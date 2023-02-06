@@ -1,13 +1,11 @@
 # The Blok Experiement
 
-This is a small scale experiment that I have worked on using the WIN32 API. The appication is build for Windows Only.
-<br/>
-<br/>
+> A project to explore how native Windows applications are created using the WIN32 API.
 
-![](./doc/MainWindow.png)
+When launching the application, a black painted window is created with a pink block at the top left corner. Towards the bottom left, there is text showing the X and Y coordinates of the pink square; in addition to whether the block is in a marked location.
 
-This application is a pink block that can be moved around using the arrow keys. Where the coordinates of the block is displayed in the bottom left of the window as well as if it is on a marked location.
+The pink block's location can be changed or manipulated through the use of arrow keys from the keyboard, also updating the coordinates at the bottom.
 
-To mark a location, you simply click on area you want marked, as this is made from a grid.
+The mouse pointer can be used to mark points on the grid; this is indicated by a white block. It can be unmarked by clicking in the same area.
 
-Clicking on the same location will remove the mark in the grid.
+![Main Window of Application](./doc/MainWindow.png)
