@@ -1,4 +1,4 @@
-# The Blok Experiement
+# The Blok Experiment
 
 > A project to explore how native Windows applications are created using the WIN32 API.
 
