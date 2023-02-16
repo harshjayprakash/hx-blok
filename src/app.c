@@ -1,4 +1,4 @@
-#include "incl/app.h"
+#include "app.h"
 
 void Application_Init(
     Application* self, HINSTANCE _hInst, HINSTANCE _hPrevInst,

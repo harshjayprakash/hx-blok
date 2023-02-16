@@ -1,18 +1,17 @@
-#include "incl/block.h"
-#include "incl/global.h"
+#include "block.h"
 
-void Block_Init(Block* self, int _x, int _y, int _width, int _height, COLORREF _colour)
+void Block_Init(Block* self, int x, int y, int width, int height, COLORREF colour)
 {
-    self->x = _x;
-    self->y = _y;
-    self->width = _width;
-    self->height = _height;
-    self->colour = _colour;
-    self->nMovfX = _width;
-    self->nMovfY = _height;
-    self->limitX = _width * 10;
-    self->limitY = _height * 10;
-    self->fcollusions = 0;
+    if (self == NULL) { return; }
+    self->x = x;
+    self->y = y;
+    self->width = width;
+    self->height = height;
+    self->colour = colour;
+    self->nMovfX = width;
+    self->nMovfY = height;
+    self->limitX = width * 10;
+    self->limitY = height * 10;
 }
 
 void Block_Del(Block* self)
@@ -20,62 +19,75 @@ void Block_Del(Block* self)
     
 }
 
-void Block_SetColour(Block* self, COLORREF _colour)
+void Block_SetColour(Block* self, COLORREF colour)
 {
-    self->colour = _colour;
+    if (self == NULL) { return; }
+    self->colour = colour;
 }
 
-void Block_SetMoveRate(Block* self, int _rateX, int _rateY)
+void Block_SetMoveRate(Block* self, int rateX, int rateY)
 {
-    self->nMovfX = _rateX;
-    self->nMovfY = _rateY;
+    if (self == NULL) { return; }
+    self->nMovfX = rateX;
+    self->nMovfY = rateY;
 }
 
-void Block_SetPosition(Block* self, int _x, int _y)
+void Block_SetPosition(Block* self, int x, int y)
 {
-    self->x = _x;
-    self->y = _y;
+    if (self == NULL) { return; }
+    self->x = x;
+    self->y = y;
 }
 
-void Block_SetSize(Block* self, int _width, int _height)
+void Block_SetSize(Block* self, int width, int height)
 {
-    self->width = _width;
-    self->height = _height;
+    if (self == NULL) { return; }
+    self->width = width;
+    self->height = height;
 }
 
-void Block_SetLimits(Block* self, int _x, int _y)
+void Block_SetLimits(Block* self, int x, int y)
 {
-    self->limitX = _x;
-    self->limitY = _y;
+    if (self == NULL) { return; }
+    self->limitX = x;
+    self->limitY = y;
 }
 
 RECT Block_ConvertToRect(Block* self)
 {
+    if (self == NULL) 
+    { 
+        RECT rectInvalid = {0L, 0L, 0L, 0L};
+        return rectInvalid;
+    }
     RECT rectBlock = {self->x, self->y, self->x + self->width, self->y + self->height};
     return rectBlock;
 }
 
 void Block_MoveUp(Block* self)
 {
+    if (self == NULL) { return; }
     if (self->y != 0)
         self->y -= self->nMovfY;
 }
 
 void Block_MoveDown(Block* self)
 {
+    if (self == NULL) { return; }
     if (self->y < self->limitY - self->height)
         self->y += self->nMovfY;
 }
 
 void Block_MoveLeft(Block* self)
 {
+    if (self == NULL) { return; }
     if (self->x != 0)
         self->x -= self->nMovfX;
 }
 
 void Block_MoveRight(Block* self)
 {
+    if (self == NULL) { return; }
     if (self->x < self->limitX - self->width)
         self->x += self->nMovfX;
 }
-

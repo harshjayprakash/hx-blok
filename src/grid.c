@@ -1,79 +1,92 @@
-#include "incl/grid.h"
-#include "incl/global.h"
+#include "grid.h"
 
-int Grid_Init(Grid* self, int _width, int _height)
+void Coord_Set(Coord* self, int x, int y)
 {
-    self->height = _height;
-    self->width = _width;
-    self->map = (GridPoint*) malloc((_width * _height) * sizeof(GridPoint));
+    if (self == NULL) { return; }
+    self->x = x;
+    self->y = y;
+}
 
-    if (self->map == NULL)
+int Grid_Init(Grid* self, int width, int height)
+{
+    if (self == NULL) { return 2; }
+    self->height = height;
+    self->width = width;
+    self->indexer = 0;
+    self->allocated = width * height;
+    self->map = (Coord*) calloc(self->allocated, sizeof(Coord));
+    self->prevMap = (Coord*) calloc(self->allocated, sizeof(Coord));
+    if (self->map == NULL) { return 1; }
+    if (self->prevMap == NULL) { return 1; }
+    for (int i = 0; i < self->allocated; i++)
     {
-        fprintf(stderr, "Failed to allocate memory [map: GridPoint*]\n");
-        fflush(stderr);
-        return 1;
+        self->map[i].x = -1;
+        self->map[i].y = -1;
     }
-
     return 0;
 }
 
 int Grid_Del(Grid* self)
 {
-    if (self->map != NULL)
-        free(self->map);
-    if (self->prevMap != NULL)
-        free(self->prevMap);
+    if (self->map != NULL) { free(self->map); }
+    if (self->prevMap != NULL) { free(self->prevMap); }
     return 0;
 }
 
 int Grid_Realloc(Grid* self)
 {
-    fprintf(stderr, "Not implementated\n");
-    fflush(stderr);
-
-    return 1;
+    return -1;
 }
 
-int Grid_AddBlock(Grid* self, int _x, int _y)
+int Grid_AddMark(Grid* self, int x, int y)
 {
-    if (self->map == NULL)
-    {
-        fprintf(stderr, "Required variable [map: GridPoint*] has not been allocated any memory\n");
-        fflush(stderr);
-
-        return 1;
-    }
-
-    GridPoint gp = { _x, _y, 1 };
-    self->map[self->idxr++] = gp;
-
+    if (self == NULL) { return 2; }
+    if (self->map == NULL) { return 1; }
+    if (self->indexer >= self->allocated) { return 3; }
+    // int newIndex =  Grid_GetNextEmptyIndex(self);
+    // if (newIndex < 0) { return 4; }
+    Coord_Set(&(self->map[self->indexer]), x, y);
+    self->indexer++;
     return 0;
 }
 
-int Grid_RemoveBlock(Grid* self, int _x, int _y)
+int Grid_RemoveMark(Grid* self, int x, int y)
 {
-    if (self->map == NULL)
-    {
-        fprintf(stderr, "Required variable [map: GridPoint*] has not been allocated any memory\n");
-        fflush(stderr);
-
-        return 1;
+    if (self == NULL) { return 2; }
+    if (self->map == NULL) { return 1; }
+    if (self->prevMap == NULL) { return 5; }
+    if (self->indexer <= 0) { return 3; }
+    int foundIndex = Grid_FindMark(self, x, y);
+    if (foundIndex < 0) { return 4; }
+    Coord_Set(&(self->map[foundIndex]), -1, -1);
+    for (int i = 0; i < self->allocated; i++) { self->prevMap[i] = self->map[i]; }
+    int newIndex = 0;
+    for (int i = 0; i < self->indexer; i++) {
+        if (self->prevMap[i].x == -1 || self->prevMap[i].y == -1) continue;
+        self->map[newIndex++] = self->prevMap[i];
     }
-
-    for (int i = 0; i < self->idxr + 1; i++)
-    {
-        if (self->map[i].posX == _x
-            && self->map[i].posY == _y)
-        {
-            self->map[i].posX = self->map[self->idxr].posX;
-            self->map[i].posY = self->map[self->idxr].posY;
-            self->map[i].illumated = self->map[self->idxr].illumated;
-            self->map[self->idxr].posX = 0;
-            self->map[self->idxr].posY = 0;
-            self->map[self->idxr].illumated = 0;
-            self->idxr--;
-        }
-    }
-    
+    self->indexer = newIndex;
     return 0;
+}
+
+int Grid_FindMark(Grid* self, int x, int y)
+{
+    if (self == NULL) { return -2; }
+    if (self->map == NULL) { return -1; }
+    for (int i = 0; i < self->allocated; i++)
+    {
+        if (self->map[i].x == x && self->map[i].y == y) { return i; }
+    }
+    return -3;
+}
+
+int Grid_GetNextEmptyIndex(Grid* self)
+{
+    if (self == NULL) { return -2; }
+    if (self->map == NULL) { return -1; }
+    for (int i = 0; i < self->allocated; i++)
+    {
+        if (self->map[i].x == -1 && self->map[i].y == -1) { return i; }
+    }
+    return -3;
 }
