@@ -2,7 +2,7 @@ C := gcc
 CFLAGS := -Wall -Werror -g -static
 CFLAGSR := -Wall -Werror -O3
 
-INPUT_FILES := src/main.c src/app.c src/window.c src/window_events.c src/block.c src/grid.c
+INPUT_FILES := src/main.c src/app.c src/globals.c src/block.c src/grid.c src/window.c src/window_events.c src/actions.c
 LIBS := -lgdi32
 OUTPUT_FILE := bin/blok
 
