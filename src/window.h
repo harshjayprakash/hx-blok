@@ -19,6 +19,7 @@ typedef struct Window
     WNDCLASSEX wcex;
     int isRegistered;
     int isCreated;
+    int isVisible;
 } Window;
 
 /**
@@ -57,7 +58,8 @@ int Window_Create(Window* self);
 /**
  * Shows the window created.
  * @returns 0 for 'success', -1 for 'the window has not been created', -2 for 
- *      'the window class has not been registered'.
+ *      'the window class has not been registered', -3 for 'the window is
+ *      already visible'.
 */
 int Window_Show(Window* self);
 

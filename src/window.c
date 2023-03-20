@@ -5,7 +5,7 @@ int Window_Init(Window* self, Application* app)
     if (self == NULL) { return 1; }
     if (app == NULL) { return 2; }
     self->xApp = app;
-    self->isRegistered = self->isCreated = 0;
+    self->isRegistered = self->isCreated = self->isVisible = 0;
     if (!Window_Register(self)) { return 3; }
     self->isRegistered = 1;
     if (Window_Create(self) == 1) { return 4; }
@@ -72,6 +72,8 @@ int Window_Show(Window* self)
 {
     if (!self->isCreated) { return -1; }
     if (!self->isRegistered) { return -2; }
+    if (!self->isVisible) { return -3; }
+    self->isVisible = 1;
     return ShowWindow(self->hWnd, self->xApp->nShow);
 }
 
