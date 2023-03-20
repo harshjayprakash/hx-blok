@@ -34,6 +34,8 @@ int Window_Init(Window* self, Application* app);
 /**
  * Destructor for the Window structure. Frees up any memory allocated within
  * the Window structure.
+ * @returns 0 for 'success', 1 for 'self does not contain an instance of the
+ *      window structure.
 */
 int Window_Del(Window* self);
 
