@@ -18,6 +18,7 @@ int Window_Init(Window* self, Application* app)
 
 int Window_Del(Window* self)
 {
+    if (self == NULL) { return -1; }
     if (self->isRegistered == 1) { UnregisterClass(self->clsName, self->xApp->hInst); }
     if (self->wcex.hIcon != NULL) { DestroyIcon(self->wcex.hIcon); }
     if (self->wcex.hIconSm != NULL) { DestroyIcon(self->wcex.hIconSm); }
