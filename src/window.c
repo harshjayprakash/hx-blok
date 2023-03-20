@@ -30,7 +30,8 @@ int Window_Del(Window* self)
 
 int Window_Register(Window* self)
 {
-    if (self->isRegistered == 1) { return -1; }
+    if (self == NULL) { return -1; }
+    if (self->isRegistered == 1) { return -2; }
     _tcsncpy(self->clsName, _T("BlokWindowClass"), 260);
     self->wcex.cbSize = sizeof(WNDCLASSEX);
     self->wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -49,8 +50,9 @@ int Window_Register(Window* self)
 
 int Window_Create(Window* self)
 {
-    if (self->isCreated == 1) { return -1; }
-    if (!self->isRegistered) { return -2; }
+    if (self == NULL) { return -1; }
+    if (self->isCreated == 1) { return -2; }
+    if (!self->isRegistered) { return -3; }
     self->hWnd = CreateWindowEx(
         WS_EX_OVERLAPPEDWINDOW,
         self->clsName,
@@ -70,24 +72,27 @@ int Window_Create(Window* self)
 
 int Window_Show(Window* self)
 {
-    if (!self->isCreated) { return -1; }
-    if (!self->isRegistered) { return -2; }
-    if (!self->isVisible) { return -3; }
+    if (self == NULL) { return -1; }
+    if (!self->isCreated) { return -2; }
+    if (!self->isRegistered) { return -3; }
+    if (!self->isVisible) { return -4; }
     self->isVisible = 1;
     return ShowWindow(self->hWnd, self->xApp->nShow);
 }
 
 int Window_Update(Window* self)
 {
-    if (!self->isCreated) { return -1; }
-    if (!self->isRegistered) { return -2; }
+    if (self == NULL) { return -1; }
+    if (!self->isCreated) { return -2; }
+    if (!self->isRegistered) { return -3; }
     return UpdateWindow(self->hWnd);
 }
 
 int Window_MessageLoop(Window* self)
 {
-    if (!self->isCreated) { return -1; }
-    if (!self->isRegistered) { return -2; }
+    if (self == NULL) { return -1; }
+    if (!self->isCreated) { return -2; }
+    if (!self->isRegistered) { return -3; }
     MSG uMsg;
     while (GetMessage(&uMsg, NULL, 0, 0))
     {
