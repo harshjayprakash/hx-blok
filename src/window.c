@@ -75,7 +75,7 @@ int Window_Show(Window* self)
     if (self == NULL) { return -1; }
     if (!self->isCreated) { return -2; }
     if (!self->isRegistered) { return -3; }
-    if (!self->isVisible) { return -4; }
+    if (self->isVisible) { return -4; }
     self->isVisible = 1;
     return ShowWindow(self->hWnd, self->xApp->nShow);
 }
