@@ -16,7 +16,7 @@ The mouse pointer can be used to mark points on the grid; this is indicated by a
 
 ## Compilation and Execution
 
-_Caution: This application may have potential memory leaks. By choosing to compile and run this application, you are aware of this fact._
+You can compile in two ways:
 
 Compiling directly with GCC:
 ```shell
@@ -28,7 +28,11 @@ Compiling via Mingw's Make
 mingw32-make RELEASE
 ```
 
-
 ## Wine
 
 Despite this having this application developed with Windows NT in mind, the compiled executable can work under wine. Please ensure that gdi32 library is available if you choose to do this.
+
+
+## Disclaimer
+
+Caution: This application may be potentially memory unsafe. By choosing to compile and run this application, you are aware of this fact.
