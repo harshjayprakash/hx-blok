@@ -43,8 +43,6 @@ int Grid_AddMark(Grid* self, int x, int y)
     if (self == NULL) { return 2; }
     if (self->map == NULL) { return 1; }
     if (self->indexer >= self->allocated) { return 3; }
-    // int newIndex =  Grid_GetNextEmptyIndex(self);
-    // if (newIndex < 0) { return 4; }
     Coord_Set(&(self->map[self->indexer]), x, y);
     self->indexer++;
     return 0;
