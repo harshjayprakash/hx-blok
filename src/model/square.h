@@ -9,11 +9,11 @@ typedef struct square__
     int height;
 } square;
 
-square square_new(int x, int y, int width, int height);
+square square_new(int _x, int _y, int _width, int _height);
 
-void square_position_set(const square *sq, int x, int y);
+void square_position_set(const square *sq, int _x, int _y);
 
-void square_size_set(const square *sq, int width, int height);
+void square_size_set(const square *sq, int _width, int _height);
 
 void square_free(const square *sq);
 
