@@ -1,9 +1,8 @@
 CC = gcc
-CC_FLAGS = -g -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy \
-			-Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations \
-			-Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual \
-			-Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel \
-			-Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused -DUNICODE -D_UNICODE
+CC_FLAGS = -g -Wall -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith -Wbad-function-cast \
+-Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Winline -Wundef \
+-Wnested-externs -Wcast-qual -Wshadow -Wwrite-strings -Wno-unused-parameter \
+-Wfloat-equal -pedantic -ansi
 
 LIBRARIES = -lgdi32
 
@@ -11,12 +10,17 @@ SOURCE_DIRECTORY = src
 BUILD_DIRECTORY = build
 OUTPUT_DIRECTORY = bin
 
-BINARY = blok
+SOURCE_FILES = src/main.c
+OBJECT_FILES = build/main.o
 
-all: compile link
+EXECUTABLE = blok
 
-main.o: $(SOURCE_DIRECTORY)/main.cpp:
-	$(CC) $(CC_FLAGS) -c $^ -o $(BUILD_DIRECTORY)/$@
+all: $(OUTPUT_DIRECTORY)/$(EXECUTABLE)
 
-link:
-	$(CC) $(CC_FLAGS) -o $(OUTPUT_DIRECTORY)/$(BINARY) $(BUILD_DIRECTORY)/*.o $(LIBRARIES)
+$(OUTPUT_DIRECTORY)/$(EXECUTABLE): $(OBJECT_FILES)
+	@echo Linking ...
+	$(CC) $(CC_FLAGS) -o $@ $^
+
+$(BUILD_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.c
+	@echo Compiling ... $^
+	$(CC) $(CC_FLAGS) -c $^ -o $@
