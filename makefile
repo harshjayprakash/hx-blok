@@ -1,15 +1,22 @@
-C := gcc
-CFLAGS := -Wall -Werror -g -static
-CFLAGSR := -Wall -Werror -O3
+CC = gcc
+CC_FLAGS = -g -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy \
+			-Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations \
+			-Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual \
+			-Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel \
+			-Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused -DUNICODE -D_UNICODE
 
-INPUT_FILES := src/main.c src/app.c src/globals.c src/block.c src/grid.c src/window.c src/window_events.c src/actions.c
-LIBS := -lgdi32
-OUTPUT_FILE := bin/blok
+LIBRARIES = -lgdi32
 
-ALL: DEBUG
+SOURCE_DIRECTORY = src
+BUILD_DIRECTORY = build
+OUTPUT_DIRECTORY = bin
 
-DEBUG:
-	$(C) $(CFLAGS) $(INPUT_FILES) -o $(OUTPUT_FILE) $(LIBS)
+BINARY = blok
 
-RELEASE:
-	$(C) $(CFLAGSR) $(INPUT_FILES) -o $(OUTPUT_FILE) $(LIBS)
+all: compile link
+
+main.o: $(SOURCE_DIRECTORY)/main.cpp:
+	$(CC) $(CC_FLAGS) -c $^ -o $(BUILD_DIRECTORY)/$@
+
+link:
+	$(CC) $(CC_FLAGS) -o $(OUTPUT_DIRECTORY)/$(BINARY) $(BUILD_DIRECTORY)/*.o $(LIBRARIES)
