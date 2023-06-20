@@ -10,17 +10,17 @@ SOURCE_DIRECTORY = src
 BUILD_DIRECTORY = build
 OUTPUT_DIRECTORY = bin
 
-SOURCE_FILES = src/main.c
-OBJECT_FILES = build/main.o
+OBJECT_FILES = $(BUILD_DIRECTORY)/main.o $(BUILD_DIRECTORY)//program.o
 
 EXECUTABLE = blok
 
 all: $(OUTPUT_DIRECTORY)/$(EXECUTABLE)
 
 $(OUTPUT_DIRECTORY)/$(EXECUTABLE): $(OBJECT_FILES)
-	@echo Linking ...
 	$(CC) $(CC_FLAGS) -o $@ $^
 
-$(BUILD_DIRECTORY)/%.o: $(SOURCE_DIRECTORY)/%.c
-	@echo Compiling ... $^
-	$(CC) $(CC_FLAGS) -c $^ -o $@
+$(BUILD_DIRECTORY)/main.o: src/main.c
+	$(CC) $(CC_FLAGS) -c $^ -o $(BUILD_DIRECTORY)/$@
+
+$(BUILD_DIRECTORY)/program.o: src/core/program.c
+	$(CC) $(CC_FLAGS) -c $^ -o $(BUILD_DIRECTORY)/$@
