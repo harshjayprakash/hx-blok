@@ -1,5 +1,6 @@
 #include "program.h"
 
+static program s_program_instance;
 void program_init(
     HINSTANCE _instance_handle, 
     HINSTANCE _previous_instance_handle, 
