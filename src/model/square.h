@@ -9,7 +9,7 @@ typedef struct square__
     int height;
 } square;
 
-void square_init(int x, int y, int width, int height);
+void square_create(int x, int y, int width, int height);
 
 void square_position_set(int x, int y);
 
