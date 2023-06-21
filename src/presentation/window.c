@@ -44,6 +44,26 @@ static ATOM window_register(window *wnd)
 
 static int window_create(window *wnd)
 {
+    if (wnd == NULL)
+        return -1;
+    
+    wnd->window_handle = CreateWindowExW(
+        WS_EX_OVERLAPPEDWINDOW,
+        wnd->window_class_name,
+        L"The Experimental Block Project.",
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT,
+        800, 600,
+        NULL,
+        NULL,
+        program_instance_get()->instance_handle,
+        NULL
+    );
+
+    if (!wnd->window_handle)
+        return 1;
+    
+    return 0;
 }
 
 optional_window window_new(void)
@@ -57,6 +77,14 @@ optional_window window_new(void)
         window_free(&wnd);
         return opt_wnd;
     }
+
+    opt_wnd.created = window_create(&wnd) + 1;
+    if (opt_wnd.created != 1)
+    {
+        window_free(&wnd);
+        return opt_wnd;
+    }
+
 }
 
 void window_free(window *wnd)
