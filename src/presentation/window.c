@@ -2,7 +2,9 @@
 
 static int window_action_while_running(HWND window_handle, WPARAM word_param, LPARAM long_param)
 {
+    return 0;
 }
+
 static int window_action_on_close(HWND window_handle, WPARAM word_param, LPARAM long_param)
 {
 }
