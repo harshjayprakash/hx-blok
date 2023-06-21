@@ -15,6 +15,11 @@ static long long window_callback(
     WPARAM word_param, 
     LPARAM long_param)
 {
+    switch (message)
+    {
+        case WM_DESTROY: return window_action_on_close(window_handle, word_param, long_param);
+        default: return DefWindowProcW(window_handle, message, word_param, long_param);
+    }
 }
 
 static int window_message_loop(window *wnd)
