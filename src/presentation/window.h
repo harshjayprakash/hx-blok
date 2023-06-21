@@ -17,4 +17,16 @@ typedef struct window__
     wchar_t window_class_name[CHAR_LENGTH_COUNT];
 } window;
 
+union inst_ {
+    window instance;
+    void *unsafe_instance;
+};
+
+typedef struct optional_window__
+{
+    int registered;
+    int created;
+    int is_present;
+    union inst_ get;
+} optional_window;
 #endif
