@@ -98,6 +98,9 @@ optional_window window_new(void)
         return opt_wnd;
     }
 
+    ShowWindow(wnd.window_handle, program_instance_get()->show_flag);
+    UpdateWindow(wnd.window_handle);
+    window_message_loop(&wnd);
 }
 
 void window_free(window *wnd)
