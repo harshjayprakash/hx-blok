@@ -7,6 +7,8 @@ static int window_action_while_running(HWND window_handle, WPARAM word_param, LP
 
 static int window_action_on_close(HWND window_handle, WPARAM word_param, LPARAM long_param)
 {
+    PostQuitMessage(0);
+    return 0;
 }
 
 static long long window_callback(
