@@ -29,4 +29,9 @@ typedef struct optional_window__
     int is_present;
     union inst_ get;
 } optional_window;
+
+optional_window window_new(void);
+
+void window_free(window *wnd);
+
 #endif
