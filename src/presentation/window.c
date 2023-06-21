@@ -119,7 +119,7 @@ void window_free(window *wnd)
 {
     if (wnd == NULL)
         return;
-
+    
     (void) UnregisterClassW(wnd->window_class_name, program_instance_get()->instance_handle);
     (void) DestroyIcon(wnd->window_class.hIcon);
     (void) DestroyIcon(wnd->window_class.hIconSm);
