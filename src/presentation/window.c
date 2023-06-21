@@ -117,5 +117,13 @@ optional_window window_new(void)
 
 void window_free(window *wnd)
 {
+    if (wnd == NULL)
+        return;
 
+    (void) UnregisterClassW(wnd->window_class_name, program_instance_get()->instance_handle);
+    (void) DestroyIcon(wnd->window_class.hIcon);
+    (void) DestroyIcon(wnd->window_class.hIconSm);
+    (void) DestroyCursor(wnd->window_class.hCursor);
+    (void) DeleteObject(wnd->window_class.hbrBackground);
+    (void) DestroyWindow(wnd->window_handle);
 }
