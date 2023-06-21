@@ -108,6 +108,11 @@ optional_window window_new(void)
     ShowWindow(wnd.window_handle, program_instance_get()->show_flag);
     UpdateWindow(wnd.window_handle);
     window_message_loop(&wnd);
+
+    opt_wnd.is_present = 1;
+    opt_wnd.get.instance = wnd;
+
+    return opt_wnd;
 }
 
 void window_free(window *wnd)
