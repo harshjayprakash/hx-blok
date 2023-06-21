@@ -17,6 +17,17 @@ static long long window_callback(
 
 static int window_message_loop(window *wnd)
 {
+    if (wnd == NULL)
+        return -1;
+    
+    while (GetMessageW(&wnd->window_message, NULL, 0, 0))
+    {
+        TranslateMessage(&wnd->window_message);
+        DispatchMessageW(&wnd->window_message);
+        window_action_while_running(
+            wnd->window_handle, wnd->window_message.wParam, wnd->window_message.lParam);
+    }
+    return (int) wnd->window_message.wParam;
 }
 
 static ATOM window_register(window *wnd)
