@@ -1,13 +1,7 @@
 #include "program.h"
 
-/**
- * @brief Stores an instance of the program structure.
- */
-static program s_program_instance;
+static struct program s_program_instance;
 
-/**
- * @brief Stores whether the program structure has been initialised.
- */
 static int s_initialised = 0;
 
 void program_init(
