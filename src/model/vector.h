@@ -1,4 +1,4 @@
-#ifndef __BLOK_VECTOR_H
-#define __BLOK_VECTOR_H
+#ifndef BLOK_VECTOR_H
+#define BLOK_VECTOR_H
 
 #endif

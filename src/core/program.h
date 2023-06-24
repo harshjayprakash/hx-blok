@@ -1,5 +1,5 @@
-#ifndef __BLOK_PROGRAM_H
-#define __BLOK_PROGRAM_H
+#ifndef BLOK_PROGRAM_H
+#define BLOK_PROGRAM_H
 
 #include <windows.h>
 

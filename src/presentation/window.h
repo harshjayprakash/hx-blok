@@ -1,5 +1,5 @@
-#ifndef __BLOK_WINDOW_H
-#define __BLOK_WINDOW_H
+#ifndef BLOK_WINDOW_H
+#define BLOK_WINDOW_H
 
 #include <stdio.h>
 #include <stdlib.h>
