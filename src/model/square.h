@@ -1,5 +1,5 @@
-#ifndef __BLOK_SQUARE_H
-#define __BLOK_SQUARE_H
+#ifndef BLOK_SQUARE_H
+#define BLOK_SQUARE_H
 
 /**
  * @brief Models a square object.
