@@ -39,7 +39,7 @@ static int window_message_loop(window *wnd)
     return (int) wnd->window_message.wParam;
 }
 
-static ATOM window_register(window *wnd)
+static ATOM window_register(window *wnd) 
 {
     if (wnd == NULL)
         return -1;
@@ -121,9 +121,19 @@ void window_free(window *wnd)
         return;
     
     (void) UnregisterClassW(wnd->window_class_name, program_instance_get()->instance_handle);
-    (void) DestroyIcon(wnd->window_class.hIcon);
-    (void) DestroyIcon(wnd->window_class.hIconSm);
-    (void) DestroyCursor(wnd->window_class.hCursor);
-    (void) DeleteObject(wnd->window_class.hbrBackground);
-    (void) DestroyWindow(wnd->window_handle);
+    
+    if (wnd->window_class.hIcon)
+        (void) DestroyIcon(wnd->window_class.hIcon);
+
+    if (wnd->window_class.hIconSm)
+        (void) DestroyIcon(wnd->window_class.hIconSm);
+    
+    if (wnd->window_class.hCursor)
+        (void) DestroyCursor(wnd->window_class.hCursor);
+    
+    if (wnd->window_class.hbrBackground)
+        (void) DeleteObject(wnd->window_class.hbrBackground);
+    
+    if (wnd->window_handle)
+        (void) DestroyWindow(wnd->window_handle);
 }
