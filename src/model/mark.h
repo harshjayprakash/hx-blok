@@ -6,4 +6,7 @@ struct mark {
     int y;
     enum mark_status illumated;
 };
+
+struct mark mark_new(int x, int y);
+
 #endif
