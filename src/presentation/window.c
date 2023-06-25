@@ -24,9 +24,7 @@ static long long window_callback(
     }
 }
 
-static int window_message_loop(window *wnd)
-{
-    if (wnd == NULL)
+static int window_message_loop(struct window *wnd) {
         return -1;
     
     while (GetMessageW(&wnd->window_message, NULL, 0, 0))
@@ -39,9 +37,7 @@ static int window_message_loop(window *wnd)
     return (int) wnd->window_message.wParam;
 }
 
-static ATOM window_register(window *wnd) 
-{
-    if (wnd == NULL)
+static ATOM window_register(struct window *wnd) {
         return -1;
     
     (void) wcsncpy(wnd->window_class_name, L"blok_window_class", CHAR_LENGTH_COUNT);
@@ -62,8 +58,7 @@ static ATOM window_register(window *wnd)
     return RegisterClassExW(&wnd->window_class);
 }
 
-static int window_create(window *wnd)
-{
+static int window_create(struct window *wnd) {
     if (wnd == NULL)
         return -1;
     
@@ -86,10 +81,7 @@ static int window_create(window *wnd)
     return 0;
 }
 
-optional_window window_new(void)
-{
-    optional_window opt_wnd;
-    window wnd;
+struct window_wrapper window_new(void) {
 
     opt_wnd.registered = window_register(&wnd);
     if (opt_wnd.registered == 0)
@@ -115,8 +107,7 @@ optional_window window_new(void)
     return opt_wnd;
 }
 
-void window_free(window *wnd)
-{
+void window_free(struct window *wnd) {
     if (wnd == NULL)
         return;
     
