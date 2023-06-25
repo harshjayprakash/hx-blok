@@ -4,14 +4,12 @@
 /**
  * @brief Models a square object.
  */
-typedef struct square__
-{
+struct square {
     int x;
     int y;
     int width;
     int height;
-} square;
-
+};
 
 /**
  * @brief Responsible for creating a new square instance.
@@ -21,8 +19,7 @@ typedef struct square__
  * @param _height the height of the square.
  * @return a new stack allocated instance of a square.
  */
-square square_new(int _x, int _y, int _width, int _height);
-
+struct square square_new(int _x, int _y, int _width, int _height);
 
 /**
  * @brief Sets the position of the given square
@@ -30,7 +27,7 @@ square square_new(int _x, int _y, int _width, int _height);
  * @param _x the new x coordinate.
  * @param _y the new y coordinate.
  */
-void square_position_set(square *sq, int _x, int _y);
+void square_position_set(struct square *sq, int _x, int _y);
 
 /**
  * @brief Sets the size of the given square.
@@ -38,12 +35,12 @@ void square_position_set(square *sq, int _x, int _y);
  * @param _width the new width of the square.
  * @param _height the new height of the square.
  */
-void square_size_set(square *sq, int _width, int _height);
+void square_size_set(struct square *sq, int _width, int _height);
 
 /**
  * @brief Frees any memory allocated of the given square.
  * @param sq the instance of the square.
  */
-void square_free(square *sq);
+void square_free(struct square *sq);
 
 #endif
