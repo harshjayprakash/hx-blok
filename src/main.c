@@ -2,7 +2,9 @@
 #include <windows.h>
 
 #include "core/program.h"
+#include "model/square.h"
 #include "presentation/window.h"
+#include "service/store.h"
 #include "service/logger.h"
 
 /**
@@ -20,6 +22,11 @@ int APIENTRY WinMain(HINSTANCE instance_handle,
 
     program_init(instance_handle, previous_instance_handle,
                  command_line_arguments, show_flag);
+
+    global_square_get()->y = 0;
+    global_square_get()->x = 0;
+    global_square_get()->height = 15;
+    global_square_get()->width = 15;
 
     struct window_wrapper window_ = window_new();
 
