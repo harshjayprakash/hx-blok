@@ -1,4 +1,6 @@
 #include "window.h"
+#include "store.h"
+
 
 static int window_action_while_running(HWND window_handle, WPARAM word_param,
                                        LPARAM long_param) {
@@ -18,27 +20,37 @@ static int window_action_on_close(void) {
     return 0;
 }
 
+static long long window_callback(HWND window_handle, UINT message,
+                                 WPARAM word_param, LPARAM long_param) {
+    switch (message) {
+    case WM_DESTROY:
         return window_action_on_close();
+    default:
+        return DefWindowProcW(window_handle, message, word_param, long_param);
     }
 }
 
 static int window_message_loop(struct window *wnd) {
+    if (wnd == NULL)
         return -1;
-    
-    while (GetMessageW(&wnd->window_message, NULL, 0, 0))
-    {
+
+    while (GetMessageW(&wnd->window_message, NULL, 0, 0)) {
         TranslateMessage(&wnd->window_message);
         DispatchMessageW(&wnd->window_message);
-        window_action_while_running(
-            wnd->window_handle, wnd->window_message.wParam, wnd->window_message.lParam);
+        window_action_while_running(wnd->window_handle,
+                                    wnd->window_message.wParam,
+                                    wnd->window_message.lParam);
     }
-    return (int) wnd->window_message.wParam;
+
+    return (int)wnd->window_message.wParam;
 }
 
 static ATOM window_register(struct window *wnd) {
+    if (wnd == NULL)
         return -1;
-    
-    (void) wcsncpy(wnd->window_class_name, L"blok_window_class", CHAR_LENGTH_COUNT);
+
+    (void)wcsncpy(wnd->window_class_name, L"blok_window_class",
+                  CHAR_LENGTH_COUNT);
 
     wnd->window_class.cbSize = sizeof(WNDCLASSEXW);
     wnd->window_class.style = CS_HREDRAW | CS_VREDRAW;
@@ -46,12 +58,14 @@ static ATOM window_register(struct window *wnd) {
     wnd->window_class.cbClsExtra = 0;
     wnd->window_class.cbWndExtra = 0;
     wnd->window_class.hInstance = program_instance_get()->instance_handle;
-    wnd->window_class.hIcon = LoadIcon(wnd->window_class.hInstance, IDI_APPLICATION);
+    wnd->window_class.hIcon =
+        LoadIcon(wnd->window_class.hInstance, IDI_APPLICATION);
     wnd->window_class.hCursor = LoadCursor(NULL, IDC_ARROW);
     wnd->window_class.hbrBackground = CreateSolidBrush(RGB(0, 0, 0));
     wnd->window_class.lpszMenuName = NULL;
     wnd->window_class.lpszClassName = wnd->window_class_name;
-    wnd->window_class.hIconSm = LoadIcon(wnd->window_class.hInstance, IDI_APPLICATION);
+    wnd->window_class.hIconSm =
+        LoadIcon(wnd->window_class.hInstance, IDI_APPLICATION);
 
     return RegisterClassExW(&wnd->window_class);
 }
@@ -59,23 +73,15 @@ static ATOM window_register(struct window *wnd) {
 static int window_create(struct window *wnd) {
     if (wnd == NULL)
         return -1;
-    
-    wnd->window_handle = CreateWindowExW(
-        WS_EX_OVERLAPPEDWINDOW,
-        wnd->window_class_name,
-        L"The Experimental Block Project.",
-        WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT,
-        800, 600,
-        NULL,
-        NULL,
-        program_instance_get()->instance_handle,
-        NULL
-    );
+
+    wnd->window_handle =
+        CreateWindowExW(WS_EX_OVERLAPPEDWINDOW, wnd->window_class_name,
+                        L"The Experimental Block Project.", WS_OVERLAPPEDWINDOW,
+                        CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, NULL, NULL,
+                        program_instance_get()->instance_handle, NULL);
 
     if (!wnd->window_handle)
         return 1;
-    
     return 0;
 }
 
@@ -114,21 +120,22 @@ struct window_wrapper window_new(void) {
 void window_free(struct window *wnd) {
     if (wnd == NULL)
         return;
-    
-    (void) UnregisterClassW(wnd->window_class_name, program_instance_get()->instance_handle);
-    
+
+    (void)UnregisterClassW(wnd->window_class_name,
+                           program_instance_get()->instance_handle);
+
     if (wnd->window_class.hIcon)
-        (void) DestroyIcon(wnd->window_class.hIcon);
+        (void)DestroyIcon(wnd->window_class.hIcon);
 
     if (wnd->window_class.hIconSm)
-        (void) DestroyIcon(wnd->window_class.hIconSm);
-    
+        (void)DestroyIcon(wnd->window_class.hIconSm);
+
     if (wnd->window_class.hCursor)
-        (void) DestroyCursor(wnd->window_class.hCursor);
-    
+        (void)DestroyCursor(wnd->window_class.hCursor);
+
     if (wnd->window_class.hbrBackground)
-        (void) DeleteObject(wnd->window_class.hbrBackground);
-    
+        (void)DeleteObject(wnd->window_class.hbrBackground);
+
     if (wnd->window_handle)
-        (void) DestroyWindow(wnd->window_handle);
+        (void)DestroyWindow(wnd->window_handle);
 }
