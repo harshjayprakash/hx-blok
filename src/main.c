@@ -3,6 +3,7 @@
 
 #include "core/program.h"
 #include "presentation/window.h"
+#include "service/logger.h"
 
 /**
  * @brief Provides a entrypoint into the program.
@@ -23,7 +24,7 @@ int APIENTRY WinMain(HINSTANCE instance_handle,
     struct window_wrapper window_ = window_new();
 
     if (!window_.present)
-        fprintf(stderr, "Failed to initialise window");
+        printlog(log_err, "main.c:WinMain", "Failed to initalise window.");
 
     window_free(&window_.handle.instance);
     program_free();
