@@ -5,22 +5,12 @@ static int window_action_while_running(HWND window_handle, WPARAM word_param, LP
     return 0;
 }
 
-static int window_action_on_close(HWND window_handle, WPARAM word_param, LPARAM long_param)
-{
+static int window_action_on_close(void) {
     PostQuitMessage(0);
     return 0;
 }
 
-static long long window_callback(
-    HWND window_handle, 
-    UINT message, 
-    WPARAM word_param, 
-    LPARAM long_param)
-{
-    switch (message)
-    {
-        case WM_DESTROY: return window_action_on_close(window_handle, word_param, long_param);
-        default: return DefWindowProcW(window_handle, message, word_param, long_param);
+        return window_action_on_close();
     }
 }
 
