@@ -13,4 +13,18 @@ struct vector {
     int head;
 };
 
+struct vector vector_new(const int _size);
+
+int vector_resize(struct vector *vec, int _new_size);
+
+int vector_push(struct vector *vec, struct mark _node);
+
+const struct mark vector_get(const struct vector *vec, int _index);
+
+struct mark *vector_get_ptr(const struct vector *vec, int _index);
+
+int vector_next_available_index(const struct vector *vec);
+
+void vector_free(struct vector *vec);
+
 #endif
