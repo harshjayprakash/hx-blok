@@ -1,6 +1,7 @@
 #ifndef BLOK_WINDOW_H
 #define BLOK_WINDOW_H
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
