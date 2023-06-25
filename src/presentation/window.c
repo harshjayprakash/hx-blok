@@ -1,7 +1,15 @@
 #include "window.h"
 
-static int window_action_while_running(HWND window_handle, WPARAM word_param, LPARAM long_param)
-{
+static int window_action_while_running(HWND window_handle, WPARAM word_param,
+                                       LPARAM long_param) {
+    HDC device_context_handle = GetDC(window_handle);
+    HBRUSH square_painter = CreateSolidBrush(RGB(255, 255, 255));
+
+    RECT square_to_paint = global_square_get_winapi_rect();
+    FillRect(device_context_handle, &square_to_paint, square_painter);
+
+    (void)DeleteObject(square_painter);
+    (void)ReleaseDC(window_handle, device_context_handle);
     return 0;
 }
 
