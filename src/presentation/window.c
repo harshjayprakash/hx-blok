@@ -82,29 +82,35 @@ static int window_create(struct window *wnd) {
 }
 
 struct window_wrapper window_new(void) {
+    struct window_wrapper opt_window;
+    opt_window.registered = false;
+    opt_window.created = false;
+    opt_window.present = false;
+    struct window wnd;
+    int result = 0;
 
-    opt_wnd.registered = window_register(&wnd);
-    if (opt_wnd.registered == 0)
-    {
+    result = window_register(&wnd);
+    if (result == 0) {
         window_free(&wnd);
-        return opt_wnd;
+        return opt_window;
     }
+    opt_window.registered = true;
 
-    opt_wnd.created = window_create(&wnd) + 1;
-    if (opt_wnd.created != 1)
-    {
+    result = window_create(&wnd);
+    if (result == 1) {
         window_free(&wnd);
-        return opt_wnd;
+        return opt_window;
     }
+    opt_window.created = true;
 
     ShowWindow(wnd.window_handle, program_instance_get()->show_flag);
     UpdateWindow(wnd.window_handle);
     window_message_loop(&wnd);
 
-    opt_wnd.is_present = 1;
-    opt_wnd.get.instance = wnd;
+    opt_window.present = true;
+    opt_window.handle.instance = wnd;
 
-    return opt_wnd;
+    return opt_window;
 }
 
 void window_free(struct window *wnd) {
