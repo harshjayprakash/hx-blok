@@ -12,13 +12,12 @@
 
 #define CHAR_LENGTH_COUNT 260
 
-typedef struct window__
-{
+struct window {
     HWND window_handle;
     MSG window_message;
     WNDCLASSEXW window_class;
     wchar_t window_class_name[CHAR_LENGTH_COUNT];
-} window;
+};
 
 union window_instance_handler {
     struct window instance;
@@ -33,5 +32,10 @@ struct window_wrapper {
     bool present;
 
     union window_instance_handler handle;
+};
+
 struct window_wrapper window_new(void);
+
+void window_free(struct window *wnd);
+
 #endif
