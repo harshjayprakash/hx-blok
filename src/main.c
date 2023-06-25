@@ -20,12 +20,12 @@ int APIENTRY WinMain(HINSTANCE instance_handle,
     program_init(instance_handle, previous_instance_handle,
                  command_line_arguments, show_flag);
 
-    optional_window window_ = window_new();
+    struct window_wrapper window_ = window_new();
 
-    if (!window_.is_present)
+    if (!window_.present)
         fprintf(stderr, "Failed to initialise window");
 
-    window_free(&window_.get.instance);
+    window_free(&window_.handle.instance);
     program_free();
 
     return 0;

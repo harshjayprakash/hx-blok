@@ -19,21 +19,18 @@ typedef struct window__
     wchar_t window_class_name[CHAR_LENGTH_COUNT];
 } window;
 
-union inst_ {
-    window instance;
-    void *unsafe_instance;
+union window_instance_handler {
+    struct window instance;
+    void *potential_instance;
 };
 
-typedef struct optional_window__
-{
-    int registered;
-    int created;
-    int is_present;
-    union inst_ get;
-} optional_window;
+struct window_wrapper {
+    bool registered;
 
-optional_window window_new(void);
+    bool created;
 
-void window_free(window *wnd);
+    bool present;
 
+    union window_instance_handler handle;
+struct window_wrapper window_new(void);
 #endif
