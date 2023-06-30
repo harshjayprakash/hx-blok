@@ -29,8 +29,8 @@ static long long window_callback(HWND window_handle, UINT message,
 }
 
 static int window_message_loop(struct window *wnd) {
-    if (wnd == NULL)
-        return -1;
+    if (!wnd)
+        return BLOK_NULL_POINTER_ERROR;
 
     while (GetMessageW(&wnd->window_message, NULL, 0, 0)) {
         TranslateMessage(&wnd->window_message);
@@ -44,8 +44,8 @@ static int window_message_loop(struct window *wnd) {
 }
 
 static ATOM window_register(struct window *wnd) {
-    if (wnd == NULL)
-        return -1;
+    if (!wnd)
+        return BLOK_NULL_POINTER_ERROR;
 
     (void)wcsncpy(wnd->window_class_name, L"blok_window_class",
                   CHAR_LENGTH_COUNT);
@@ -69,8 +69,8 @@ static ATOM window_register(struct window *wnd) {
 }
 
 static int window_create(struct window *wnd) {
-    if (wnd == NULL)
-        return -1;
+    if (!wnd)
+        return BLOK_NULL_POINTER_ERROR;
 
     wnd->window_handle =
         CreateWindowExW(WS_EX_OVERLAPPEDWINDOW, wnd->window_class_name,
@@ -79,8 +79,8 @@ static int window_create(struct window *wnd) {
                         program_instance_get()->instance_handle, NULL);
 
     if (!wnd->window_handle)
-        return 1;
-    return 0;
+        return BLOK_WINDOW_CREATION_ERROR;
+    return BLOK_OPERATION_SUCCESS;
 }
 
 struct window_wrapper window_new(void) {
@@ -92,14 +92,14 @@ struct window_wrapper window_new(void) {
     int result = 0;
 
     result = window_register(&wnd);
-    if (result == 0) {
+    if (result == BLOK_WINDOW_REGISTRATION_ERROR) {
         window_free(&wnd);
         return opt_window;
     }
     opt_window.registered = true;
 
     result = window_create(&wnd);
-    if (result == 1) {
+    if (result == BLOK_WINDOW_CREATION_ERROR) {
         window_free(&wnd);
         return opt_window;
     }
@@ -116,7 +116,7 @@ struct window_wrapper window_new(void) {
 }
 
 void window_free(struct window *wnd) {
-    if (wnd == NULL)
+    if (!wnd)
         return;
 
     (void)UnregisterClassW(wnd->window_class_name,

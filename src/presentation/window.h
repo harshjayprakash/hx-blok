@@ -11,6 +11,7 @@
 
 #include "../core/program.h"
 #include "../service/store.h"
+#include "../core/error.h"
 
 #define CHAR_LENGTH_COUNT 260
 
