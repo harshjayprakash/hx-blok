@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "mark.h"
+#include "../core/error.h"
 
 struct vector {
     struct mark *dyn_array;
