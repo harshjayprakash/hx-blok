@@ -10,6 +10,7 @@
 #include <wingdi.h>
 
 #include "../core/program.h"
+#include "../service/store.h"
 
 #define CHAR_LENGTH_COUNT 260
 
