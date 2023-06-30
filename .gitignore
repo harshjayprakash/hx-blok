@@ -1,3 +1,12 @@
+# Output Binary Directory.
 bin/
+
+# Output Object File Directory
 build/
+
+# IDEs and Code Editors
 .vscode/
+.idea/
+
+# Temporary Files.
+temp/
