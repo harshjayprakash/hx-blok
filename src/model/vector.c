@@ -1,6 +1,6 @@
 #include "vector.h"
 
-struct vector vector_new(const int _size) {
+struct vector vector_new(int _size) {
     struct vector vec;
     vec.head = -1;
     vec.max = _size;
@@ -43,7 +43,7 @@ struct mark *vector_get_ptr(const struct vector *vec, int _index) {
     return (vec->dyn_array + (_index - 1));
 }
 
-const struct mark vector_get(const struct vector *vec, int _index) {
+struct mark vector_get(const struct vector *vec, int _index) {
     struct mark value = {0, 0, mark_invisible};
     if (!vec)
         return value;

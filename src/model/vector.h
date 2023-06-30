@@ -13,13 +13,13 @@ struct vector {
     int head;
 };
 
-struct vector vector_new(const int _size);
+struct vector vector_new(int _size);
 
 int vector_resize(struct vector *vec, int _new_size);
 
 int vector_push(struct vector *vec, struct mark _node);
 
-const struct mark vector_get(const struct vector *vec, int _index);
+struct mark vector_get(const struct vector *vec, int _index);
 
 struct mark *vector_get_ptr(const struct vector *vec, int _index);
 
