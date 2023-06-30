@@ -6,6 +6,7 @@
 #include "presentation/window.h"
 #include "service/store.h"
 #include "service/logger.h"
+#include "service/store.h"
 
 /**
  * @brief Provides a entrypoint into the program.
