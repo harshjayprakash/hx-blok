@@ -14,6 +14,9 @@ int vector_resize(struct vector *vec, int _new_size) {
 
     if (!vec->dyn_array)
         return BLOK_VECTOR_ARRAY_NULL;
+    
+    if (_new_size < vec->max + 1)
+        return BLOK_VECTOR_INVALID_SIZE;
 
     struct mark *new_mem =
         realloc(vec->dyn_array, _new_size * sizeof(struct mark));
