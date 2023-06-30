@@ -5,8 +5,6 @@
 #include "model/square.h"
 #include "presentation/window.h"
 #include "service/store.h"
-#include "service/logger.h"
-#include "service/store.h"
 
 /**
  * @brief Provides a entrypoint into the program.
@@ -30,7 +28,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     struct window_wrapper window_ = window_new();
 
     if (!window_.present)
-        printlog(log_err, "main.c:WinMain", "Failed to initalise window.");
+        (void)fprintf(stderr, "Failed to initialise window.");
 
     window_free(&window_.handle.instance);
     program_free();
