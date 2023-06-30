@@ -7,6 +7,6 @@
 
 struct square *global_square_get(void);
 
-RECT global_square_get_winapi_rect();
+RECT global_square_get_winapi_rect(void);
 
 #endif

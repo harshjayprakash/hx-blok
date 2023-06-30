@@ -5,7 +5,7 @@ struct square *global_square_get(void) {
     return &sq;
 }
 
-RECT global_square_get_winapi_rect() {
+RECT global_square_get_winapi_rect(void) {
     struct square *sq = global_square_get();
     RECT rect = { sq->x, sq->y, sq->x + sq->width, sq->y + sq->height };
     return rect;
