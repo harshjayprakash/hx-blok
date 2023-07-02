@@ -2,6 +2,12 @@
 
 > A project to explore how native Windows applications are created using the WIN32 API.
 
+## Purpose of the Experimental Branch.
+
+The purpose of the experimental branch a place to store the progress of a re-written version of this program. This version focuses more on organisation as well as making the code more memory safe.
+
+Disclaimer: This program can still be potentially unsafe.
+
 
 ## Description
 
@@ -12,27 +18,3 @@ The pink block's location can be changed or manipulated through the use of arrow
 The mouse pointer can be used to mark points on the grid; this is indicated by a white block. It can be unmarked by clicking in the same area.
 
 ![Main Window of Application](./doc/MainWindow.png)
-
-
-## Compilation and Execution
-
-You can compile in two ways:
-
-Compiling directly with GCC:
-```shell
-gcc -O3 src/main.c src/app.c src/globals.c src/block.c src/grid.c src/window.c src/window_events.c src/actions.c -o bin/blok -lgdi32
-```
-
-Compiling via Mingw's Make
-```shell
-mingw32-make RELEASE
-```
-
-## Wine
-
-Despite this having this application developed with Windows NT in mind, the compiled executable can work under wine. Please ensure that gdi32 library is available if you choose to do this.
-
-
-## Disclaimer
-
-Caution: This application may be potentially memory unsafe. By choosing to compile and run this application, you are aware of this fact.
