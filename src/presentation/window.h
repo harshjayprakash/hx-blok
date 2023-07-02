@@ -82,8 +82,16 @@ struct window_wrapper {
     union window_instance_handler handle;
 };
 
+/**
+ * @brief Creates a window.
+ * @return A window wrapper to provide additional checks if creation was successful.
+ */
 struct window_wrapper window_new(void);
 
+/**
+ * @brief Frees any memory allocated to the window object.
+ * @param wnd THe instance of the window.
+ */
 void window_free(struct window *wnd);
 
 #endif
