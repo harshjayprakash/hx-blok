@@ -10,7 +10,9 @@ SOURCE_DIRECTORY = src
 BUILD_DIRECTORY = build
 OUTPUT_DIRECTORY = bin
 
-OBJECT_FILES = $(BUILD_DIRECTORY)/main.o $(BUILD_DIRECTORY)/program.o $(BUILD_DIRECTORY)/window.o $(BUILD_DIRECTORY)/logger.o $(BUILD_DIRECTORY)/square.o $(BUILD_DIRECTORY)/store.o
+OBJECT_FILES = $(BUILD_DIRECTORY)/main.o $(BUILD_DIRECTORY)/program.o \
+	$(BUILD_DIRECTORY)/window.o $(BUILD_DIRECTORY)/square.o \
+	$(BUILD_DIRECTORY)/store.o
 
 EXECUTABLE = blok
 
@@ -29,9 +31,6 @@ $(BUILD_DIRECTORY)/square.o: src/model/square.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIRECTORY)/window.o: src/presentation/window.c
-	$(CC) $(CC_FLAGS) -c $^ -o $@
-
-$(BUILD_DIRECTORY)/logger.o: src/service/logger.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIRECTORY)/store.o: src/service/store.c
