@@ -21,12 +21,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     program_init(hInstance, hPrevInstance, lpCmdLine, nShowCmd);
     store_instance_get()->movable_square = (struct square){0, 0, 15, 15};
     struct window_wrapper window_ = window_new();
-
     if (!window_.present)
+    {
         (void)fprintf(stderr, "Failed to initialise window.");
-
+    }
     window_free(&window_.handle.instance);
     program_free();
-
     return 0;
 }
