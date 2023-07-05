@@ -85,6 +85,13 @@ int vector_next_available_index(const struct vector *vec);
 struct mark vector_pop(struct vector *vec);
 
 /**
+ * @brief Gets the last element.
+ * @param vec The instance of the vector.
+ * @return A stack allocated of the node at the last index. 
+ */
+struct mark vector_peak(const struct vector *vec);
+
+/**
  * @brief Frees any memory allocated to the vector object.
  * @param vec The instance of the vector.
  */
