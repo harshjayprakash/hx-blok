@@ -12,6 +12,7 @@
 #include "../core/error.h"
 #include "../core/program.h"
 #include "../service/store.h"
+#include "../model/square.h"
 
 #define CHAR_LENGTH_COUNT 260
 
