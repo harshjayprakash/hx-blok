@@ -1,6 +1,7 @@
 #ifndef BLOK_PROGRAM_H
 #define BLOK_PROGRAM_H
 
+#include <stdbool.h>
 #include <windows.h>
 
 /**
