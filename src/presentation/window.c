@@ -1,5 +1,28 @@
 #include "window.h"
 
+static int window_action_key_down(HWND window_handle, WPARAM word_param, LPARAM long_param)
+{
+    switch (word_param)
+    {
+    case VK_UP:
+        square_move(&store_instance_get()->movable_square, north);
+        break;
+    case VK_RIGHT:
+        square_move(&store_instance_get()->movable_square, east);
+        break;
+    case VK_DOWN:
+        square_move(&store_instance_get()->movable_square, south);
+        break;
+    case VK_LEFT:
+        square_move(&store_instance_get()->movable_square, west);
+        break;
+    default:
+        return -1;
+    }
+    InvalidateRect(window_handle, NULL, TRUE);
+    return 0;
+}
+
 static int window_action_while_running(HWND window_handle, WPARAM word_param, LPARAM long_param)
 {
     HDC device_context_handle = GetDC(window_handle);
@@ -24,6 +47,8 @@ static long long window_callback(HWND window_handle, UINT message, WPARAM word_p
     {
     case WM_DESTROY:
         return window_action_on_close();
+    case WM_KEYDOWN:
+        return window_action_key_down(window_handle, word_param, long_param);
     default:
         return DefWindowProcW(window_handle, message, word_param, long_param);
     }
