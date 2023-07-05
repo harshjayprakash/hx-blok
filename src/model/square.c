@@ -49,6 +49,16 @@ void square_move(struct square *sq, enum direction _direction)
     }
 }
 
+RECT square_winapi_rect_cast(const struct square *sq)
+{
+    if (!sq)
+    {
+        return (RECT){0, 0, 15, 15};
+    }
+    RECT rect = {sq->x, sq->y, sq->x + sq->width, sq->y + sq->height};
+    return rect;
+}
+
 void square_free(struct square *sq)
 {
 }

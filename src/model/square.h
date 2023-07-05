@@ -1,6 +1,7 @@
 #ifndef BLOK_SQUARE_H
 #define BLOK_SQUARE_H
 
+#include <windows.h>
 #include "direction.h"
 
 /**
@@ -46,6 +47,13 @@ void square_size_set(struct square *sq, int _width, int _height);
  * @param _direction the direction to move.
  */
 void square_move(struct square *sq, enum direction _direction);
+
+/**
+ * @brief Converts the square to the Win32 API's RECT structure.
+ * @param sq the instance of the square.
+ * @return the square as a Win32 API RECT.
+ */
+RECT square_winapi_rect_cast(const struct square *sq);
 
 /**
  * @brief Frees any memory allocated of the given square.
