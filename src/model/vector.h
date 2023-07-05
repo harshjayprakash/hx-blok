@@ -92,6 +92,22 @@ struct mark vector_pop(struct vector *vec);
 struct mark vector_peak(const struct vector *vec);
 
 /**
+ * @brief Removes a node (mark) at a specified index.
+ * @param vec The instance of the vector.
+ * @param _index The index to be removed.
+ * @return The removed node (mark) specified by the given index.
+ */
+struct mark vector_remove_index(struct vector *vec, int _index);
+
+/**
+ * @brief Removes a node (mark) specified.
+ * @param vec The instance of the vector.
+ * @param _node The node to be removed.
+ * @return 0 for success, anything else for an error. Refer to 'error.h'.
+ */
+int vector_remove_object(struct vector *vec, struct mark _node);
+
+/**
  * @brief Frees any memory allocated to the vector object.
  * @param vec The instance of the vector.
  */
