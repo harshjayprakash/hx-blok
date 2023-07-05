@@ -4,7 +4,8 @@
 /**
  * @brief Represents the state the mark can be in.
  */
-enum mark_status {
+enum mark_status
+{
     /**
      * @brief Indicates a mark that is not visible.
      */
@@ -20,7 +21,8 @@ enum mark_status {
 /**
  * @brief Represents a mark's position and visibility.
  */
-struct mark {
+struct mark
+{
     /**
      * @brief Stores the x coordinate of the mark.
      */

@@ -9,16 +9,17 @@
 #include <windows.h>
 #include <wingdi.h>
 
+#include "../core/error.h"
 #include "../core/program.h"
 #include "../service/store.h"
-#include "../core/error.h"
 
 #define CHAR_LENGTH_COUNT 260
 
 /**
  * @brief Contains all the components for the creation of a window.
  */
-struct window {
+struct window
+{
     /**
      * @brief Stores the handle to the window.
      */
@@ -59,7 +60,8 @@ union window_instance_handler {
  * @brief Provides a wrapper around the window structure with varies checks to
  * ensure that window creation was successful.
  */
-struct window_wrapper {
+struct window_wrapper
+{
     /**
      * @brief Stores whether window registration was successful.
      */

@@ -1,11 +1,13 @@
 #include "square.h"
 
-struct square square_new(int _x, int _y, int _width, int _height) {
+struct square square_new(int _x, int _y, int _width, int _height)
+{
     struct square sq = {_x, _y, _width, _height};
     return sq;
 }
 
-void square_position_set(struct square *sq, int _x, int _y) {
+void square_position_set(struct square *sq, int _x, int _y)
+{
     if (!sq)
         return;
 
@@ -13,7 +15,8 @@ void square_position_set(struct square *sq, int _x, int _y) {
     sq->y = _y;
 }
 
-void square_size_set(struct square *sq, int _width, int _height) {
+void square_size_set(struct square *sq, int _width, int _height)
+{
     if (!sq)
         return;
 
@@ -21,4 +24,6 @@ void square_size_set(struct square *sq, int _width, int _height) {
     sq->height = _height;
 }
 
-void square_free(struct square *sq) { }
+void square_free(struct square *sq)
+{
+}

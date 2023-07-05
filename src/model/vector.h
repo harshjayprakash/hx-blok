@@ -11,7 +11,8 @@
 /**
  * @brief Represents a dynamically allocated and resizable linked list.
  */
-struct vector {
+struct vector
+{
     /**
      * @brief Stores the memory address of the start of the array.
      */

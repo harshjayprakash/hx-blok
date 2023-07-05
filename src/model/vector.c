@@ -1,6 +1,7 @@
 #include "vector.h"
 
-struct vector vector_new(int _size) {
+struct vector vector_new(int _size)
+{
     struct vector vec;
     vec.head = -1;
     vec.max = _size;
@@ -8,18 +9,18 @@ struct vector vector_new(int _size) {
     return vec;
 }
 
-int vector_resize(struct vector *vec, int _new_size) {
+int vector_resize(struct vector *vec, int _new_size)
+{
     if (!vec)
         return BLOK_VECTOR_NULL;
 
     if (!vec->dyn_array)
         return BLOK_VECTOR_ARRAY_NULL;
-    
+
     if (_new_size < vec->max + 1)
         return BLOK_VECTOR_INVALID_SIZE;
 
-    struct mark *new_mem =
-        realloc(vec->dyn_array, _new_size * sizeof(struct mark));
+    struct mark *new_mem = realloc(vec->dyn_array, _new_size * sizeof(struct mark));
 
     if (!new_mem)
         return BLOK_VECTOR_REALLOC_FAILED;
@@ -30,7 +31,8 @@ int vector_resize(struct vector *vec, int _new_size) {
     return BLOK_OPERATION_SUCCESS;
 }
 
-int vector_push(struct vector *vec, struct mark _node) {
+int vector_push(struct vector *vec, struct mark _node)
+{
     if (vec->head == vec->max)
         return BLOK_VECTOR_CAPACITY_FULL;
 
@@ -38,15 +40,18 @@ int vector_push(struct vector *vec, struct mark _node) {
     return BLOK_OPERATION_SUCCESS;
 }
 
-struct mark *vector_get_ptr(const struct vector *vec, int _index) {
-    if (_index - 1 > vec->head) {
+struct mark *vector_get_ptr(const struct vector *vec, int _index)
+{
+    if (_index - 1 > vec->head)
+    {
         return NULL;
     }
 
     return (vec->dyn_array + (_index - 1));
 }
 
-struct mark vector_get(const struct vector *vec, int _index) {
+struct mark vector_get(const struct vector *vec, int _index)
+{
     struct mark value = {0, 0, mark_invisible};
     if (!vec)
         return value;
@@ -58,12 +63,15 @@ struct mark vector_get(const struct vector *vec, int _index) {
     return *result;
 }
 
-int vector_next_available_index(const struct vector *vec) {
+int vector_next_available_index(const struct vector *vec)
+{
     if (!vec)
         return BLOK_NULL_POINTER_ERROR;
 
-    for (int i = 0; i < vec->head + 1; i++) {
-        if (vec->dyn_array[i].illumated == mark_invisible) {
+    for (int i = 0; i < vec->head + 1; i++)
+    {
+        if (vec->dyn_array[i].illumated == mark_invisible)
+        {
             return i;
         }
     }
@@ -74,7 +82,8 @@ int vector_next_available_index(const struct vector *vec) {
     return vec->head + 1;
 }
 
-void vector_free(struct vector *vec) {
+void vector_free(struct vector *vec)
+{
     if (!vec)
         return;
 

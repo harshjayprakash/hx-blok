@@ -4,7 +4,8 @@
 /**
  * @brief Models a square object.
  */
-struct square {
+struct square
+{
     int x;
     int y;
     int width;
