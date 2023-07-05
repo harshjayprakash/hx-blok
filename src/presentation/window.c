@@ -67,7 +67,6 @@ static int window_message_loop(struct window *wnd)
         window_action_while_running(wnd->window_handle, wnd->window_message.wParam,
                                     wnd->window_message.lParam);
     }
-
     return (int)wnd->window_message.wParam;
 }
 
@@ -78,7 +77,6 @@ static ATOM window_register(struct window *wnd)
         return BLOK_NULL_POINTER_ERROR;
     }
     (void)wcsncpy(wnd->window_class_name, L"blok_window_class", CHAR_LENGTH_COUNT);
-
     wnd->window_class.cbSize = sizeof(WNDCLASSEXW);
     wnd->window_class.style = CS_HREDRAW | CS_VREDRAW;
     wnd->window_class.lpfnWndProc = window_callback;
@@ -91,7 +89,6 @@ static ATOM window_register(struct window *wnd)
     wnd->window_class.lpszMenuName = NULL;
     wnd->window_class.lpszClassName = wnd->window_class_name;
     wnd->window_class.hIconSm = LoadIcon(wnd->window_class.hInstance, IDI_APPLICATION);
-
     return RegisterClassExW(&wnd->window_class);
 }
 
@@ -105,7 +102,6 @@ static int window_create(struct window *wnd)
                                          L"The Experimental Block Project.", WS_OVERLAPPEDWINDOW,
                                          CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, NULL, NULL,
                                          program_instance_get()->instance_handle, NULL);
-
     if (!wnd->window_handle)
     {
         return BLOK_WINDOW_CREATION_ERROR;
@@ -121,7 +117,6 @@ struct window_wrapper window_new(void)
     opt_window.present = false;
     struct window wnd;
     int result = 0;
-
     result = window_register(&wnd);
     if (result == BLOK_WINDOW_REGISTRATION_ERROR)
     {
@@ -129,7 +124,6 @@ struct window_wrapper window_new(void)
         return opt_window;
     }
     opt_window.registered = true;
-
     result = window_create(&wnd);
     if (result == BLOK_WINDOW_CREATION_ERROR)
     {
@@ -137,14 +131,11 @@ struct window_wrapper window_new(void)
         return opt_window;
     }
     opt_window.created = true;
-
     ShowWindow(wnd.window_handle, program_instance_get()->show_flag);
     UpdateWindow(wnd.window_handle);
     window_message_loop(&wnd);
-
     opt_window.present = true;
     opt_window.handle.instance = wnd;
-
     return opt_window;
 }
 
