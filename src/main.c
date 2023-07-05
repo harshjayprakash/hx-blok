@@ -19,12 +19,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                      LPSTR lpCmdLine, int nShowCmd) {
 
     program_init(hInstance, hPrevInstance, lpCmdLine, nShowCmd);
-
-    global_square_get()->y = 0;
-    global_square_get()->x = 0;
-    global_square_get()->height = 15;
-    global_square_get()->width = 15;
-
+    store_instance_get()->movable_square = (struct square){0, 0, 15, 15};
     struct window_wrapper window_ = window_new();
 
     if (!window_.present)
