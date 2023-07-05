@@ -78,6 +78,13 @@ struct mark *vector_get_ptr(const struct vector *vec, int _index);
 int vector_next_available_index(const struct vector *vec);
 
 /**
+ * @brief Removes the last element.
+ * @param vec The instance of the vector.
+ * @return A stack allocated of the node at the last index that has been removed.
+ */
+struct mark vector_pop(struct vector *vec);
+
+/**
  * @brief Frees any memory allocated to the vector object.
  * @param vec The instance of the vector.
  */
