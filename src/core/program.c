@@ -8,7 +8,9 @@ void program_init(HINSTANCE _instance_handle, HINSTANCE _previous_instance_handl
                   int _show_flag)
 {
     if (s_initialised)
+    {
         return;
+    }
     s_program_instance.instance_handle = _instance_handle;
     s_program_instance.previous_instance_handle = _previous_instance_handle;
     s_program_instance.command_line_arguments = _command_line_arguments;
