@@ -5,8 +5,11 @@
 
 #include "../model/square.h"
 
-struct square *global_square_get(void);
+struct store
+{
+    struct square movable_square;
+};
 
-RECT global_square_get_winapi_rect(void);
+struct store *store_instance_get(void);
 
 #endif
