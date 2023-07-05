@@ -7,6 +7,7 @@ build/
 # IDEs and Code Editors
 .vscode/
 .idea/
+.fleet/
 
 # Temporary Files.
 temp/
