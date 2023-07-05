@@ -1,6 +1,8 @@
 #ifndef BLOK_SQUARE_H
 #define BLOK_SQUARE_H
 
+#include "direction.h"
+
 /**
  * @brief Models a square object.
  */
@@ -37,6 +39,13 @@ void square_position_set(struct square *sq, int _x, int _y);
  * @param _height the new height of the square.
  */
 void square_size_set(struct square *sq, int _width, int _height);
+
+/**
+ * @brief Moves the square in the direction specified.
+ * @param sq the instance of the square.
+ * @param _direction the direction to move.
+ */
+void square_move(struct square *sq, enum direction _direction);
 
 /**
  * @brief Frees any memory allocated of the given square.
