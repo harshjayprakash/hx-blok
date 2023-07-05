@@ -34,8 +34,9 @@ static long long window_callback(HWND window_handle, UINT message, WPARAM word_p
 static int window_message_loop(struct window *wnd)
 {
     if (!wnd)
+    {
         return BLOK_NULL_POINTER_ERROR;
-
+    }
     while (GetMessageW(&wnd->window_message, NULL, 0, 0))
     {
         TranslateMessage(&wnd->window_message);
@@ -50,8 +51,9 @@ static int window_message_loop(struct window *wnd)
 static ATOM window_register(struct window *wnd)
 {
     if (!wnd)
+    {
         return BLOK_NULL_POINTER_ERROR;
-
+    }
     (void)wcsncpy(wnd->window_class_name, L"blok_window_class", CHAR_LENGTH_COUNT);
 
     wnd->window_class.cbSize = sizeof(WNDCLASSEXW);
@@ -73,15 +75,18 @@ static ATOM window_register(struct window *wnd)
 static int window_create(struct window *wnd)
 {
     if (!wnd)
+    {
         return BLOK_NULL_POINTER_ERROR;
-
+    }
     wnd->window_handle = CreateWindowExW(WS_EX_OVERLAPPEDWINDOW, wnd->window_class_name,
                                          L"The Experimental Block Project.", WS_OVERLAPPEDWINDOW,
                                          CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, NULL, NULL,
                                          program_instance_get()->instance_handle, NULL);
 
     if (!wnd->window_handle)
+    {
         return BLOK_WINDOW_CREATION_ERROR;
+    }
     return BLOK_OPERATION_SUCCESS;
 }
 
@@ -123,22 +128,34 @@ struct window_wrapper window_new(void)
 void window_free(struct window *wnd)
 {
     if (!wnd)
+    {
         return;
+    }
 
     (void)UnregisterClassW(wnd->window_class_name, program_instance_get()->instance_handle);
 
     if (wnd->window_class.hIcon)
+    {
         (void)DestroyIcon(wnd->window_class.hIcon);
+    }
 
     if (wnd->window_class.hIconSm)
+    {
         (void)DestroyIcon(wnd->window_class.hIconSm);
+    }
 
     if (wnd->window_class.hCursor)
+    {
         (void)DestroyCursor(wnd->window_class.hCursor);
+    }
 
     if (wnd->window_class.hbrBackground)
+    {
         (void)DeleteObject(wnd->window_class.hbrBackground);
+    }
 
     if (wnd->window_handle)
+    {
         (void)DestroyWindow(wnd->window_handle);
+    }
 }
