@@ -14,5 +14,7 @@
 
 #define BLOK_SUCCESSFUL_OPERATION 0
 
+#define BLOK_ERROR_NULL_POINTER (-1)
+
 
 #endif
