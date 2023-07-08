@@ -35,4 +35,9 @@ struct WindowWrapper
     int present;
     union WindowInstance optionalInstance;
 };
+
+struct WindowWrapper blokWindowNew(void);
+
+void blokWindowFree(struct Window *window);
+
 #endif
