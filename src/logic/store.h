@@ -10,5 +10,10 @@ struct Store
     struct Vector markedRegions;
 };
 
+void blokStoreInitialise(void);
+
+struct Store *blokStoreInstanceGet(void);
+
+void blokStoreFree(void);
 
 #endif
