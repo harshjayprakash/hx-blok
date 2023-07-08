@@ -9,5 +9,8 @@
 #define BLOK_NON_VOID_EXIT_IF(CONDITION, RETURN_VALUE) \
     if (CONDITION) return (RETURN_VALUE)
 
+#define BLOK_FREE_IF_NOT_NULL(OBJECT, FUNC) \
+    if ((OBJECT) != NULL) FUNC(OBJECT)
+
 
 #endif
