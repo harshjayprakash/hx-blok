@@ -11,4 +11,12 @@ struct Program
     int showFlag;
 };
 
+void blokProgramInitialise(
+    HINSTANCE _instanceHandle, HINSTANCE _previousInstanceHandle,
+    LPSTR _commandLineArguments, int _showFlag);
+
+struct Program *blokProgramInstanceGet(void);
+
+void blokProgramFree(void);
+
 #endif
