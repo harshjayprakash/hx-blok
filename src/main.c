@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include "core/program.h"
+#include "presentation/window.h"
 
 int APIENTRY WinMain(
     HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
