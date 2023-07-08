@@ -1,5 +1,21 @@
 #include "window.h"
 
+static int blokWindowActionLeftMouseDown(
+    HWND windowHandle, WPARAM wordParam, LPARAM longParam)
+{
+    struct Square square = blokStoreInstanceGet()->movableSquare;
+    int positionX = (LOWORD(longParam) / square.width ) * square.width;
+    int positionY = (HIWORD(longParam) / square.height ) * square.height;
+
+    printf("(%d, %d)\n", positionX, positionY);
+
+    blokVectorPush(
+        &(blokStoreInstanceGet()->markedRegions), blokMarkNew(positionX, positionY));
+
+    InvalidateRect(windowHandle, NULL, TRUE);
+
+    return BLOK_SUCCESSFUL_OPERATION;
+}
 
 static int blokWindowActionKeyPressed(
     HWND windowHandle, WPARAM wordParam, LPARAM longParam)
@@ -30,12 +46,47 @@ static int blokWindowWhileRunning(HWND windowHandle)
 {
     HDC deviceContextHandle = GetDC(windowHandle);
     HBRUSH foregroundBrushHandle = CreateSolidBrush(blokColourForegroundGet());
+    HBRUSH markBrushHandle = CreateSolidBrush(blokColourMarkGet());
+    RECT windowSize = { };
     RECT squareToPaint = blokCastSquareToWinApiRect(
         &(blokStoreInstanceGet()->movableSquare));
+    wchar_t squareCoordinate[BLOK_MAX_CHAR_LENGTH];
+    struct Vector *marks = &(blokStoreInstanceGet()->markedRegions);
+
+    (void)_snwprintf_s(
+        squareCoordinate, BLOK_MAX_CHAR_LENGTH, BLOK_MAX_CHAR_LENGTH, 
+        L"( X: %d, Y: %d )", 
+        blokStoreInstanceGet()->movableSquare.positionX, 
+        blokStoreInstanceGet()->movableSquare.positionY);
+    (void)GetClientRect(windowHandle, &windowSize);
+
+    (void)SelectObject(deviceContextHandle, markBrushHandle);
+    for (int i = 0; i < marks->max; i++)
+    {
+        struct Mark *region = ((*marks).arr + i);
+        
+        if (region->positionX == -1 && region->positionY == -1)
+        {
+            continue;
+        }
+
+        RECT markToPaint = { 
+            region->positionX, region->positionY, 
+            (region->positionX + blokStoreInstanceGet()->movableSquare.width), 
+            (region->positionY + blokStoreInstanceGet()->movableSquare.height) };
+        (void)FillRect(deviceContextHandle, &markToPaint, markBrushHandle);
+    }
 
     (void)SelectObject(deviceContextHandle, foregroundBrushHandle);
     (void)FillRect(deviceContextHandle, &squareToPaint, foregroundBrushHandle);
+    (void)SetTextColor(deviceContextHandle, blokColourForegroundGet());
+    (void)SetBkColor(deviceContextHandle, blokColourBackgroundGet());
+    (void)TextOutW(
+        deviceContextHandle, 10, (windowSize.bottom - windowSize.top) - 25, 
+        squareCoordinate, (int)wcslen(squareCoordinate));
+
     (void)DeleteObject(foregroundBrushHandle);
+    (void)DeleteObject(markBrushHandle);
     (void)ReleaseDC(windowHandle, deviceContextHandle);
 
     return BLOK_SUCCESSFUL_OPERATION;
@@ -51,6 +102,8 @@ static long long blokWindowCallbackProcedure(
         return BLOK_SUCCESSFUL_OPERATION;
     case WM_KEYDOWN:
         return blokWindowActionKeyPressed(windowHandle, wordParam, longParam);
+    case WM_LBUTTONDOWN:
+        return blokWindowActionLeftMouseDown(windowHandle, wordParam, longParam);
     default:
         return DefWindowProcW(windowHandle, message, wordParam, longParam);
     }
