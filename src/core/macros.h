@@ -1,6 +1,7 @@
 #ifndef BLOK_MACROS_H
 #define BLOK_MACROS_H
 
+#define BLOK_MAX_CHAR_LENGTH 260
 
 #define BLOK_EXIT_IF(CONDITION) \
     if (CONDITION) return
