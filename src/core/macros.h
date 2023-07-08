@@ -5,5 +5,8 @@
 #define BLOK_EXIT_IF(CONDITION) \
     if (CONDITION) return
 
+#define BLOK_NON_VOID_EXIT_IF(CONDITION, RETURN_VALUE) \
+    if (CONDITION) return (RETURN_VALUE)
+
 
 #endif
