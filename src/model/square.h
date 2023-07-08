@@ -1,6 +1,8 @@
 #ifndef BLOK_SQUARE_H
 #define BLOK_SQUARE_H
 
+#include "../core/macros.h"
+#include "compass.h"
 
 struct Square
 {
