@@ -9,5 +9,8 @@ struct Mark
     int positionY;
 };
 
+struct Mark blokMarkNew(int _positionX, int _positionY);
+
+void blokMarkPositionSet(struct Mark *mark, int _positionX, int _positionY);
 
 #endif
