@@ -9,4 +9,14 @@ enum Theme
     ThemeDark
 };
 
+void blokThemeSet(enum Theme _theme);
+
+enum Theme blokThemeGet(void);
+
+unsigned long blokColourBackgroundGet(void);
+
+unsigned long blokColourForegroundGet(void);
+
+unsigned long blokColourMarkGet(void);
+
 #endif
