@@ -3,6 +3,9 @@
 
 #include <Windows.h>
 
+#include "macros.h"
+#include "../logic/theme.h"
+
 struct Program
 {
     HINSTANCE instanceHandle;
