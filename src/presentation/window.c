@@ -1,5 +1,20 @@
 #include "window.h"
 
+static int blokWindowWhileRunning(HWND windowHandle)
+{
+    HDC deviceContextHandle = GetDC(windowHandle);
+    HBRUSH foregroundBrushHandle = CreateSolidBrush(blokColourForegroundGet());
+    RECT squareToPaint = blokCastSquareToWinApiRect(
+        &(blokStoreInstanceGet()->movableSquare));
+
+    (void)SelectObject(deviceContextHandle, foregroundBrushHandle);
+    (void)FillRect(deviceContextHandle, &squareToPaint, foregroundBrushHandle);
+    (void)DeleteObject(foregroundBrushHandle);
+    (void)ReleaseDC(windowHandle, deviceContextHandle);
+
+    return BLOK_SUCCESSFUL_OPERATION;
+}
+
 static long long blokWindowCallbackProcedure(
     HWND windowHandle, UINT message, WPARAM wordParam, LPARAM longParam)
 {
@@ -21,10 +36,12 @@ static int blokWindowMessageLoop(struct Window *window)
     {
         (void)TranslateMessage(&window->windowMessage);
         (void)DispatchMessageW(&window->windowMessage);
+        (void)blokWindowWhileRunning(window->windowHandle);
     }
 
     return (int)window->windowMessage.wParam;
 }
+
 static unsigned short blokWindowRegister(struct Window *window)
 {
     BLOK_NON_VOID_EXIT_IF(!window, BLOK_ERROR_NULL_POINTER);
