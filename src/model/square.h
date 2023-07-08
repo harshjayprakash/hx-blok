@@ -18,5 +18,6 @@ void blokSquarePositionSet(struct Square *square, int _positionX, int _positionY
 
 void blokSquareSizeSet(struct Square *square, int _width, int _height);
 
+void blokSquareMove(struct Square *square, enum CompassRose _direction);
 
 #endif
