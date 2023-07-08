@@ -12,6 +12,15 @@ static long long blokWindowCallbackProcedure(
         return DefWindowProcW(windowHandle, message, wordParam, longParam);
     }
 }
+
+static int blokWindowMessageLoop(struct Window *window)
+{
+    BLOK_NON_VOID_EXIT_IF(!window, BLOK_ERROR_NULL_POINTER);
+
+    while (GetMessageW(&window->windowMessage, NULL, 0, 0))
+    {
+        (void)TranslateMessage(&window->windowMessage);
+        (void)DispatchMessageW(&window->windowMessage);
     }
 
     return (int)window->windowMessage.wParam;
