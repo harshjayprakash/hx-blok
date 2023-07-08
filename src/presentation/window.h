@@ -14,4 +14,25 @@
 #include "../logic/store.h"
 #include "../logic/casts.h"
 
+struct Window
+{
+    HWND windowHandle;
+    MSG windowMessage;
+    WNDCLASSEXW nativeWindowClass;
+    wchar_t windowClassName[BLOK_MAX_CHAR_LENGTH];
+};
+
+union WindowInstance
+{
+    struct Window actualInstance;
+    void *potentialInstance;
+};
+
+struct WindowWrapper
+{
+    int registered;
+    int created;
+    int present;
+    union WindowInstance optionalInstance;
+};
 #endif
