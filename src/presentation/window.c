@@ -1,5 +1,31 @@
 #include "window.h"
 
+
+static int blokWindowActionKeyPressed(
+    HWND windowHandle, WPARAM wordParam, LPARAM longParam)
+{
+    switch (wordParam)
+    {
+    case VK_UP:
+        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionNorth);
+        break;
+    case VK_RIGHT:
+        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionEast);
+        break;
+    case VK_DOWN:
+        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionSouth);
+        break;
+    case VK_LEFT:
+        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionWest);
+        break;
+    default:
+        return (-1);
+    }
+    InvalidateRect(windowHandle, NULL, TRUE);
+
+    return BLOK_SUCCESSFUL_OPERATION;
+}
+
 static int blokWindowWhileRunning(HWND windowHandle)
 {
     HDC deviceContextHandle = GetDC(windowHandle);
@@ -23,6 +49,8 @@ static long long blokWindowCallbackProcedure(
     case WM_DESTROY:
         PostQuitMessage(0);
         return BLOK_SUCCESSFUL_OPERATION;
+    case WM_KEYDOWN:
+        return blokWindowActionKeyPressed(windowHandle, wordParam, longParam);
     default:
         return DefWindowProcW(windowHandle, message, wordParam, longParam);
     }
