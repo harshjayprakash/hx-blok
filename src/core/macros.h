@@ -12,5 +12,7 @@
 #define BLOK_FREE_IF_NOT_NULL(OBJECT, FUNC) \
     if ((OBJECT) != NULL) FUNC(OBJECT)
 
+#define BLOK_SUCCESSFUL_OPERATION 0
+
 
 #endif
