@@ -25,6 +25,7 @@ colour.
 ### Visual
 
 * Light and Dark mode, specified by Command Line Arguments.
+* Changed colours
 
 ### Internal
 
@@ -34,7 +35,7 @@ colour.
 * Block object renamed to Square.
 * Debugging Mechanisms macros have a global switch.
 * Grid is now a Vector.
-* Now using wide character version of functions.
+* Now using wide character versions of functions.
 * More safety checks _(not 100% fool-proof)_
 
 ### Removed
@@ -47,12 +48,13 @@ colour.
 * Doxygen Documenetion
 * Vector library
 
-## Limitationa and Known Issues
+## Limitations and Known Issues
 
 * Vector cannot be resized
 * Vector can store duplicate mark regions.
 * The Square can moved out of the window region.
 * The default Vector size is 10.
+* GDI32 Graphics can flicker.
 
 ## Compilation and Excuation
 
