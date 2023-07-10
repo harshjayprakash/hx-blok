@@ -1,3 +1,13 @@
+/**
+ * @file debug.h
+ * @version 1.0
+ * @date 10-07-2023
+ * 
+ * @brief Debugging console.
+ * 
+ * This file contains the functions and macros for managing the debugging.
+ */
+
 #ifndef BLOK_DEBUG_H
 #define BLOK_DEBUG_H
 
@@ -16,47 +26,42 @@
 
 /**
  * @brief Opens the debugging console.
+ *
+ * This function opens the debugging console, allowing the application to output debug 
+ * messages and interact with the debugger.
  * 
- * This allows to any terminal output while the program is running.
- * 
- * @details Opening the debugging console consists of:
- *          1. Assigning the files to the main streams (stdin, stdout, stderr).
- *          2. Allocating a console.
- *          3. Attaching the console to the current procees id occupied by the program.
- *          4. Opening the file streams.
- *          
- *          In addition to this, the console's title is set, as well as printing a title
- *          in the console.
- * 
- * @note This function should not be called directly. Please use the macro versions only.
+ * @details The standard streams are redirected to the new console that has been allocated
+ *          and attached to the current process id. In addition, the console's title has
+ *          been set.
+ *
+ * @note This function should be called before using any other debug console functions.
  */
 void blokDebugConsoleOpen();
 
 /**
  * @brief Closes the debugging console.
+ *
+ * This function closes the debugging console and restores the standard input, output,
+ * and error streams.
  * 
- * This cleans up allocated console memory.
- * 
- * @details Closing the debugging console consists of:
- *          1. Closing all the file streams, opened.
- *          2. Freeing the console.
- * 
- *          This function assumes that the console has been opened before calling the
- *          corresponding close function.
- * 
- * @note This function should not be called directly. Please use the macro versions only.
+ * @details The standard streams are closed and the allocated console is freed.
+ *
+ * @note This function should be called when debugging is no longer required or at the
+ *       end of the application.
  */
 void blokDebugConsoleClose();
 
+
 /**
- * @brief Outputs to the debugging console.
+ * @brief Logs a message to the debugging console.
+ *
+ * This function prints the specified message to the debugging console.
+ *
+ * @param message The message to be logged.
+ *
+ * @details The message passed to the printf function.
  * 
- * Prints the given message to the standard output.
- * 
- * @details Prints the message with the addition of a newline character using 
- *          prinf(const char* const, ...).
- * 
- * @param message The message to be printed.
+ * @note The message will be printed followed by a newline character.
  */
 void blokDebugConsoleLog(const char *message);
 

@@ -8,6 +8,7 @@
  * This file contains WinMain which serves as a starting point for the compiled executable
  * It initialises thw window and any globals needed for the program to run.
  */
+
 #include <Windows.h>
 
 #include "core/program.h"
