@@ -17,12 +17,14 @@
  *                  for the program, excluding the program name.
  * @param nCmdShow Controls how the window is to be shown.
  * 
- * @details The following tasks are executed:
- *          - Starts a console to view debugging information
- *          - Initialises the program handles store
- *          - Initialises the program's standard globals store.
- *          - Creates, initialises and runs the main window.
- *          - Then cleans up any resources used when the window is terminated.
+ * @details The program is started by
+ *          1. Starting the console for debugging, if emabled.
+ *          2. Stores the parameters in the program store.
+ *          3. The global store's values are initialised
+ *          4. An instance of the main window is created, including creation and startup.
+ *          
+ *          After the window has been close, the resources allocated will be cleaned up
+ *          by using the corresponding free functions.
  * 
  * @note This is the standard ASCII WinMain entrypoint due to Mingw GCC not supporting
  *       the unicode version of wWinMain.
