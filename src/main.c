@@ -1,3 +1,13 @@
+/**
+ * @file main.c
+ * @version 1.0
+ * @date 10-07-2023
+ * 
+ * @brief Entrypoint for the program.
+ * 
+ * This file contains WinMain which serves as a starting point for the compiled executable
+ * It initialises thw window and any globals needed for the program to run.
+ */
 #include <Windows.h>
 
 #include "core/program.h"
