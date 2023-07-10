@@ -50,7 +50,8 @@ colour.
 
 ## Limitations and Known Issues
 
-* Vector cannot be resized
+* Vector cannot be resized.
+* Regions cannot be marked after the Vector is full.
 * Vector can store duplicate mark regions.
 * The Square can moved out of the window region.
 * The default Vector size is 10.
