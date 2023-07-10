@@ -1,24 +1,15 @@
 # The Blok Experiment
 
-> A project to explore how native Windows applications are created using the WIN32 API.
+> An exploration of the Windows API and the principles of lower level development.
 
-## What's New
+When the application has been lauched, there will be a graphical window, displaying a
+square that can be move around with arrows keys. The position coordinates relative to the
+window displayed in the bottom left.
 
-* Light and Dark mode, specified by Command Line Arguments
-* Grid is now just a vector that will in future resize.
-* Block renamed to Square.
-* Disable-able Debugging Mechanisms.
-* More organised internal code structure.
-* More safety checks. _(Not 100% fool-proof)_
-
-## Description
-
-When launching the application, a window will display a square that you can move around where the coordinates relative to the window is displayed in the bottom left hand corner.
-
-The cursor can be used to mark regions within the window in a colourful colour.
+The cursor can be used to mark regions within the window. This is displayed in a colourful
+colour.
 
 ![Main Window of Application](./window-light-dark.png)
-
 
 ## Program Structure
 
@@ -29,9 +20,44 @@ The cursor can be used to mark regions within the window in a colourful colour.
 | logic | a translation layer that handles logic and storage for the presentation |
 | presentation | handles the graphical user interface |
 
+## What's new in this version (0.6)
+
+### Visual
+
+* Light and Dark mode, specified by Command Line Arguments.
+
+### Internal
+
+* More organised code.
+* Typdefs are now standard structs.
+* Improved doxygen documentation.
+* Block object renamed to Square.
+* Debugging Mechanisms macros have a global switch.
+* Grid is now a Vector.
+* Now using wide character version of functions.
+* More safety checks _(not 100% fool-proof)_
+
+### Removed
+
+* Ability to unmark regions.
+* 'on marked location' display.
+
+## What is currently being worked on
+
+* Doxygen Documenetion
+* Vector library
+
+## Limitationa and Known Issues
+
+* Vector cannot be resized
+* Vector can store duplicate mark regions.
+* The Square can moved out of the window region.
+* The default Vector size is 10.
+
 ## Compilation and Excuation
 
 Libraries Required:
+
 * kernel32
 * user32
 * shell32
