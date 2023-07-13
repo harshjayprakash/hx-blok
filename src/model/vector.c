@@ -14,7 +14,25 @@ int blokVectorGenerateNewSize(int _size)
 
 int blokVectorResize(struct Vector *vector, int _newSize)
 {
-    return -1;
+    BLOK_NON_VOID_EXIT_IF(!vector, BLOK_ERROR_NULL_POINTER);
+    BLOK_NON_VOID_EXIT_IF(!vector->arr, BLOK_ERROR_VECTOR_ARRAY_NULL);
+
+    if (_newSize + 1 < vector->max)
+    {
+        return BLOK_ERROR_VECTOR_INVALID_SIZE;
+    }
+
+    struct Mark *newMemory = realloc(vector->arr, _newSize * sizeof(struct Mark));
+
+    if (newMemory == NULL)
+    {
+        return BLOK_ERROR_MEMORY_REALLOCATION;
+    }
+
+    vector->arr = newMemory;
+    vector->max = _newSize;
+    
+    return BLOK_SUCCESSFUL_OPERATION;
 }
 
 int blokVectorFull(struct Vector *vector)
