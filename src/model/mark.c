@@ -1,3 +1,16 @@
+/**
+ * @file mark.c
+ * @version 0.6.1
+ * @date 18-07-2023
+ * 
+ * @brief Implementation of the mark.
+ * 
+ * This file contains the implementation of the mark as defined in the corresponding 
+ * header file.
+ * 
+ * @implements mark.h
+ */
+
 #include "mark.h"
 
 struct Mark blokMarkNew(int _positionX, int _positionY)
