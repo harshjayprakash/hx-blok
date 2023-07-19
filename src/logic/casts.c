@@ -1,9 +1,9 @@
 /**
  * @file casts.c
- * @version 1.0
- * @date 10-07-2023
+ * @version 0.6.1
+ * @date 18-07-2023
  * 
- * @brief Implementation of the casts.
+ * @brief Implementation of the cast functions.
  * 
  * This file contains function convert between types as defined in the corresponding
  * header file.
