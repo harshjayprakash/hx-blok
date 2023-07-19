@@ -36,5 +36,5 @@ void blokDebugConsoleClose()
 
 void blokDebugConsoleLog(const char *message)
 {
-    printf("%s\n", message);
+    (void)printf("%s\n", message);
 }
