@@ -5,6 +5,7 @@
 
 enum Theme
 {
+    Unset,
     ThemeLight,
     ThemeDark
 };

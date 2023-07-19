@@ -1,6 +1,6 @@
 #include "theme.h"
 
-static enum Theme theme = ThemeLight;
+static enum Theme theme = Unset;
 static unsigned long colourBlack = RGB(0, 0, 0);
 static unsigned long colourWhite = RGB(255, 255, 255);
 static unsigned long colourBlue = RGB(0, 15, 254);
