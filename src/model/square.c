@@ -1,3 +1,15 @@
+/**
+ * @file square.c
+ * @version 0.6.1
+ * @date 18-07-2023
+ * 
+ * @brief Implementation of the square.
+ * 
+ * This file contains the implementations in correspondance to the header file.
+ * 
+ * @implements square.h
+ */
+
 #include "square.h"
 
 struct Square blokSquareNew(int _positionX, int _positionY, int _width, int _height)
