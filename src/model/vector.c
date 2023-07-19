@@ -180,8 +180,8 @@ int blokVectorRemoveIndex(struct Vector *vector, int _index)
         return BLOK_ERROR_VECTOR_OUT_OF_RANGE;
     }
 
-    vector->arr[_index].positionX = -1;
-    vector->arr[_index].positionY = -1;
+    struct Mark *node = blokVectorPointerGet(vector, _index);
+    blokMarkPositionSet(node, -1, -1);
 
     return BLOK_SUCCESSFUL_OPERATION;
 }
