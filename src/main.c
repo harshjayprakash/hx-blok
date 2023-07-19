@@ -50,7 +50,7 @@ int APIENTRY WinMain(
     blokStoreInitialise();
     struct WindowWrapper windowWrapper = blokWindowNew();
 
-    blokWindowFree(&windowWrapper.optionalInstance.actualInstance);
+    blokWindowFree(&windowWrapper.instance);
     blokStoreFree();
     blokProgramFree();
     

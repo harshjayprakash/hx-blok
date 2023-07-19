@@ -22,18 +22,12 @@ struct Window
     wchar_t windowClassName[BLOK_MAX_CHAR_LENGTH];
 };
 
-union WindowInstance
-{
-    struct Window actualInstance;
-    void *potentialInstance;
-};
-
 struct WindowWrapper
 {
     int registered;
     int created;
     int present;
-    union WindowInstance optionalInstance;
+    struct Window instance;
 };
 
 struct WindowWrapper blokWindowNew(void);

@@ -203,7 +203,7 @@ struct WindowWrapper blokWindowNew(void)
 
     blokWindowMessageLoop(&window);
     optionalWindow.present = 1;
-    optionalWindow.optionalInstance.actualInstance = window;
+    optionalWindow.instance = window;
 
     return optionalWindow;
 }
