@@ -102,7 +102,7 @@ int blokVectorPush(struct Vector *vector, struct Mark _node)
     
     if (blokVectorFull(vector) == BLOK_VECTOR_FULL)
     {
-        return BLOK_VECTOR_FULL;
+        blokVectorResize(vector, blokVectorGenerateNewSize(vector->max));
     }
 
     vector->head++;
