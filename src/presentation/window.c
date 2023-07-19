@@ -12,7 +12,7 @@ static int blokWindowActionLeftMouseDown(
     blokVectorPush(
         &(blokStoreInstanceGet()->markedRegions), blokMarkNew(positionX, positionY));
 
-    InvalidateRect(windowHandle, NULL, TRUE);
+    (void)InvalidateRect(windowHandle, NULL, TRUE);
 
     return BLOK_SUCCESSFUL_OPERATION;
 }
@@ -37,7 +37,8 @@ static int blokWindowActionKeyPressed(
     default:
         return (-1);
     }
-    InvalidateRect(windowHandle, NULL, TRUE);
+    
+    (void)InvalidateRect(windowHandle, NULL, TRUE);
 
     return BLOK_SUCCESSFUL_OPERATION;
 }
