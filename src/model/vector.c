@@ -127,6 +127,7 @@ struct Mark *blokVectorPointerGet(struct Vector *vector, int _index)
     {
         return NULL;
     }
+
     return (vector->arr + _index);
 }
 
