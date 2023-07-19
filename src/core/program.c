@@ -16,7 +16,7 @@
 /**
  * @brief Stores the internal program instance.
  */
-static struct Program singletonInstance = { };
+static struct Program instance = { };
 
 /**
  * @brief Stores whether the blokProgramInitialise() function has been called.
@@ -63,10 +63,10 @@ void blokProgramInitialise(
         return;
     }
 
-    singletonInstance.instanceHandle = _instanceHandle;
-    singletonInstance.previousInstanceHandle = _previousInstanceHandle;
-    singletonInstance.commandLineArguments = _commandLineArguments;
-    singletonInstance.showFlag = _showFlag;
+    instance.instanceHandle = _instanceHandle;
+    instance.previousInstanceHandle = _previousInstanceHandle;
+    instance.commandLineArguments = _commandLineArguments;
+    instance.showFlag = _showFlag;
 
     blokProgramProcessArguments();
 
@@ -75,7 +75,7 @@ void blokProgramInitialise(
 
 struct Program *blokProgramInstanceGet(void)
 {
-    return &singletonInstance;
+    return &instance;
 }
 
 void blokProgramFree(void)
