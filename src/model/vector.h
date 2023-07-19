@@ -267,6 +267,8 @@ int blokVectorFind(struct Vector *vector, struct Mark _node);
  * @retval BLOK_ERROR_NULL_POINTER
  * @retval BLOK_ERROR_VECTOR_ARRAY_NULL
  * @retval BLOK_ERROR_VECTOR_NO_INDEX_AVAILABLE
+ * 
+ * @see macro.h
  */
 int blokVectorNextAvailableIndex(struct Vector *vector);
 
