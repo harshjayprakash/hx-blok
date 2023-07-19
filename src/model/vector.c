@@ -37,6 +37,12 @@ int blokVectorResize(struct Vector *vector, int _newSize)
     }
 
     vector->arr = newMemory;
+
+    for (int i = vector->max; i < _newSize; i++)
+    {
+        blokMarkPositionSet(vector->arr + i, -1, -1);
+    }
+
     vector->max = _newSize;
     
     return BLOK_SUCCESSFUL_OPERATION;
