@@ -1,9 +1,9 @@
 /**
  * @file debug.h
- * @version 1.0
- * @date 10-07-2023
+ * @version 0.6.1
+ * @date 18-07-2023
  * 
- * @brief Debugging console.
+ * @brief Debugging console management.
  * 
  * This file contains the functions and macros for managing the debugging.
  */
@@ -28,9 +28,9 @@
  * @brief Opens the debugging console.
  *
  * This function opens the debugging console, allowing the application to output debug 
- * messages and interact with the debugger.
+ * messages.
  * 
- * @details The standard streams are redirected to the new console that has been allocated
+ * @details The standard output is redirected to the new console that has been allocated
  *          and attached to the current process id. In addition, the console's title has
  *          been set.
  *
@@ -41,16 +41,14 @@ void blokDebugConsoleOpen();
 /**
  * @brief Closes the debugging console.
  *
- * This function closes the debugging console and restores the standard input, output,
- * and error streams.
+ * This function closes the debugging console and restores the standard output stream.
  * 
- * @details The standard streams are closed and the allocated console is freed.
+ * @details The standard output stream is closed and the allocated console is freed.
  *
  * @note This function should be called when debugging is no longer required or at the
  *       end of the application.
  */
 void blokDebugConsoleClose();
-
 
 /**
  * @brief Logs a message to the debugging console.
