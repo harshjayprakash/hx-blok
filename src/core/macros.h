@@ -1,7 +1,7 @@
 /**
  * @file macros.h
- * @version 1.0
- * @date 10-07-2023
+ * @version 0.6.1
+ * @date 19-07-2023
  * 
  * @brief Global non-debugging macros.
  * 
@@ -38,6 +38,21 @@
  * @brief Specifies the error that the object was null.
  */
 #define BLOK_ERROR_NULL_POINTER (-1)
+
+/**
+ * @brief Specifies the error that occured during memory allocation.
+ */
+#define BLOK_ERROR_MEMORY_ALLOCATION (-34)
+
+/**
+ * @brief Specifies the error that occured during memory reallocation.
+ */
+#define BLOK_ERROR_MEMORY_REALLOCATION (-50)
+
+/**
+ * @brief Specifies the new vector size provided is not valid.
+ */
+#define BLOK_ERROR_VECTOR_INVALID_SIZE (-32)
 
 /**
  * @brief Specifies that an error occured during window creation.
