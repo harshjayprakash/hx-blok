@@ -1,24 +1,24 @@
 #include "store.h"
 
-static struct Store singletonInstance;
+static struct Store instance;
 
 void blokStoreInitialise(void)
 {
-    singletonInstance.movableSquare = blokSquareNew(0, 0, 15, 15);
-    singletonInstance.markedRegions = blokVectorNew(10);
+    instance.movableSquare = blokSquareNew(0, 0, 15, 15);
+    instance.markedRegions = blokVectorNew(10);
     
-    for (int i = 0; i < singletonInstance.markedRegions.max; i++)
+    for (int i = 0; i < instance.markedRegions.max; i++)
     {
-        blokMarkPositionSet(&(singletonInstance.markedRegions.arr[i]), -1, -1);
+        blokMarkPositionSet(&(instance.markedRegions.arr[i]), -1, -1);
     }
 }
 
 struct Store *blokStoreInstanceGet(void)
 {
-    return &singletonInstance;
+    return &instance;
 }
 
 void blokStoreFree(void)
 {
-    blokVectorFree(&(singletonInstance.markedRegions));
+    blokVectorFree(&(instance.markedRegions));
 }
