@@ -1,3 +1,16 @@
+/**
+ * @file vector.c
+ * @version 0.6.1
+ * @date 19-07-2023
+ * 
+ * @brief Implements the vector.
+ * 
+ * This file implements the operations of the vector as defined in the corresponding
+ * header file.
+ * 
+ * @implements vector.h
+ */
+
 #include "vector.h"
 
 struct Vector blokVectorNew(int _size)
