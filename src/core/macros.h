@@ -18,26 +18,6 @@
 #define BLOK_MAX_CHAR_LENGTH 260
 
 /**
- * @brief Exits a void function based on the given condition.
- * 
- * @param CONDITION the condition for exit.
- */
-#define BLOK_EXIT_IF(CONDITION) \
-    if (CONDITION) return
-
-/**
- * @brief Exits a non-void function based on the given condition, returns the value
- *        specified.
- * 
- * @param CONDITION the condition for exit.
- * @param RETURN_VALUE the value to be returned.
- * 
- * @note As this a macro returning the value, the return type is not checked.
- */
-#define BLOK_NON_VOID_EXIT_IF(CONDITION, RETURN_VALUE) \
-    if (CONDITION) return (RETURN_VALUE)
-
-/**
  * @brief Frees the given object's memory using the function specified.
  * 
  * The object checked ensuring that it is not null before proceeding to use the function 

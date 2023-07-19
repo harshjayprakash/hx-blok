@@ -58,7 +58,10 @@ void blokProgramInitialise(
     HINSTANCE _instanceHandle, HINSTANCE _previousInstanceHandle, 
     LPSTR _commandLineArguments, int _showFlag)
 {
-    BLOK_EXIT_IF(initialised);
+    if (initialised)
+    {
+        return;
+    }
 
     singletonInstance.instanceHandle = _instanceHandle;
     singletonInstance.previousInstanceHandle = _previousInstanceHandle;

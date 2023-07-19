@@ -7,7 +7,10 @@ struct Square blokSquareNew(int _positionX, int _positionY, int _width, int _hei
 
 void blokSquarePositionSet(struct Square *square, int _positionX, int _positionY)
 {
-    BLOK_EXIT_IF(!square);
+    if (!square)
+    {
+        return;
+    }
 
     square->positionX = _positionX;
     square->positionY = _positionY;
@@ -15,7 +18,10 @@ void blokSquarePositionSet(struct Square *square, int _positionX, int _positionY
 
 void blokSquareSizeSet(struct Square *square, int _width, int _height)
 {
-    BLOK_EXIT_IF(!square);
+    if (!square)
+    {
+        return;
+    }
 
     square->width = _width;
     square->height = _height;
@@ -23,7 +29,10 @@ void blokSquareSizeSet(struct Square *square, int _width, int _height)
 
 void blokSquareMove(struct Square *square, enum CompassRose _direction)
 {
-    BLOK_EXIT_IF(!square);
+    if (!square)
+    {
+        return;
+    }
 
     switch (_direction)
     {

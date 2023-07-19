@@ -111,7 +111,10 @@ static long long blokWindowCallbackProcedure(
 
 static int blokWindowMessageLoop(struct Window *window)
 {
-    BLOK_NON_VOID_EXIT_IF(!window, BLOK_ERROR_NULL_POINTER);
+    if (!window)
+    {
+        return BLOK_ERROR_NULL_POINTER;
+    }
 
     while (GetMessageW(&window->windowMessage, NULL, 0, 0))
     {
@@ -125,7 +128,10 @@ static int blokWindowMessageLoop(struct Window *window)
 
 static unsigned short blokWindowRegister(struct Window *window)
 {
-    BLOK_NON_VOID_EXIT_IF(!window, BLOK_ERROR_NULL_POINTER);
+    if (!window)
+    {
+        return BLOK_ERROR_NULL_POINTER;
+    }
 
     (void)wcsncpy_s(
         window->windowClassName, BLOK_MAX_CHAR_LENGTH, 
@@ -151,7 +157,10 @@ static unsigned short blokWindowRegister(struct Window *window)
 
 static int blokWindowCreate(struct Window *window)
 {
-    BLOK_NON_VOID_EXIT_IF(!window, BLOK_ERROR_NULL_POINTER);
+    if (!window)
+    {
+        return BLOK_ERROR_NULL_POINTER;
+    }
 
     window->windowHandle = CreateWindowExW(
         WS_EX_OVERLAPPEDWINDOW, window->windowClassName, 
@@ -159,7 +168,10 @@ static int blokWindowCreate(struct Window *window)
         CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, NULL, NULL, 
         blokProgramInstanceGet()->instanceHandle, NULL);
     
-    BLOK_NON_VOID_EXIT_IF(!window->windowHandle, BLOK_ERROR_WINDOW_CREATION);
+    if (!window->windowHandle)
+    {
+        return BLOK_ERROR_WINDOW_CREATION;
+    }
 
     return BLOK_SUCCESSFUL_OPERATION;
 }
@@ -198,7 +210,10 @@ struct WindowWrapper blokWindowNew(void)
 
 void blokWindowFree(struct Window *window)
 {
-    BLOK_EXIT_IF(!window);
+    if (!window)
+    {
+        return;
+    }
 
     (void)UnregisterClassW(
         window->windowClassName, blokProgramInstanceGet()->instanceHandle);

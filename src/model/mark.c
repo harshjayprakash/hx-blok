@@ -7,7 +7,10 @@ struct Mark blokMarkNew(int _positionX, int _positionY)
 
 void blokMarkPositionSet(struct Mark *mark, int _positionX, int _positionY)
 {
-    BLOK_EXIT_IF(!mark);
+    if (!mark)
+    {
+        return;
+    }
 
     mark->positionX = _positionX;
     mark->positionY = _positionY;
