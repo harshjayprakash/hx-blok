@@ -1,12 +1,12 @@
 /**
  * @file debug.c
- * @version 1.0
- * @date 10-07-2023
+ * @version 0.6.1
+ * @date 19-07-2023
  * 
  * @brief Debugging console implementation
  * 
- * This file implements the functionality for managing the debugging the console as
- * defined in the corresponding header file.
+ * This file implements the functionality for managing the debugging console as defined in 
+ * the corresponding header file.
  * 
  * @implements debug.h
  */
@@ -15,6 +15,8 @@
 
 /**
  * @brief Output stream for the console.
+ * 
+ * This allows the output to be redirected to the console allocated.
  */
 static FILE *consoleOut;
 
