@@ -31,7 +31,7 @@ int blokVectorResize(struct Vector *vector, int _newSize)
 
     struct Mark *newMemory = realloc(vector->arr, _newSize * sizeof(struct Mark));
 
-    if (newMemory == NULL)
+    if (!newMemory)
     {
         return BLOK_ERROR_MEMORY_REALLOCATION;
     }
