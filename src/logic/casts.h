@@ -1,7 +1,7 @@
 /**
  * @file casts.h
- * @version 1.0
- * @date 10-07-2023
+ * @version 0.6.1
+ * @date 18-07-2023
  * 
  * @brief Provides casts to different types.
  * 
