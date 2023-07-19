@@ -160,7 +160,7 @@ struct Mark blokVectorPeak(struct Vector *vector)
         return (struct Mark){ -1, -1 };
     }
     
-    return vector->arr[vector->head];
+    return blokVectorGet(vector, vector->head);
 }
 
 int blokVectorRemoveIndex(struct Vector *vector, int _index)
