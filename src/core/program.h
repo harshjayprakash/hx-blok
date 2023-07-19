@@ -1,7 +1,7 @@
 /**
  * @file program.h
- * @version 1.0
- * @date 10-07-2023
+ * @version 0.6.1
+ * @date 18-07-2023
  * 
  * @brief Program handles and instance management.
  * 
@@ -90,8 +90,8 @@ void blokProgramInitialise(
  * @return A pointer to the program instance.
  * 
  * @note The ownership of the memory is not transferred to the caller. The returned 
- *       pointer provides access to the program instance, but the caller should not 
- *       deallocate or modify the memory directly.
+ *       pointer provides access to the program instance. This memory should not be 
+ *       deallocated.
  * 
  * @see struct Program
  */
