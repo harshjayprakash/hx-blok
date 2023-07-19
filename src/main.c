@@ -1,7 +1,7 @@
 /**
  * @file main.c
  * @version 1.0
- * @date 10-07-2023
+ * @date 19-07-2023
  * 
  * @brief Entrypoint for the program.
  * 
@@ -25,20 +25,21 @@
  * @param hInstance The handle to the current instance of the program.
  * @param hPrevInstance Always NULL in this program.
  * @param lpCmdLine A pointer to a null terminated string that specifies the command line
- *                  for the program, excluding the program name.
+ *                  for the program.
  * @param nCmdShow Controls how the window is to be shown.
  * 
  * @details The program is started by
- *          1. Starting the console for debugging, if emabled.
+ *          1. Starting the console for debugging, if enabled.
  *          2. Stores the parameters in the program store.
  *          3. The global store's values are initialised
  *          4. An instance of the main window is created, including creation and startup.
  *          
- *          After the window has been close, the resources allocated will be cleaned up
+ *          After the window has been closed, the resources allocated will be cleaned up
  *          by using the corresponding free functions.
  * 
  * @note This is the standard ASCII WinMain entrypoint due to Mingw GCC not supporting
- *       the unicode version of wWinMain.
+ *       the unicode version of wWinMain. Despite this, the program uses the unicode 
+ *       (wide) versions of the WinApi functions.
  */
 int APIENTRY WinMain(
     HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
