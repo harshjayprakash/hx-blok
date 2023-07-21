@@ -45,16 +45,13 @@ colour.
 
 ## Limitations and Known Issues
 
-* Vector cannot be resized.
-* Regions cannot be marked after the Vector is full.
 * Regions cannot be unmarked.
 * Vector can store duplicate mark regions.
 * The Square can moved out of the window region.
 * The Square can be covering a mark region without indication.
-* The default Vector size is 10.
 * GDI32 Graphics can flicker.
 
-## Compilation and Excuation
+## Compilation and Execuation
 
 Libraries Required:
 
