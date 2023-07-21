@@ -1,35 +1,58 @@
-#include <stdio.h>
-#include <windows.h>
+/**
+ * @file main.c
+ * @version 1.0
+ * @date 19-07-2023
+ * 
+ * @brief Entrypoint for the program.
+ * 
+ * This file contains WinMain which serves as a starting point for the compiled executable
+ * It initialises thw window and any globals needed for the program to run.
+ */
 
-#include "globals.h"
-#include "app.h"
-#include "block.h"
-#include "grid.h"
-#include "window.h"
+#include <Windows.h>
+
+#include "core/program.h"
+#include "core/debug.h"
+#include "presentation/window.h"
+#include "logic/store.h"
 
 /**
- * The entrypoint to the application. 
- * @param hInst: Handle to the instance of the application. Windows uses this 
- *      to identify the program executable when loaded in memory
- * @param hPrevInst: Used for 16-bit version of Windows. Not used in this
- *      application.
- * @param lpCmdline: Any command line arguments specified when running the
- *      program.
- * @param nShow: A flag used to specify how the application should be displayed.
-*/
-int __stdcall WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdline, INT nShow)
+ * @brief Entrypoint for the program.
+ * 
+ * Responsible for starting up the program, initialising any globally stored data and 
+ * creation of the window. After this, cleaning up resources when terminating.
+ * 
+ * @param hInstance The handle to the current instance of the program.
+ * @param hPrevInstance Always NULL in this program.
+ * @param lpCmdLine A pointer to a null terminated string that specifies the command line
+ *                  for the program.
+ * @param nCmdShow Controls how the window is to be shown.
+ * 
+ * @details The program is started by
+ *          1. Starting the console for debugging, if enabled.
+ *          2. Stores the parameters in the program store.
+ *          3. The global store's values are initialised
+ *          4. An instance of the main window is created, including creation and startup.
+ *          
+ *          After the window has been closed, the resources allocated will be cleaned up
+ *          by using the corresponding free functions.
+ * 
+ * @note This is the standard ASCII WinMain entrypoint due to Mingw GCC not supporting
+ *       the unicode version of wWinMain. Despite this, the program uses the unicode 
+ *       (wide) versions of the WinApi functions.
+ */
+int APIENTRY WinMain(
+    HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-    Application app;
-    Application_Init(&app, hInst, hPrevInst, lpCmdline, nShow);
-    Block_Init(&g_user, 0, 0, 15, 15, RGB(255, 32, 100));
+    BLOK_DEBUG_CONSOLE_OPEN();
 
-    Grid_Init(&g_map, 2048, 2048);
-    Window wnd;
-    Window_Init(&wnd, &app);
+    blokProgramInitialise(hInstance, hPrevInstance, lpCmdLine, nShowCmd);
+    blokStoreInitialise();
+    struct WindowWrapper windowWrapper = blokWindowNew();
 
-    Window_Del(&wnd);
-    Grid_Del(&g_map);
-    Block_Del(&g_user);
-    Application_Del(&app);
-    return 0;
+    blokWindowFree(&windowWrapper.instance);
+    blokStoreFree();
+    blokProgramFree();
+    
+    BLOK_DEBUG_CONSOLE_CLOSE();
 }

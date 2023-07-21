@@ -1,38 +1,73 @@
 # The Blok Experiment
 
-> A project to explore how native Windows applications are created using the WIN32 API.
+> An exploration of the Windows API and the principles of lower level development.
 
+When the application has been lauched, there will be a graphical window, displaying a
+square that can be move around with arrows keys. The position coordinates relative to the
+window displayed in the bottom left.
 
-## Description
+The cursor can be used to mark regions within the window. This is displayed in a colourful
+colour.
 
-When launching the application, a black painted window is created with a pink block at the top left corner. Towards the bottom left, there is text showing the X and Y coordinates of the pink square; in addition to whether the block is in a marked location.
+![Main Window of Application](./window-light-dark.png)
 
-The pink block's location can be changed or manipulated through the use of arrow keys from the keyboard, also updating the coordinates at the bottom.
+## Program Structure
 
-The mouse pointer can be used to mark points on the grid; this is indicated by a white block. It can be unmarked by clicking in the same area.
+| Folder | Description |
+|--------|-------------|
+| core   | global macros and storage for the program's entrypoint arguments.  |
+| model  | contains structures and enumerations to model objects. |
+| logic | a translation layer that handles logic and storage for the presentation |
+| presentation | handles the graphical user interface |
 
-![Main Window of Application](./doc/MainWindow.png)
+## What's new in this version (0.6)
 
+### Visual
 
-## Compilation and Execution
+* Light and Dark mode, specified by Command Line Arguments.
+* Changed colours
 
-You can compile in two ways:
+### Internal
 
-Compiling directly with GCC:
-```shell
-gcc -O3 src/main.c src/app.c src/globals.c src/block.c src/grid.c src/window.c src/window_events.c src/actions.c -o bin/blok -lgdi32
+* More organised code.
+* Typdefs are now standard structs.
+* Improved doxygen documentation.
+* Block object renamed to Square.
+* Debugging Mechanisms macros have a global switch.
+* Grid is now a Vector.
+* Now using wide character versions of functions.
+* More safety checks _(not 100% fool-proof)_
+
+## What is currently being worked on
+
+* Doxygen Documenetion
+* Vector Module.
+
+## Limitations and Known Issues
+
+* Regions cannot be unmarked.
+* Vector can store duplicate mark regions.
+* The Square can moved out of the window region.
+* The Square can be covering a mark region without indication.
+* GDI32 Graphics can flicker.
+
+## Compilation and Execuation
+
+Libraries Required:
+
+* kernel32
+* user32
+* shell32
+* gdi32
+
+```sh
+# Compiling the program.
+# This is compiled with clang, you can change the CC variable to gcc.
+mingw32-make
+
+# Running the program. A command line argument can be added to change the theme, 
+# with either the following arguments (not required):
+# --dark-theme 
+# --light-theme
+bin/blok
 ```
-
-Compiling via Mingw's Make
-```shell
-mingw32-make RELEASE
-```
-
-## Wine
-
-Despite this having this application developed with Windows NT in mind, the compiled executable can work under wine. Please ensure that gdi32 library is available if you choose to do this.
-
-
-## Disclaimer
-
-Caution: This application may be potentially memory unsafe. By choosing to compile and run this application, you are aware of this fact.
