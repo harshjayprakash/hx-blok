@@ -1,5 +1,30 @@
+/**
+ * @file window.c
+ * @version 0.6.1
+ * @date 21-07-2023
+ * 
+ * @brief Graphical window handles and creation.
+ * 
+ * This file contains the implementation for creating and handling events for the window.
+ * 
+ * @implements window.h
+ */
+
 #include "window.h"
 
+/**
+ * @brief Handles the left mouse down (click event).
+ * 
+ * @details This function gets the coordinate for the region clicked, using the square's
+ *          dimensions as the base a grid. This is then added to the vector storing all
+ *          the marked regions. Then the window is invalidated forcing an update.
+ * 
+ * @param windowHandle the handle to the window.
+ * @param wordParam additional information in type word.
+ * @param longParam additional information in type long - used to get coordinates of
+ *                  clicked region.
+ * @return 0: Operation Successful
+ */
 static int blokWindowActionLeftMouseDown(
     HWND windowHandle, WPARAM wordParam, LPARAM longParam)
 {
@@ -17,6 +42,22 @@ static int blokWindowActionLeftMouseDown(
     return BLOK_SUCCESSFUL_OPERATION;
 }
 
+/**
+ * @brief Handles the key press event.
+ * 
+ * @details This function gets the specific arrow key pressed and moves the square's
+ *          position accordingly. Then the window is invalidated, forcing an update.
+ * 
+ * @param windowHandle the handle to the window.
+ * @param wordParam additional information in type word - used to get key pressed.
+ * @param longParam additional information in type long.
+ * @return A integer dictating whether the operatioon was successful.
+ * 
+ * @retval -1: Key pressed event not implementated.
+ * @retval 0: Operation Successful.
+ * 
+ * @see macro.h
+ */
 static int blokWindowActionKeyPressed(
     HWND windowHandle, WPARAM wordParam, LPARAM longParam)
 {
@@ -43,6 +84,19 @@ static int blokWindowActionKeyPressed(
     return BLOK_SUCCESSFUL_OPERATION;
 }
 
+/**
+ * @brief Actions performed while the window is running.
+ * 
+ * @details This function paints the following to the window:
+ *          1. The coordinate display in the bottom left.
+ *          2. THe marked regions on the window.
+ *          3. The movable square controlled by the user.
+ *          4. Outputs the coordinate display
+ *          5. Cleans up the objects and resources used.
+ * 
+ * @param windowHandle the handle to the window.
+ * @return BLOK_SUCCESSFUL_OPERATION: 0.
+ */
 static int blokWindowWhileRunning(HWND windowHandle)
 {
     HDC deviceContextHandle = GetDC(windowHandle);
@@ -93,6 +147,18 @@ static int blokWindowWhileRunning(HWND windowHandle)
     return BLOK_SUCCESSFUL_OPERATION;
 }
 
+/**
+ * @brief Processes the window event messages.
+ * 
+ * @details This function calls other functions to perform events or references the
+ *          default window procedure if not implementated.
+ * 
+ * @param windowHandle the handle to the window.
+ * @param message the window message
+ * @param wordParam additional information in type word.
+ * @param longParam additional information in type long
+ * @return A long long result.
+ */
 static long long blokWindowCallbackProcedure(
     HWND windowHandle, UINT message, WPARAM wordParam, LPARAM longParam)
 {
@@ -110,6 +176,15 @@ static long long blokWindowCallbackProcedure(
     }
 }
 
+/**
+ * @brief Starts the message event loop.
+ * 
+ * @details This function runs the standard windows api message loop with the addition of
+ *          having a while running function to paint objects to the window.
+ * 
+ * @param window tha instance of the window.
+ * @return A integer value from the message word param. 
+ */
 static int blokWindowMessageLoop(struct Window *window)
 {
     if (!window)
@@ -127,6 +202,15 @@ static int blokWindowMessageLoop(struct Window *window)
     return (int)window->windowMessage.wParam;
 }
 
+/**
+ * @brief Registers the native window class.
+ * 
+ * @param window the instance of the window.
+ * @return An integer macro dictating whether the operation was successful.
+ * 
+ * @retval BLOK_ERROR_NULL_POINTER: window instance was null.
+ * @retval 0: window class registration was successful.
+ */
 static unsigned short blokWindowRegister(struct Window *window)
 {
     if (!window)
@@ -156,6 +240,21 @@ static unsigned short blokWindowRegister(struct Window *window)
     return RegisterClassExW(&window->nativeWindowClass);
 }
 
+/**
+ * @brief Creates the window.
+ * 
+ * @details This function creates the window with default properties and then checking if
+ *          the creation succeeded.
+ * 
+ * @param window the instance of the window.
+ * @return An integer dictating whether the operation was successful.
+ * 
+ * @retval BLOK_ERROR_NULL_POINTER: The window instance was null.
+ * @retval BLOK_ERROR_WINDOW_CREATION: There was error in creating the window; the handle
+ *         does not contain the window.
+ * @retval BLOK_SUCCESSFUL_OPERATION: The window was created and assigned to the handle 
+ *         successfully.
+ */
 static int blokWindowCreate(struct Window *window)
 {
     if (!window)
