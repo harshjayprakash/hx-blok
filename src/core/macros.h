@@ -35,6 +35,16 @@
 #define BLOK_SUCCESSFUL_OPERATION 0
 
 /**
+ * @brief Specifies a constant identifying that the objects are equal.
+ */
+#define BLOK_OBJECt_EQUALS 1
+
+/**
+ * @brief Specifies a constant identifying that the objects are not equal.
+ */
+#define BLOK_OBJECT_NOT_EQUALS 0
+
+/**
  * @brief Specifies the error that the object was null.
  */
 #define BLOK_ERROR_NULL_POINTER (-1)
