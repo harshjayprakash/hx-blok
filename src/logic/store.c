@@ -26,7 +26,7 @@ void blokStoreInitialise(void)
     
     for (int i = 0; i < instance.markedRegions.max; i++)
     {
-        blokMarkPositionSet(&(instance.markedRegions.arr[i]), -1, -1);
+        blokMarkPositionSet(instance.markedRegions.arr + i, -1, -1);
     }
 }
 
