@@ -32,10 +32,16 @@ static int blokWindowActionLeftMouseDown(
     int positionX = (LOWORD(longParam) / square.width ) * square.width;
     int positionY = (HIWORD(longParam) / square.height ) * square.height;
 
-    printf("(%d, %d)\n", positionX, positionY);
+    struct Mark newMark = blokMarkNew(positionX, positionY);
 
-    blokVectorPush(
-        &(blokStoreInstanceGet()->markedRegions), blokMarkNew(positionX, positionY));
+    if (blokVectorExists(&(blokStoreInstanceGet()->markedRegions), newMark))
+    {
+        return BLOK_SUCCESSFUL_OPERATION;
+    }
+
+    blokMarkPrint(&newMark);
+
+    (void)blokVectorPush(&(blokStoreInstanceGet()->markedRegions), newMark);
 
     (void)InvalidateRect(windowHandle, NULL, TRUE);
 
@@ -61,23 +67,46 @@ static int blokWindowActionLeftMouseDown(
 static int blokWindowActionKeyPressed(
     HWND windowHandle, WPARAM wordParam, LPARAM longParam)
 {
+    enum CompassRose directionToMove;
+
     switch (wordParam)
     {
     case VK_UP:
-        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionNorth);
+        directionToMove = DirectionNorth;
         break;
     case VK_RIGHT:
-        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionEast);
+        directionToMove = DirectionEast;
         break;
     case VK_DOWN:
-        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionSouth);
+        directionToMove = DirectionSouth;
         break;
     case VK_LEFT:
-        blokSquareMove(&(blokStoreInstanceGet()->movableSquare), DirectionWest);
+        directionToMove = DirectionWest;
         break;
     default:
         return (-1);
     }
+
+    blokSquareCopy(
+        &(blokStoreInstanceGet()->movableSquare),
+        &(blokStoreInstanceGet()->projectedSquare)); 
+
+    blokSquareMove(&(blokStoreInstanceGet()->projectedSquare), directionToMove);
+
+    struct Mark position = { 
+        blokStoreInstanceGet()->projectedSquare.positionX,
+        blokStoreInstanceGet()->projectedSquare.positionY };
+
+    if ((blokVectorExists(
+            &(blokStoreInstanceGet()->markedRegions), 
+            position)) == BLOK_VECTOR_OBJECT_EXISTS)
+    {
+        return BLOK_SUCCESSFUL_OPERATION;
+    }
+
+    blokSquareCopy(
+        &(blokStoreInstanceGet()->projectedSquare), 
+        &(blokStoreInstanceGet()->movableSquare));
     
     (void)InvalidateRect(windowHandle, NULL, TRUE);
 
@@ -120,7 +149,7 @@ static int blokWindowWhileRunning(HWND windowHandle)
     {
         struct Mark *region = ((*marks).arr + i);
         
-        if (region->positionX == -1 && region->positionY == -1)
+        if (blokMarkEquals(*region, (struct Mark){ -1, -1 }))
         {
             continue;
         }
