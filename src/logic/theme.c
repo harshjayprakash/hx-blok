@@ -34,9 +34,9 @@ static unsigned long colourWhite = RGB(255, 255, 255);
 static unsigned long colourBlue = RGB(0, 15, 254);
 
 /**
- * @brief Stores the colour pink.
+ * @brief Stores the colour aqua.
  */
-static unsigned long colourPink = RGB(255, 32, 100);
+static unsigned long colourAqua = RGB(0, 229, 229);
 
 void blokThemeSet(enum Theme _theme)
 {
@@ -80,6 +80,6 @@ unsigned long blokColourMarkGet(void)
         return colourBlue;
     case ThemeLight:
     default:
-        return colourPink;
+        return colourAqua;
     }
 }
