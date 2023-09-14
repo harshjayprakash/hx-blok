@@ -68,3 +68,16 @@ void blokSquareMove(struct Square *square, enum CompassRose _direction)
         break; 
     }
 }
+
+void blokSquareCopy(struct Square *from, struct Square *destination)
+{
+    if (!from || !destination)
+    {
+        return;
+    }
+
+    destination->height = (*from).height;
+    destination->width = (*from).width;
+    destination->positionX = (*from).positionX;
+    destination->positionY = (*from).positionY;
+}

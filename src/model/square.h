@@ -93,4 +93,13 @@ void blokSquareSizeSet(struct Square *square, int _width, int _height);
  */
 void blokSquareMove(struct Square *square, enum CompassRose _direction);
 
+/**
+ * @brief Copies the position and dimensions of the given square to the destination square 
+ *        given.
+ * 
+ * @param from the square attributes to the copied from. 
+ * @param destination the square attributes to the copied to.
+ */
+void blokSquareCopy(struct Square *from, struct Square *destination);
+
 #endif
