@@ -28,6 +28,14 @@ struct Store
     struct Square movableSquare;
 
     /**
+     * @brief Stores a projected version of the square that determines if a collusion 
+     *        occurs with a marked area.
+     * 
+     * @see struct Square.
+     */
+    struct Square projectedSquare;
+
+    /**
      * @brief Stores vector (dynamic list) of the marked regions.
      * 
      * @see struct Vector.

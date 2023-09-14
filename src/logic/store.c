@@ -22,6 +22,7 @@ static struct Store instance;
 void blokStoreInitialise(void)
 {
     instance.movableSquare = blokSquareNew(0, 0, 15, 15);
+    instance.projectedSquare = blokSquareNew(0, 0, 15, 15);
     instance.markedRegions = blokVectorNew(10);
     
     for (int i = 0; i < instance.markedRegions.max; i++)
