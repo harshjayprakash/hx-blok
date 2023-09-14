@@ -28,3 +28,26 @@ void blokMarkPositionSet(struct Mark *mark, int _positionX, int _positionY)
     mark->positionX = _positionX;
     mark->positionY = _positionY;
 }
+
+int blokMarkEquals(struct Mark firstMark, struct Mark secondMark)
+{
+    if (firstMark.positionX == secondMark.positionX 
+        && firstMark.positionY == secondMark.positionY)
+    {
+        return BLOK_OBJECt_EQUALS;
+    }
+
+    return BLOK_OBJECT_NOT_EQUALS;
+}
+
+void blokMarkPrint(struct Mark *mark)
+{
+    if (!mark)
+    {
+        return;
+    }
+
+    (void)printf(
+        "Mark ( X: %d, Y: %d )\n", 
+        mark->positionX, mark->positionY);
+}
