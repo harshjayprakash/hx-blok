@@ -228,8 +228,7 @@ int blokVectorFind(struct Vector *vector, struct Mark _node)
 
     for (int i = 0; i < vector->head; i++)
     {
-        if (vector->arr[i].positionX == _node.positionX 
-            && vector->arr[i].positionY == _node.positionY)
+        if (blokMarkEquals(vector->arr[i], _node))
         {
             return i;
         }
@@ -252,7 +251,7 @@ int blokVectorNextAvailableIndex(struct Vector *vector)
 
     for (int i = 0; i < vector->max; i++)
     {
-        if (vector->arr[i].positionX == -1 && vector->arr[i].positionY == -1)
+        if (blokMarkEquals(vector->arr[i], (struct Mark){ -1, -1 }))
         {
             return i;
         }
