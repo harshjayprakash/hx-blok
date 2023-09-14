@@ -98,6 +98,16 @@
 #define BLOK_ERROR_VECTOR_OUT_OF_RANGE (-232)
 
 /**
+ * @brief Specifies that the vector contains the node already.
+ */
+#define BLOK_VECTOR_OBJECT_EXISTS 1
+
+/**
+ * @brief Specifies that the vector does not contains the node already.
+ */
+#define BLOK_VECTOR_OBJECT_NON_EXISTANT 0
+
+/**
  * @brief Specifies that the vector is full.
  */
 #define BLOK_VECTOR_FULL (-3204)
