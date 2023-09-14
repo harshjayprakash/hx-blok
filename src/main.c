@@ -50,6 +50,11 @@ int APIENTRY WinMain(
     blokStoreInitialise();
     struct WindowWrapper windowWrapper = blokWindowNew();
 
+    if (windowWrapper.present == 0)
+    {
+        MessageBoxExW(NULL, L"Failed to initialise program", L"Startup Error", MB_OK, 0);
+    }
+
     blokWindowFree(&windowWrapper.instance);
     blokStoreFree();
     blokProgramFree();
