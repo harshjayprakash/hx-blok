@@ -26,7 +26,7 @@ void blokDebugConsoleOpen()
     (void)AllocConsole();
     (void)AttachConsole(GetCurrentProcessId());
     (void)freopen_s(&consoleOut, "CONOUT$", "w", stdout);
-    (void)SetConsoleTitleW(L"The Blok Experiment Console");
+    (void)SetConsoleTitleW(L"The Experimental Block Console");
     (void)printf("======= THE BLOCK EXPERIMENT DEBUGGING MECHANISM =======\n");
 }
 
