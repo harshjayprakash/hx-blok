@@ -19,8 +19,19 @@
  */
 static struct Store instance;
 
+/**
+ * @brief Stores whether the instance of the store has been initialised to prevent
+ *        memory allocation.
+ */
+static int initialised = 0;
+
 void blokStoreInitialise(void)
 {
+    if (initialised)
+    {
+        return;
+    }
+
     instance.movableSquare = blokSquareNew(0, 0, 15, 15);
     instance.projectedSquare = blokSquareNew(0, 0, 15, 15);
     instance.markedRegions = blokVectorNew(10);
@@ -29,6 +40,8 @@ void blokStoreInitialise(void)
     {
         blokMarkPositionSet(instance.markedRegions.arr + i, -1, -1);
     }
+
+    initialised = 1;
 }
 
 struct Store *blokStoreInstanceGet(void)
