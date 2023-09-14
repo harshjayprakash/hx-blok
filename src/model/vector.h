@@ -273,6 +273,20 @@ int blokVectorFind(struct Vector *vector, struct Mark _node);
 int blokVectorNextAvailableIndex(struct Vector *vector);
 
 /**
+ * @brief Checks if there the node provided exists already in the vector.
+ * 
+ * @param vector the instance of the vector.
+ * @param _node the node to be checked.
+ * @return An integer macro indicating whether the node already exists.
+ * 
+ * @retval BLOK_VECTOR_OBJECT_EXISTS
+ * @retval BLOK_VECTOR_OBJECT_NON_EXISTANT
+ * 
+ * @see macro.h
+ */
+int blokVectorExists(struct Vector *vector, struct Mark _node);
+
+/**
  * @brief Frees the memory allocated to the vector.
  * 
  * @details This function checks for an instance before freeing the memory allocated.

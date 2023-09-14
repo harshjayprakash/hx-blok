@@ -260,6 +260,16 @@ int blokVectorNextAvailableIndex(struct Vector *vector)
     return BLOK_ERROR_VECTOR_NO_INDEX_AVAILABLE;
 }
 
+int blokVectorExists(struct Vector *vector, struct Mark _node)
+{
+    if (blokVectorFind(vector, _node) > -1)
+    {
+        return BLOK_VECTOR_OBJECT_EXISTS;
+    }
+
+    return BLOK_VECTOR_OBJECT_NON_EXISTANT;
+}
+
 void blokVectorFree(struct Vector *vector)
 {
     if (!vector)
@@ -269,5 +279,3 @@ void blokVectorFree(struct Vector *vector)
 
     BLOK_FREE_IF_NOT_NULL(vector->arr, free);
 }
-
-
