@@ -32,8 +32,8 @@ void blokStoreInitialise(void)
         return;
     }
 
-    instance.movableSquare = blokSquareNew(0, 0, 15, 15);
-    instance.projectedSquare = blokSquareNew(0, 0, 15, 15);
+    instance.movableSquare = blokSquareNew(0, 0, 15, 15, 260, 260);
+    instance.projectedSquare = blokSquareNew(0, 0, 15, 15, 260, 260);
     instance.markedRegions = blokVectorNew(10);
     
     for (int i = 0; i < instance.markedRegions.max; i++)
