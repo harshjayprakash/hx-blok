@@ -28,3 +28,6 @@ This is the orginal version that was uploaded to GitHub.
 
 ## 0.7 TBD
 
+* `VI0701`: Changed mark colour for light mode.
+* `VI0702`: Collusion system added.
+* `VI0703`: Boundary system added.
