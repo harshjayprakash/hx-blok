@@ -20,35 +20,30 @@ colour.
 | logic | a translation layer that handles logic and storage for the presentation |
 | presentation | handles the graphical user interface |
 
-## What's new in this version (0.6)
+## What's new in this version (0.7)
 
 ### Visual
 
-* Light and Dark mode, specified by Command Line Arguments.
-* Changed colours
+* Light mode mark colour changed to aqua.
 
 ### Internal
 
-* More organised code.
-* Typdefs are now standard structs.
 * Improved doxygen documentation.
-* Block object renamed to Square.
-* Debugging Mechanisms macros have a global switch.
-* Grid is now a Vector.
-* Now using wide character versions of functions.
-* More safety checks _(not 100% fool-proof)_
+* Continued vector implementation.
+* Collusion system with marks.
+* Boundary system has been added.
+* Safety checks _(not 100% fool-proof)_
 
 ## What is currently being worked on
 
-* Doxygen Documenetion
+* Doxygen Documentation
 * Vector Module.
 
 ## Limitations and Known Issues
 
 * Regions cannot be unmarked.
 * Vector can store duplicate mark regions.
-* The Square can moved out of the window region.
-* The Square can be covering a mark region without indication.
+* The Square can be covering the last marked region without indication.
 * GDI32 Graphics can flicker.
 
 ## Compilation and Execuation
