@@ -12,14 +12,26 @@
 
 #include "square.h"
 
-struct Square blokSquareNew(int _positionX, int _positionY, int _width, int _height)
+struct Square blokSquareNew(
+    int _positionX, int _positionY, 
+    int _width, int _height, 
+    int _boundaryX, int _boundaryY)
 {
-    return (struct Square){ _positionX, _positionY, _width, _height };
+    return (struct Square) { 
+        _positionX, _positionY, 
+        _width, _height, 
+        _boundaryX, _boundaryY };
 }
 
 void blokSquarePositionSet(struct Square *square, int _positionX, int _positionY)
 {
     if (!square)
+    {
+        return;
+    }
+
+    if (_positionX > square->boundaryX 
+            || _positionY > square->boundaryY || _positionX < 0 || _positionY < 0)
     {
         return;
     }
@@ -37,6 +49,22 @@ void blokSquareSizeSet(struct Square *square, int _width, int _height)
 
     square->width = _width;
     square->height = _height;
+}
+
+void blokSquareBoundarySet(struct Square *square, int _boundaryX, int _boundaryY)
+{
+    if (!square)
+    {
+        return;
+    }
+
+    if (_boundaryX < 0 || _boundaryY < 0)
+    {
+        return;
+    }
+
+    square->boundaryX = _boundaryX;
+    square->boundaryY = _boundaryY;
 }
 
 void blokSquareMove(struct Square *square, enum CompassRose _direction)
@@ -80,4 +108,6 @@ void blokSquareCopy(struct Square *from, struct Square *destination)
     destination->width = (*from).width;
     destination->positionX = (*from).positionX;
     destination->positionY = (*from).positionY;
+    destination->boundaryX = (*from).boundaryX;
+    destination->boundaryY = (*from).boundaryY;
 }

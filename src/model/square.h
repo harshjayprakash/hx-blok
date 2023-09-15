@@ -93,6 +93,17 @@ void blokSquarePositionSet(struct Square *square, int _positionX, int _positionY
 void blokSquareSizeSet(struct Square *square, int _width, int _height);
 
 /**
+ * @brief Sets the boundaries of the square.
+ * 
+ * @details This function sets the boundaries so that square cannot go out of this range.
+ * 
+ * @param square the instance of the square.
+ * @param _boundaryX the x boundary.
+ * @param _boundaryY the y boundary.
+ */
+void blokSquareBoundarySet(struct Square *square, int _boundaryX, int _boundaryY);
+
+/**
  * @brief Moves the position of the square.
  * 
  * @details This function works out the new set of coordinates based on the initialised 
