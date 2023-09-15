@@ -39,6 +39,17 @@ struct Square
      * @brief Stores the height of the square.
      */
     int height;
+
+    /**
+     * @brief Stores the boundaries the square can be within the x axis.
+     */
+    int boundaryX;
+
+    /**
+     * @brief Stores the boundaries the square can be within the y axis.
+     * 
+     */
+    int boundaryY;
 };
 
 /**
@@ -50,9 +61,14 @@ struct Square
  * @param _positionY the y position of the square.
  * @param _width the width of the square.
  * @param _height the height of the square.
+ * @param _boundaryX the x boundary.
+ * @param _boundaryY the y boundary.
  * @return A Square.
  */
-struct Square blokSquareNew(int _positionX, int _positionY, int _width, int _height);
+struct Square blokSquareNew(
+    int _positionX, int _positionY, 
+    int _width, int _height, 
+    int _boundaryX, int _boundaryY);
 
 /**
  * @brief Sets the position of the square.
