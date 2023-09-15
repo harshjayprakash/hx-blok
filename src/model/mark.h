@@ -1,7 +1,7 @@
 /**
  * @file mark.h
- * @version 0.6.1
- * @date 13-07-2023
+ * @version 0.7.1
+ * @date 14-09-2023
  * 
  * @brief Provides the representation of a mark.
  * 

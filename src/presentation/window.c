@@ -1,7 +1,7 @@
 /**
  * @file window.c
- * @version 0.6.1
- * @date 21-07-2023
+ * @version 0.7.2
+ * @date 15-09-2023
  * 
  * @brief Graphical window handles and creation.
  * 

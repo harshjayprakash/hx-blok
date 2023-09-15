@@ -1,7 +1,7 @@
 /**
  * @file square.h
- * @version 0.6.1
- * @date 18-07-2023
+ * @version 0.7.2
+ * @date 15-09-2023
  * 
  * @brief Representation of a square.
  * 

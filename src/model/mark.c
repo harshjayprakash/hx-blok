@@ -1,7 +1,7 @@
 /**
  * @file mark.c
- * @version 0.6.1
- * @date 18-07-2023
+ * @version 0.7.1
+ * @date 14-09-2023
  * 
  * @brief Implementation of the mark.
  * 

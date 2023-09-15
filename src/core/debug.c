@@ -1,7 +1,7 @@
 /**
  * @file debug.c
- * @version 0.6.1
- * @date 19-07-2023
+ * @version 0.7.1
+ * @date 14-09-2023
  * 
  * @brief Debugging console implementation
  * 

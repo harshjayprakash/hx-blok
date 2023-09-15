@@ -1,7 +1,7 @@
 /**
  * @file main.c
- * @version 1.0
- * @date 19-07-2023
+ * @version 0.7.1
+ * @date 14-08-2023
  * 
  * @brief Entrypoint for the program.
  * 
