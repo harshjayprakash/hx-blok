@@ -114,6 +114,37 @@ static int blokWindowActionKeyPressed(
 }
 
 /**
+ * @brief Handles the resize window event.
+ * 
+ * @details This function retrieves the window size to set the boundaries of the movable
+ *          square to prevent it from going out of view. This then copied to the projected
+ *          square.
+ * 
+ * @param windowHandle the handle to the window
+ * @param wordParam additional information in type word
+ * @param longParam additional information in type long
+ * @return the result of the default window procedure.
+ */
+static long long blokWindowActionOnResize(
+    HWND windowHandle, WPARAM wordParam, LPARAM longParam)
+{
+    RECT windowSize = { };
+
+    (void)GetClientRect(windowHandle, &windowSize);
+
+    blokSquareBoundarySet(
+        &(blokStoreInstanceGet()->movableSquare), 
+        windowSize.right - blokStoreInstanceGet()->movableSquare.width, 
+        windowSize.bottom - blokStoreInstanceGet()->movableSquare.height);
+
+    blokSquareCopy(
+        &(blokStoreInstanceGet()->movableSquare),
+        &(blokStoreInstanceGet()->projectedSquare)); 
+
+    return DefWindowProcW(windowHandle, WM_SIZE, wordParam, longParam);
+}
+
+/**
  * @brief Actions performed while the window is running.
  * 
  * @details This function paints the following to the window:
@@ -200,6 +231,8 @@ static long long blokWindowCallbackProcedure(
         return blokWindowActionKeyPressed(windowHandle, wordParam, longParam);
     case WM_LBUTTONDOWN:
         return blokWindowActionLeftMouseDown(windowHandle, wordParam, longParam);
+    case WM_SIZE:
+        return blokWindowActionOnResize(windowHandle, wordParam, longParam);
     default:
         return DefWindowProcW(windowHandle, message, wordParam, longParam);
     }
