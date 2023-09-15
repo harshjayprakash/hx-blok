@@ -226,7 +226,7 @@ int blokVectorFind(struct Vector *vector, struct Mark _node)
         return BLOK_ERROR_VECTOR_ARRAY_NULL;
     }
 
-    for (int i = 0; i < vector->head; i++)
+    for (int i = 0; i < vector->head + 1; i++)
     {
         if (blokMarkEquals(vector->arr[i], _node))
         {
