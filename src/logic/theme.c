@@ -52,11 +52,12 @@ unsigned long blokColourBackgroundGet(void)
 {
     switch (theme)
     {
-    case ThemeDark:
-        return colourBlack;
+
     case ThemeLight:
-    default:
         return colourWhite;
+    case ThemeDark:
+    default:
+        return colourBlack;
     }
 }
 
