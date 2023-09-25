@@ -24,7 +24,8 @@ colour.
 
 ### Visual
 
-* Light mode mark colour changed to aqua.
+* Changed colour scheme.
+* Dark mode is now default.
 
 ### Internal
 
@@ -42,8 +43,6 @@ colour.
 ## Limitations and Known Issues
 
 * Regions cannot be unmarked.
-* Vector can store duplicate mark regions.
-* The Square can be covering the last marked region without indication.
 * GDI32 Graphics can flicker.
 
 ## Compilation and Execuation
