@@ -64,11 +64,11 @@ unsigned long blokColourForegroundGet(void)
 {
     switch (theme)
     {
-    case ThemeDark:
-        return colourWhite;
     case ThemeLight:
-    default:
         return colourBlack;
+    case ThemeDark:
+    default:
+        return colourWhite;
     }
 }
 
@@ -76,9 +76,9 @@ unsigned long blokColourMarkGet(void)
 {
     switch (theme)
     {
-    case ThemeDark:
-        return colourBlue;
     case ThemeLight:
+        return colourBlue;
+    case ThemeDark:
     default:
         return colourAqua;
     }
