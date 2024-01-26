@@ -1,4 +1,4 @@
-CC = gcc
+CC = clang
 CC_FLAGS = -g -Wall -Werror -std=c17
 CC_LINK_FLAGS = -mwindows -mconsole
 
