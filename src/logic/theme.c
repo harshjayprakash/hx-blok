@@ -1,85 +1,58 @@
-/**
- * @file theme.c
- * @version 0.6.1
- * @date 18-07-2023
- * 
- * @brief Theme management.
- * 
- * This file contains the functions for theme management as defined in correspondance to
- * the header file. In addition, including addtional static properties for encapsulation.
- * 
- * @implements theme.h
- */
-
 #include "theme.h"
 
-/**
- * @brief Stores the current theme of the program.
- */
-static enum Theme theme = Unset;
+static enum TTheme programTheme = BLOK_THEME_UNSET;
 
-/**
- * @brief Store the colour black.
- */
 static unsigned long colourBlack = RGB(0, 0, 0);
 
-/**
- * @brief Stores the colour white.
- */
 static unsigned long colourWhite = RGB(255, 255, 255);
 
-/**
- * @brief Stores the colour blue.
- */
 static unsigned long colourBlue = RGB(0, 15, 254);
 
-/**
- * @brief Stores the colour pink.
- */
-static unsigned long colourPink = RGB(255, 32, 100);
+static unsigned long colourAqua = RGB(0, 229, 229);
 
-void blokThemeSet(enum Theme _theme)
+void blokThemeSet(enum TTheme theme)
 {
-    theme = _theme;
+    programTheme = theme;
 }
 
-enum Theme blokThemeGet(void)
+enum TTheme blokThemeGet(void)
 {
-    return theme;
+    return programTheme;
 }
 
 unsigned long blokColourBackgroundGet(void)
 {
-    switch (theme)
+    switch (programTheme)
     {
-    case ThemeDark:
-        return colourBlack;
-    case ThemeLight:
-    default:
+
+    case BLOK_THEME_LIGHT:
         return colourWhite;
+    case BLOK_THEME_DARK:
+    default:
+        return colourBlack;
     }
 }
 
 unsigned long blokColourForegroundGet(void)
 {
-    switch (theme)
+    switch (programTheme)
     {
-    case ThemeDark:
-        return colourWhite;
-    case ThemeLight:
-    default:
+    case BLOK_THEME_LIGHT:
         return colourBlack;
+    case BLOK_THEME_DARK:
+    default:
+        return colourWhite;
     }
 }
 
 unsigned long blokColourMarkGet(void)
 {
-    switch (theme)
+    switch (programTheme)
     {
-    case ThemeDark:
+    case BLOK_THEME_LIGHT:
         return colourBlue;
-    case ThemeLight:
+    case BLOK_THEME_DARK:
     default:
-        return colourPink;
+        return colourAqua;
     }
 }

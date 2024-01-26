@@ -1,41 +1,37 @@
-/**
- * @file store.c
- * @version 0.6.1
- * @date 18-07-2023
- * 
- * @brief Global store management.
- * 
- * This file contains the functions for the global store instance management as defined
- * in corresponding to the header file.
- * 
- * @implements store.h
- */
-
 #include "store.h"
 
-/**
- * @brief Stores the internal instance of the store, acessable externally through the
- *        blokStoreInstanceGet() function.
- */
-static struct Store instance;
+static struct TStore storeInst;
 
-void blokStoreInitialise(void)
+static int initialised = 0;
+
+enum TResult blokStoreInit(void)
 {
-    instance.movableSquare = blokSquareNew(0, 0, 15, 15);
-    instance.markedRegions = blokVectorNew(10);
-    
-    for (int i = 0; i < instance.markedRegions.max; i++)
+    if (initialised)
     {
-        blokMarkPositionSet(&(instance.markedRegions.arr[i]), -1, -1);
+        return BLOK_UNNESSECARY_INIT;
     }
+
+    storeInst.movableSquare = blokSquareNew(
+        blokPositionNew(0, 0), 
+        blokDimensionNew(15, 15), 
+        blokDimensionNew(260, 260));
+    storeInst.projectedSquare = blokSquareNew(
+        blokPositionNew(0, 0), 
+        blokDimensionNew(15, 15), 
+        blokDimensionNew(260, 260));
+    storeInst.markedRegions = blokVectorNew(10);
+
+    initialised = 1;
+
+    return BLOK_SUCCESS;
 }
 
-struct Store *blokStoreInstanceGet(void)
+struct TStore *blokStoreGet(void)
 {
-    return &instance;
+    return &storeInst;
 }
 
-void blokStoreFree(void)
+enum TResult blokStoreFree(void)
 {
-    blokVectorFree(&(instance.markedRegions));
+    return blokVectorFree(&storeInst.markedRegions);
 }

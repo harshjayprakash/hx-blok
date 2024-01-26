@@ -1,41 +1,11 @@
-/**
- * @file compass.h
- * @version 0.6.1
- * @date 18-07-2023
- * 
- * @brief Directional representation.
- * 
- * This header file contains an enumeration for representing a direction via the compass
- * rose.
- */
+#ifndef BLOK_MODEL_COMPASS_H
+#define BLOK_MODEL_COMPASS_H
 
-#ifndef BLOK_COMPASS_H
-#define BLOK_COMPASS_H
-
-/**
- * @brief Describes the direction with compass terms.
- */
-enum CompassRose
-{
-    /**
-     * @brief Represents the up movement (north).
-     */
-    DirectionNorth,
-
-    /**
-     * @brief Represents the right movement (east).
-     */
-    DirectionEast,
-
-    /**
-     * @brief Represents the down movement (south).
-     */
-    DirectionSouth,
-
-    /**
-     * @brief Represents the left movement (wes).
-     */
-    DirectionWest
+enum TCompass {
+    BLOK_DIRECTION_NORTH = 12,
+    BLOK_DIRECTION_EAST = 3,
+    BLOK_DIRECTION_SOUTH = 6,
+    BLOK_DIRECTION_WEST = 9
 };
 
 #endif
