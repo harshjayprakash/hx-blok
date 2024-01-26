@@ -1,16 +1,16 @@
 # The Experimental Block Project Roadmap
 
-## 0.4 November 2022: Uploaded to GitHub
+## 2211: Uploaded to GitHub
 
 This is the orginal version that was uploaded to GitHub.
 
-## 0.5 February 2023: Neatened Up Code
+## 2302: Neatened Up Code
 
 * `IC0501`: Combined headers and source files into one directory.
 * `IC0502`: Added null checks.
 * `IC0503`: Added code documentation.
 
-## 0.6 July 2023: Rewritten
+## 2307: Rewritten
 
 * `DV0601`: Switched to Clang compiler.
 * `DV0602`: Improved Makefile.
@@ -26,9 +26,11 @@ This is the orginal version that was uploaded to GitHub.
 * `IC0608`: Now using wide character versions of functions.
 * `IC0609`: More safety checks.
 
-## 0.7 TBD
+## 2401
 
 * `VI0701`: Changed colour scheme.
 * `VI0702`: Collusion system added.
 * `VI0703`: Boundary system added.
 * `VI0704`: Dark mode is now default.
+* `DV0701`: Datatypes are now prefixed with T.
+* `DV0702`: Result macros converted to TResult enumeration.
