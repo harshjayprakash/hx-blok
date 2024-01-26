@@ -36,7 +36,7 @@ window displayed in the bottom left.
 The cursor can be used to mark regions within the window. This is displayed in a colourful
 colour.
 
-![Main Window of Application](./window-light-dark.png)
+![Main Window of Application](./doc/window-light-dark.PNG)
 
 ## Program Structure
 
@@ -45,17 +45,18 @@ colour.
 | core   | global macros and storage for the program's entrypoint arguments.  |
 | model  | contains structures and enumerations to model objects. |
 | logic | a translation layer that handles logic and storage for the presentation |
-| presentation | handles the graphical user interface |
+| ui | handles the graphical user interface |
 
-## Changelog (this version: 0.7)
+## Changelog (this version: 2401)
 
 * Changed colour scheme.
 * Dark mode is now default.
-* Improved doxygen documentation.
 * Continued vector implementation.
 * Collusion system with marks.
 * Boundary system has been added.
 * Safety checks _(not 100% fool-proof)_
+* Result macros converted to enum.
+* Data types have the convention of prefixed with 'T'.
 
 ## Limitations and Known Issues
 
