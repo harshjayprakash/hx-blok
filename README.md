@@ -2,7 +2,7 @@
 
 > An exploration of the Windows API and the principles of lower level development.
 
-Internal Codename: `XBlok`.
+Internal Codename: `blok`.
 
 ## Compiling
 
