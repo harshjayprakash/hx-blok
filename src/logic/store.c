@@ -1,55 +1,37 @@
-/**
- * @file store.c
- * @version 0.7.2
- * @date 15-09-2023
- * 
- * @brief Global store management.
- * 
- * This file contains the functions for the global store instance management as defined
- * in corresponding to the header file.
- * 
- * @implements store.h
- */
-
 #include "store.h"
 
-/**
- * @brief Stores the internal instance of the store, acessable externally through the
- *        blokStoreInstanceGet() function.
- */
-static struct Store instance;
+static struct TStore storeInst;
 
-/**
- * @brief Stores whether the instance of the store has been initialised to prevent
- *        memory allocation.
- */
 static int initialised = 0;
 
-void blokStoreInitialise(void)
+enum TResult blokStoreInit(void)
 {
     if (initialised)
     {
-        return;
+        return BLOK_UNNESSECARY_INIT;
     }
 
-    instance.movableSquare = blokSquareNew(0, 0, 15, 15, 260, 260);
-    instance.projectedSquare = blokSquareNew(0, 0, 15, 15, 260, 260);
-    instance.markedRegions = blokVectorNew(10);
-    
-    for (int i = 0; i < instance.markedRegions.max; i++)
-    {
-        blokMarkPositionSet(instance.markedRegions.arr + i, -1, -1);
-    }
+    storeInst.movableSquare = blokSquareNew(
+        blokPositionNew(0, 0), 
+        blokDimensionNew(15, 15), 
+        blokDimensionNew(260, 260));
+    storeInst.projectedSquare = blokSquareNew(
+        blokPositionNew(0, 0), 
+        blokDimensionNew(15, 15), 
+        blokDimensionNew(260, 260));
+    storeInst.markedRegions = blokVectorNew(10);
 
     initialised = 1;
+
+    return BLOK_SUCCESS;
 }
 
-struct Store *blokStoreInstanceGet(void)
+struct TStore *blokStoreGet(void)
 {
-    return &instance;
+    return &storeInst;
 }
 
-void blokStoreFree(void)
+enum TResult blokStoreFree(void)
 {
-    blokVectorFree(&(instance.markedRegions));
+    return blokVectorFree(&storeInst.markedRegions);
 }

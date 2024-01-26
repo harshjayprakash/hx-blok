@@ -1,113 +1,107 @@
-/**
- * @file square.c
- * @version 0.7.2
- * @date 15-09-2023
- * 
- * @brief Implementation of the square.
- * 
- * This file contains the implementations in correspondance to the header file.
- * 
- * @implements square.h
- */
-
 #include "square.h"
+#include <stdio.h>
 
-struct Square blokSquareNew(
-    int _positionX, int _positionY, 
-    int _width, int _height, 
-    int _boundaryX, int _boundaryY)
+struct TSquare blokSquareNew(
+    struct TPosition pos, struct TDimension size, struct TDimension boundary)
 {
-    return (struct Square) { 
-        _positionX, _positionY, 
-        _width, _height, 
-        _boundaryX, _boundaryY };
+    return (struct TSquare) {
+        pos, size, boundary
+    };
 }
 
-void blokSquarePositionSet(struct Square *square, int _positionX, int _positionY)
+enum TResult blokSquarePositionSet(struct TSquare *sq, struct TPosition pos)
 {
-    if (!square)
+    if (!sq)
     {
-        return;
+        return BLOK_NULLPTR_ERROR;
     }
 
-    if (_positionX > square->boundaryX 
-            || _positionY > square->boundaryY || _positionX < 0 || _positionY < 0)
+    if (pos.x > sq->boundary.width || pos.y > sq->boundary.height 
+        || pos.x < 0 || pos.y < 0)
     {
-        return;
+        return BLOK_OUTSIDE_BOUNDARY;
     }
 
-    square->positionX = _positionX;
-    square->positionY = _positionY;
+    return blokPositionCopy(&pos, &sq->pos);
 }
 
-void blokSquareSizeSet(struct Square *square, int _width, int _height)
+enum TResult blokSquareSizeSet(struct TSquare *sq, struct TDimension size)
 {
-    if (!square)
+    if (!sq)
     {
-        return;
+        return BLOK_NULLPTR_ERROR;
     }
 
-    square->width = _width;
-    square->height = _height;
+    return blokDimensionCopy(&size, &sq->size);
 }
 
-void blokSquareBoundarySet(struct Square *square, int _boundaryX, int _boundaryY)
+enum TResult blokSquareBoundarySet(struct TSquare *sq, struct TDimension boundary)
 {
-    if (!square)
+    if (!sq)
     {
-        return;
+        return BLOK_NULLPTR_ERROR;
     }
 
-    if (_boundaryX < 0 || _boundaryY < 0)
+    if (boundary.width < sq->size.width || boundary.height < sq->size.height)
     {
-        return;
+        return BLOK_INVALID_BOUNDARY;
     }
 
-    square->boundaryX = _boundaryX;
-    square->boundaryY = _boundaryY;
+    return blokDimensionCopy(&boundary, &sq->boundary);
 }
 
-void blokSquareMove(struct Square *square, enum CompassRose _direction)
+enum TResult blokSquareMove(struct TSquare *sq, enum TCompass direction)
 {
-    if (!square)
+    if (!sq)
     {
-        return;
+        return BLOK_NULLPTR_ERROR;
     }
 
-    switch (_direction)
+    switch (direction)
     {
-    case DirectionNorth:
-        blokSquarePositionSet(
-            square, square->positionX, (square->positionY - square->height));
-        break;
-    case DirectionEast:
-        blokSquarePositionSet(
-            square, (square->positionX + square->width), square->positionY);
-        break;
-    case DirectionSouth:
-        blokSquarePositionSet(
-            square, square->positionX, (square->positionY + square->height));
-        break;
-    case DirectionWest:
-        blokSquarePositionSet(
-            square, (square->positionX - square->width), square->positionY);
-        break;
+    case BLOK_DIRECTION_NORTH:
+        return blokSquarePositionSet(
+            sq, blokPositionNew(sq->pos.x, (sq->pos.y - sq->size.height)));
+    case BLOK_DIRECTION_EAST:
+        return blokSquarePositionSet(
+            sq, blokPositionNew((sq->pos.x + sq->size.width), sq->pos.y));
+    case BLOK_DIRECTION_SOUTH:
+        return blokSquarePositionSet(
+            sq, blokPositionNew(sq->pos.x, (sq->pos.y + sq->size.height)));
+    case BLOK_DIRECTION_WEST:
+        return blokSquarePositionSet(
+            sq, blokPositionNew((sq->pos.x - sq->size.width), sq->pos.y));
     default:
-        break; 
+        break;
     }
 }
 
-void blokSquareCopy(struct Square *from, struct Square *destination)
+enum TResult blokSquareCopy(struct TSquare *src, struct TSquare *dest)
 {
-    if (!from || !destination)
+    if (!src || !dest)
     {
-        return;
+        return BLOK_NULLPTR_ERROR;
     }
 
-    destination->height = (*from).height;
-    destination->width = (*from).width;
-    destination->positionX = (*from).positionX;
-    destination->positionY = (*from).positionY;
-    destination->boundaryX = (*from).boundaryX;
-    destination->boundaryY = (*from).boundaryY;
+    enum TResult result;
+
+    result = blokPositionCopy(&src->pos, &dest->pos);
+    if (result != BLOK_SUCCESS)
+    {
+        return result;
+    }
+
+    result = blokDimensionCopy(&src->size, &dest->size);
+    if (result != BLOK_SUCCESS)
+    {
+        return result;
+    }
+
+    result = blokDimensionCopy(&src->boundary, &dest->boundary);
+    if (result != BLOK_SUCCESS)
+    {
+        return result;
+    }
+
+    return BLOK_SUCCESS;
 }

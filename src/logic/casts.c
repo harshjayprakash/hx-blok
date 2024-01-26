@@ -1,26 +1,18 @@
-/**
- * @file casts.c
- * @version 0.6.1
- * @date 18-07-2023
- * 
- * @brief Implementation of the cast functions.
- * 
- * This file contains function convert between types as defined in the corresponding
- * header file.
- * 
- * @implements casts.h
- */
-
 #include "casts.h"
 
-RECT blokCastSquareToWinApiRect(struct Square *square)
+RECT blokCastSquareToWinApiRect(struct TSquare *sq)
 {
-    if (!square)
+    if (!sq)
     {
-        return (RECT){ 0, 0, 15, 15 };
+        return (RECT) { 
+            0, 0, 15, 15 
+        };
     }
 
     return (RECT) { 
-        square->positionX, square->positionY, 
-        (square->positionX + square->width), (square->positionY + square->height) };
+        sq->pos.x, 
+        sq->pos.y, 
+        (sq->pos.x + sq->size.width), 
+        (sq->pos.y + sq->size.height) 
+    };
 }
