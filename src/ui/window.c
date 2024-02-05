@@ -1,11 +1,20 @@
 #include "window.h"
 #include <stdio.h>
+#include <wingdi.h>
 
 static int blokWindowEventLeftMouseDown(HWND windowHandle, WPARAM wordParam, LPARAM longParam)
 {
     struct TSquare sq = blokStoreGet()->movableSquare;
     int posx = (LOWORD(longParam) / sq.size.width) * sq.size.width;
     int posy = (HIWORD(longParam) / sq.size.height) * sq.size.height;
+    RECT windowSize = { };
+
+    GetClientRect(windowHandle, &windowSize);
+    if (windowSize.right - 100 < posx && windowSize.bottom - 30 < posy)
+    {
+        blokVectorClear(&blokStoreGet()->markedRegions);
+        goto processed_mouse_down;
+    }
 
     struct TPosition pos = blokPositionNew(posx, posy);
 
@@ -15,6 +24,9 @@ static int blokWindowEventLeftMouseDown(HWND windowHandle, WPARAM wordParam, LPA
     }
 
     (void) blokVectorPush(&blokStoreGet()->markedRegions, pos);
+
+processed_mouse_down:
+
     (void) InvalidateRect(windowHandle, NULL, TRUE);
 
     return BLOK_SUCCESS;
@@ -108,6 +120,7 @@ static int blokWindowWhileRunning(HWND windowHandle)
     (void) GetClientRect(windowHandle, &windowSize);
 
     (void) SelectObject(deviceContextHandle, markBrushHandle);
+    
     for (int i = 0; i < marks->max; i++)
     {
         struct TPosition *region = ((*marks).arr + i);
@@ -131,6 +144,13 @@ static int blokWindowWhileRunning(HWND windowHandle)
     (void) TextOutW(
         deviceContextHandle, 10, (windowSize.bottom - windowSize.top) - 25, 
         squareCoordinate, (int) wcslen(squareCoordinate));
+    (void) Rectangle(
+        deviceContextHandle, windowSize.right - 100, windowSize.bottom - 30,
+        windowSize.right, windowSize.bottom);
+    (void) TextOutW(
+        deviceContextHandle, (windowSize.right - windowSize.left) - 90, 
+        (windowSize.bottom - windowSize.top) - 25,
+        L"CLEAR ALL", wcslen(L"CLEAR ALL"));
 
     (void) DeleteObject(foregroundBrushHandle);
     (void) DeleteObject(markBrushHandle);
