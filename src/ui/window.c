@@ -112,7 +112,7 @@ static int blokWindowWhileRunning(HWND windowHandle)
     {
         struct TPosition *region = ((*marks).arr + i);
         
-        if (region->x == -1 && region->y)
+        if (region->x == -1 && region->y == -1)
         {
             continue;
         }
