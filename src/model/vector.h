@@ -47,6 +47,9 @@ int blokVectorNewAvailableIndex(struct TVector *vec);
 
 enum TResult blokVectorExists(struct TVector *vec, struct TPosition node);
 
+enum TResult blokVectorClear(struct TVector *vec);
+
 enum TResult blokVectorFree(struct TVector *vec);
+
 
 #endif
