@@ -47,18 +47,12 @@ colour.
 | logic | a translation layer that handles logic and storage for the presentation |
 | ui | handles the graphical user interface |
 
-## Changelog (this version: 2401)
+## Changelog (this version: 2402.1)
 
-* Changed colour scheme.
-* Dark mode is now default.
-* Continued vector implementation.
-* Collusion system with marks.
-* Boundary system has been added.
-* Safety checks _(not 100% fool-proof)_
-* Result macros converted to enum.
-* Data types have the convention of prefixed with 'T'.
+* 'CLEAR ALL' button added.
 
 ## Limitations and Known Issues
 
 * Regions cannot be unmarked.
 * GDI32 Graphics can flicker.
+* 'CLEAR ALL' button clickable area is small - to be fixed in 2402.2.

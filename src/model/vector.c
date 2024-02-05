@@ -285,6 +285,26 @@ enum TResult blokVectorExists(struct TVector *vec, struct TPosition node)
     return BLOK_OBJ_NON_EXISTANT;
 }
 
+enum TResult blokVectorClear(struct TVector *vec)
+{
+    if (!vec)
+    {
+        return BLOK_NULLPTR_ERROR;
+    }
+
+    if (!vec->arr)
+    {
+        return BLOK_VEC_ARR_NULL;
+    }
+
+    for (int i = 0; i < vec->max; i++)
+    {
+        blokPositionSet(vec->arr + i, -1, -1);
+    }
+
+    return BLOK_SUCCESS;
+}
+
 enum TResult blokVectorFree(struct TVector *vec)
 {
     if (!vec)
