@@ -7,12 +7,12 @@ CC_LINK_FLAGS           = -mwindows -mconsole
 
 # Libraries ------------------------------------------------------------------------------
 
-LIBS                    = -lkernel32 -luser32 -lshell32 -lgdi32
+LIBS                    = -Lkernel32 -Luser32 -Lshell32 -Lgdi32
 
 
 # Includes -------------------------------------------------------------------------------
 
-INCS                    = -iinc
+HDR_FILES               = -Iinc
 
 
 # Directories ----------------------------------------------------------------------------
@@ -27,35 +27,34 @@ DIR_RES                 = res
 
 # Object Files ---------------------------------------------------------------------------
 
-OBJ                     = $(DIR_BUILD)/main.o
+OBJ_FILES               = $(DIR_BUILD)/main.o
 
 
 # Output ---------------------------------------------------------------------------------
 
-EXE                     = bloq.exe
+OUT_FILE                = bloq.exe
 
 
 # Recipes --------------------------------------------------------------------------------
 
-.PHONY: ALL
-ALL:
-	ifeq ($(OS),Windows_NT)
-		INIT
-		$(DIR_BIN)/$(EXE)
-	endif
-
-.PHONY: INIT
-INIT:
+.PHONY: init
+init:
 	if not exist $(DIR_BIN) mkdir $(DIR_BIN)
 	if not exist $(DIR_BUILD) mkdir $(DIR_BUILD)
 
-$(DIR_BIN)/$(EXE): $(OBJ)
-	$(CC) $(CC_FLAGS) -o $@ $^ $(LIBS) $(CC_LINK_FLAGS)
 
-$(DIR_BUILD)/main.o: src/main.o
-	$(CC) $(CC_FLAGS) -c $^ -o $@
+.PHONY: build
+build: $(DIR_BIN)/$(OUT_FILE)
 
-.PHONY: CLEAN
-CLEAN:
+
+$(DIR_BIN)/$(OUT_FILE): $(OBJ_FILES)
+	$(CC) $(CC_FLAGS) -o $@ $^ $(LIBS) $(HDR_FILES) $(CC_LINK_FLAGS)
+
+$(DIR_BUILD)/main.o: src/main.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@ $(HDR_FILES)
+
+
+.PHONY: clean
+clean:
 	if exist $(DIR_BIN) del /f /q $(DIR_BIN)
 	if exist $(DIR_BUILD) del /f /q $(DIR_BUILD)
