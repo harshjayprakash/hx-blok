@@ -27,7 +27,8 @@ DIR_RES                 = res
 
 # Object Files ---------------------------------------------------------------------------
 
-OBJ_FILES               = $(DIR_BUILD)/main.o
+OBJ_FILES               = $(DIR_BUILD)/main.o \
+							$(DIR_BUILD)/core.common.program.o
 
 
 # Output ---------------------------------------------------------------------------------
@@ -48,10 +49,13 @@ build: $(DIR_BIN)/$(OUT_FILE)
 
 
 $(DIR_BIN)/$(OUT_FILE): $(OBJ_FILES)
-	$(CC) $(CC_FLAGS) -o $@ $^ $(LIBS) $(HDR_FILES) $(CC_LINK_FLAGS)
+	$(CC) $(CC_FLAGS) -o $@ $^ $(LIBS) $(CC_LINK_FLAGS)
 
 $(DIR_BUILD)/main.o: src/main.c
-	$(CC) $(CC_FLAGS) -c $^ -o $@ $(HDR_FILES)
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(DIR_BUILD)/core.common.program.o: src/core/common/program.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
 .PHONY: clean
