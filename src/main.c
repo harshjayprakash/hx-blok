@@ -5,9 +5,7 @@
 #if _WIN32
 
 #include <Windows.h>
-#include "core/common/macros.h"
-#include "core/common/program.h"
-
+#include "core/interface/program.h"
 int __stdcall WinMain(
     HINSTANCE hInstance, HINSTANCE hPrevInstance, 
     LPSTR lpCmdLine, int nShowCmd)
