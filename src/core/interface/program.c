@@ -31,7 +31,7 @@ void bloqStart(void)
 {
     if (!sInitialised) { return; }
 
-    TPane pane = bloqNewPane();
+    TPane pane = bloqInitPane();
     bloqFreePane(&pane);
 }
 
