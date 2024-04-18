@@ -14,8 +14,11 @@ int __stdcall WinMain(
     (void) lpCmdLine;
 
     bloqInitProgram();
+
     bloqSaveArguments(hInstance, nShowCmd);
     bloqProcessArguments();
+    bloqStart();
+
     bloqExitProgram();
 
     return 0;
