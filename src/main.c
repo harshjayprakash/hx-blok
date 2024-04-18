@@ -10,8 +10,8 @@ int __stdcall WinMain(
     HINSTANCE hInstance, HINSTANCE hPrevInstance, 
     LPSTR lpCmdLine, int nShowCmd)
 {
-    bloqDiscard(hPrevInstance);
-    bloqDiscard(lpCmdLine);
+    (void) hPrevInstance;
+    (void) lpCmdLine;
 
     bloqInitProgram();
     bloqSaveArguments(hInstance, nShowCmd);
