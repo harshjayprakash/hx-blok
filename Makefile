@@ -28,7 +28,13 @@ DIR_RES                 = res
 # Object Files ---------------------------------------------------------------------------
 
 OBJ_FILES               = $(DIR_BUILD)/main.o \
-							$(DIR_BUILD)/core.common.program.o
+							$(DIR_BUILD)/core.interface.program.o \
+							$(DIR_BUILD)/core.common.globals.o \
+							$(DIR_BUILD)/core.common.position.o \
+							$(DIR_BUILD)/core.common.size.o \
+							$(DIR_BUILD)/model.entity.square.o \
+							$(DIR_BUILD)/logic.state.state-manager.o \
+							$(DIR_BUILD)/presentation.window.pane.o
 
 
 # Output ---------------------------------------------------------------------------------
@@ -54,7 +60,25 @@ $(DIR_BIN)/$(OUT_FILE): $(OBJ_FILES)
 $(DIR_BUILD)/main.o: src/main.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
-$(DIR_BUILD)/core.common.program.o: src/core/common/program.c
+$(DIR_BUILD)/core.common.globals.o: src/core/common/globals.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(DIR_BUILD)/core.common.position.o: src/core/common/position.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(DIR_BUILD)/core.common.size.o: src/core/common/size.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(DIR_BUILD)/core.interface.program.o: src/core/interface/program.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(DIR_BUILD)/model.entity.square.o: src/model/entity/square.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(DIR_BUILD)/logic.state.state-manager.o: src/logic/state/state-manager.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(DIR_BUILD)/presentation.window.pane.o: src/presentation/window/pane.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
