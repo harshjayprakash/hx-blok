@@ -1,5 +1,5 @@
 CC = clang
-CC_FLAGS = -g -Wall -Werror =std=c17
+CC_FLAGS = -g -Wall -Werror -std=c17 -DUNICODE -DSTRICT
 CC_LINK_FLAGS = -mwindows -mconsole
 
 LIBRARIES = -lkernel32 -luser32 -lshell32 -lgdi32
@@ -8,7 +8,7 @@ SOURCE_DIR = source
 BUILD_DIR = build
 OUTPUT_DIR = bin
 
-OBJECT_FILES = main.o
+OBJECT_FILES = $(BUILD_DIR)/main.o
 
 EXECUTABLE = blok.exe
 
@@ -27,5 +27,5 @@ init:
 
 .PHONY: clean
 clean:
-	del /f /q $(BUILD_DIR)/*
-	del /f /q $(OUTPUT_DIR)/*
+	del /f /q $(BUILD_DIR)\*
+	del /f /q $(OUTPUT_DIR)\*
