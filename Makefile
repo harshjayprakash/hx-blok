@@ -15,9 +15,10 @@ OBJECT_FILES = $(BUILD_DIR)/main.o \
 	$(BUILD_DIR)/model.utilities.position.o \
 	$(BUILD_DIR)/model.utilities.size.o \
 	$(BUILD_DIR)/presentation.colour.theme.o \
-	$(BUILD_DIR)/presentation.components.block.o \
+	$(BUILD_DIR)/presentation.components.canvas.o \
 	$(BUILD_DIR)/presentation.components.panel.o \
-	$(BUILD_DIR)/presentation.events.keyboard.o \
+	$(BUILD_DIR)/presentation.events.handler.o \
+	$(BUILD_DIR)/presentation.graphics.renderer.o \
 	$(BUILD_DIR)/presentation.window.window.o
 
 EXECUTABLE = blok.exe
@@ -48,13 +49,16 @@ $(BUILD_DIR)/model.utilities.size.o: $(SOURCE_DIR)/model/utilities/size.c
 $(BUILD_DIR)/presentation.colour.theme.o: $(SOURCE_DIR)/presentation/colour/theme.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
-$(BUILD_DIR)/presentation.components.block.o: $(SOURCE_DIR)/presentation/components/block.c
+$(BUILD_DIR)/presentation.components.canvas.o: $(SOURCE_DIR)/presentation/components/canvas.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.components.panel.o: $(SOURCE_DIR)/presentation/components/panel.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
-$(BUILD_DIR)/presentation.events.keyboard.o: $(SOURCE_DIR)/presentation/events/keyboard.c
+$(BUILD_DIR)/presentation.events.handler.o: $(SOURCE_DIR)/presentation/events/handler.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/presentation.graphics.renderer.o: $(SOURCE_DIR)/presentation/graphics/renderer.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.window.window.o: $(SOURCE_DIR)/presentation/window/window.c
