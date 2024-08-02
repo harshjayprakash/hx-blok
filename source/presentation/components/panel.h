@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-void NeonRenderPanel(HDC displayContextHandle, RECT windowSize, HBRUSH backgroundBrushHandle, HBRUSH foregroundBrushHandle);
+void NeonRenderPanel(HDC displayContext);
 
 void NeonUpdateCoordinateText(void);
 
