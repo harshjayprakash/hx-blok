@@ -4,26 +4,21 @@
 #include <windef.h>
 #include <windows.h>
 #include <wingdi.h>
-#include "../components/block.h"
-#include "../events/keyboard.h"
+#include "../components/canvas.h"
 #include "../components/panel.h"
+#include "../events/handler.h"
 
-HWND mWindowHandle = { 0 };
-MSG mMessage = { 0 };
-WNDCLASSEXW mClass = { 0 };
-wchar_t mClassName[] = L"_NeonWindowClass";
+static HWND mWindowHandle = { 0 };
+static MSG mMessage = { 0 };
+static WNDCLASSEXW mClass = { 0 };
+static wchar_t mClassName[] = L"_NeonWindowClass";
+static RECT mWindowArea = { 0 };
 
 static long long __stdcall _NeonWindowEventHandler(
     HWND inWindowHandle, UINT inMessage, WPARAM inWordParam, LPARAM inLongParam)
 {
     PAINTSTRUCT paintStructure;
-    HDC displayContextHandle, OffScreenContextHandle;
-    HBITMAP bitmapMemoryHandle;
-    HBRUSH backgroundBrushHandle;
-    HBRUSH foregroundBrushHandle;
-    HBRUSH accentBrushHandle;
-    HPEN foregroundPenHandle;
-    RECT windowSize;
+    HDC displayContext;
 
     switch (inMessage)
     {
@@ -31,43 +26,15 @@ static long long __stdcall _NeonWindowEventHandler(
             PostQuitMessage(0);
             return 0;
         case WM_PAINT:
-            displayContextHandle = BeginPaint(inWindowHandle, &paintStructure);
-            backgroundBrushHandle = CreateSolidBrush(NeonGetBackgroundColour());
-            foregroundBrushHandle = CreateSolidBrush(NeonGetForegroundColour());
-            accentBrushHandle = CreateSolidBrush(NeonGetAccentColour());
-            foregroundPenHandle = CreatePen(PS_GEOMETRIC, 1, NeonGetForegroundColour());
-
-            (void) GetClientRect(inWindowHandle, &windowSize);
-
-            OffScreenContextHandle = CreateCompatibleDC(displayContextHandle);
-            bitmapMemoryHandle = CreateCompatibleBitmap(displayContextHandle, windowSize.right, windowSize.bottom);
-            (void) SelectObject(OffScreenContextHandle, bitmapMemoryHandle);
-            (void) SetTextColor(OffScreenContextHandle, NeonGetForegroundColour());
-            (void) SetBkColor(OffScreenContextHandle, NeonGetBackgroundColour());
-            
-
-            NeonRenderBlock(OffScreenContextHandle, accentBrushHandle);
-
-            (void) SelectObject(OffScreenContextHandle, backgroundBrushHandle);
-            (void) SelectObject(OffScreenContextHandle, foregroundPenHandle);
-            NeonRenderPanel(OffScreenContextHandle, windowSize, backgroundBrushHandle, foregroundBrushHandle);
-
-            (void) BitBlt(
-                displayContextHandle, 0, 0, 
-                windowSize.right, windowSize.bottom, 
-                OffScreenContextHandle, 0, 0, SRCCOPY
-            );
-
-            (void) DeleteObject(bitmapMemoryHandle);
-            (void) DeleteDC(OffScreenContextHandle);
-            (void) DeleteObject(backgroundBrushHandle);
-            (void) DeleteObject(foregroundBrushHandle);
-            (void) DeleteObject(accentBrushHandle);
-            (void) DeleteObject(foregroundPenHandle);
+            displayContext = BeginPaint(inWindowHandle, &paintStructure);
+            NeonHandlePaintEvent(inWindowHandle, displayContext);
             (void) EndPaint(inWindowHandle, &paintStructure);
             return 0;
+        case WM_SIZE:
+            (void) GetClientRect(inWindowHandle, &mWindowArea);
+            return 0;
         case WM_KEYDOWN:
-            NeonArrowsKeyboardEvent(inWordParam);
+            NeonHandleKeyDownEvent(inWordParam);
             (void) InvalidateRect(inWindowHandle, NULL, TRUE);
             return 0;
         default:
@@ -75,7 +42,7 @@ static long long __stdcall _NeonWindowEventHandler(
     }
 }
 
-static int _NeonWindowMessageLoop()
+static int _NeonWindowMessageLoop(void)
 {
     while (GetMessageW(&mMessage, NULL, 0, 0))
     {
@@ -86,7 +53,7 @@ static int _NeonWindowMessageLoop()
     return (int) mMessage.wParam;
 }
 
-static int _NeonCreateWindow()
+static int _NeonCreateWindow(void)
 {
     mWindowHandle = CreateWindowExW(
         WS_EX_OVERLAPPEDWINDOW,
@@ -107,7 +74,7 @@ static int _NeonCreateWindow()
     return 0;
 }
 
-static int _NeonRegisterWindowClass()
+static int _NeonRegisterWindowClass(void)
 {
     mClass.cbSize = sizeof(WNDCLASSEXW);
     mClass.style = CS_HREDRAW | CS_VREDRAW;
@@ -116,11 +83,12 @@ static int _NeonRegisterWindowClass()
     mClass.cbWndExtra = 0;
     mClass.hInstance = NeonGetInstanceHandle();
     mClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-    mClass.hIcon = (HICON) LoadImageW(
-        NULL, L"program_icon.ico", 
-        IMAGE_ICON, 0, 0, 
-        LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED
-    );
+    mClass.hIcon = LoadIcon(NeonGetInstanceHandle(), IDI_APPLICATION);
+    // mClass.hIcon = (HICON) LoadImageW(
+    //     NULL, L"program_icon.ico",
+    //     IMAGE_ICON, 0, 0,
+    //     LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED
+    // );
     mClass.hIconSm = LoadIcon(NeonGetInstanceHandle(), IDI_APPLICATION);
     mClass.hbrBackground = CreateSolidBrush(NeonGetBackgroundColour());
     mClass.lpszMenuName = NULL;
@@ -136,7 +104,7 @@ static int _NeonRegisterWindowClass()
     return 0;
 }
 
-void NeonInitWindow()
+void NeonInitWindow(void)
 {
     int failed = _NeonRegisterWindowClass();
     if (failed) { NeonFreeWindow(); return; }
@@ -144,7 +112,7 @@ void NeonInitWindow()
     failed = _NeonCreateWindow();
     if (failed) { NeonFreeWindow(); return; }
 
-    NeonInitBlock();
+    NeonInitCanvas();
     
     (void) ShowWindow(mWindowHandle, NeonGetShowFlag());
     (void) UpdateWindow(mWindowHandle);
@@ -152,7 +120,7 @@ void NeonInitWindow()
     (void) _NeonWindowMessageLoop();
 }
 
-void NeonFreeWindow()
+void NeonFreeWindow(void)
 {
     (void) UnregisterClassW(mClassName, NeonGetInstanceHandle());
     
@@ -161,4 +129,9 @@ void NeonFreeWindow()
     if (mClass.hCursor) { (void) DestroyCursor(mClass.hCursor); }
     if (mClass.hbrBackground) { (void) DeleteObject(mClass.hbrBackground); }
     if (mWindowHandle) { (void) DestroyWindow(mWindowHandle); }
+}
+
+RECT NeonGetWindowArea(void)
+{
+    return mWindowArea;
 }
