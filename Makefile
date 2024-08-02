@@ -16,6 +16,7 @@ OBJECT_FILES = $(BUILD_DIR)/main.o \
 	$(BUILD_DIR)/model.utilities.size.o \
 	$(BUILD_DIR)/presentation.colour.theme.o \
 	$(BUILD_DIR)/presentation.components.block.o \
+	$(BUILD_DIR)/presentation.components.panel.o \
 	$(BUILD_DIR)/presentation.events.keyboard.o \
 	$(BUILD_DIR)/presentation.window.window.o
 
@@ -48,6 +49,9 @@ $(BUILD_DIR)/presentation.colour.theme.o: $(SOURCE_DIR)/presentation/colour/them
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.components.block.o: $(SOURCE_DIR)/presentation/components/block.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/presentation.components.panel.o: $(SOURCE_DIR)/presentation/components/panel.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.events.keyboard.o: $(SOURCE_DIR)/presentation/events/keyboard.c
