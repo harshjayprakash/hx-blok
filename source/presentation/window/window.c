@@ -6,6 +6,7 @@
 #include <wingdi.h>
 #include "../components/block.h"
 #include "../events/keyboard.h"
+#include "../components/panel.h"
 
 HWND mWindowHandle = { 0 };
 MSG mMessage = { 0 };
@@ -21,6 +22,7 @@ static long long __stdcall _NeonWindowEventHandler(
     HBRUSH backgroundBrushHandle;
     HBRUSH foregroundBrushHandle;
     HBRUSH accentBrushHandle;
+    HPEN foregroundPenHandle;
     RECT windowSize;
 
     switch (inMessage)
@@ -33,14 +35,22 @@ static long long __stdcall _NeonWindowEventHandler(
             backgroundBrushHandle = CreateSolidBrush(NeonGetBackgroundColour());
             foregroundBrushHandle = CreateSolidBrush(NeonGetForegroundColour());
             accentBrushHandle = CreateSolidBrush(NeonGetAccentColour());
+            foregroundPenHandle = CreatePen(PS_GEOMETRIC, 1, NeonGetForegroundColour());
 
             (void) GetClientRect(inWindowHandle, &windowSize);
 
             OffScreenContextHandle = CreateCompatibleDC(displayContextHandle);
             bitmapMemoryHandle = CreateCompatibleBitmap(displayContextHandle, windowSize.right, windowSize.bottom);
             (void) SelectObject(OffScreenContextHandle, bitmapMemoryHandle);
+            (void) SetTextColor(OffScreenContextHandle, NeonGetForegroundColour());
+            (void) SetBkColor(OffScreenContextHandle, NeonGetBackgroundColour());
+            
 
             NeonRenderBlock(OffScreenContextHandle, accentBrushHandle);
+
+            (void) SelectObject(OffScreenContextHandle, backgroundBrushHandle);
+            (void) SelectObject(OffScreenContextHandle, foregroundPenHandle);
+            NeonRenderPanel(OffScreenContextHandle, windowSize, backgroundBrushHandle, foregroundBrushHandle);
 
             (void) BitBlt(
                 displayContextHandle, 0, 0, 
@@ -53,6 +63,7 @@ static long long __stdcall _NeonWindowEventHandler(
             (void) DeleteObject(backgroundBrushHandle);
             (void) DeleteObject(foregroundBrushHandle);
             (void) DeleteObject(accentBrushHandle);
+            (void) DeleteObject(foregroundPenHandle);
             (void) EndPaint(inWindowHandle, &paintStructure);
             return 0;
         case WM_KEYDOWN:
@@ -80,7 +91,7 @@ static int _NeonCreateWindow()
     mWindowHandle = CreateWindowExW(
         WS_EX_OVERLAPPEDWINDOW,
         mClassName,
-        L"The Experimental Block Project (Neon) v24.10",
+        L"The Experimental Block Project (Neon) v24.10 - Technical Preview",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
         NULL, NULL,
