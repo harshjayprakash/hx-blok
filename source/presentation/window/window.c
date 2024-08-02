@@ -116,7 +116,11 @@ static int _NeonRegisterWindowClass()
     mClass.cbWndExtra = 0;
     mClass.hInstance = NeonGetInstanceHandle();
     mClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-    mClass.hIcon = LoadIcon(NeonGetInstanceHandle(), IDI_APPLICATION);
+    mClass.hIcon = (HICON) LoadImageW(
+        NULL, L"program_icon.ico", 
+        IMAGE_ICON, 0, 0, 
+        LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED
+    );
     mClass.hIconSm = LoadIcon(NeonGetInstanceHandle(), IDI_APPLICATION);
     mClass.hbrBackground = CreateSolidBrush(NeonGetBackgroundColour());
     mClass.lpszMenuName = NULL;
