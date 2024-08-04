@@ -6,6 +6,7 @@
 #include "../../model/utilities/direction.h"
 #include "../window/window.h"
 #include "../graphics/renderer.h"
+#include <stdio.h>
 
 static HDC bufferedContext;
 static HBITMAP bitmapMemory;
@@ -53,4 +54,25 @@ void NeonHandleKeyDownEvent(WPARAM wordParam)
     }
 
     NeonMoveSquare(NeonGetBlockReference(), directionToMove);
+}
+
+void NeonHandleLeftMouseButton(LPARAM longParam)
+{
+    NeonSquare *square = NeonGetBlockReference();
+    NeonVector *markedRegions = NeonGetVectorReference();
+
+    if (!square || !markedRegions) { return; }
+
+    int posX = (LOWORD(longParam) / square->size.width) * square->size.width;
+    int posY = (HIWORD(longParam) / square->size.height) * square->size.height;
+
+    NeonVectorItem newNode = { 1, { posX, posY } };
+
+    if (NeonNodeExists(markedRegions, newNode) == 0)
+    {
+        NeonPush(markedRegions, newNode);
+    }
+
+    NeonPrintVector(*markedRegions);
+    
 }

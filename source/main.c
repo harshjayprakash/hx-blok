@@ -1,4 +1,5 @@
 #include "core/program.h"
+#include "core/result.h"
 #include <windows.h>
 
 int APIENTRY WinMain(
@@ -11,5 +12,5 @@ int APIENTRY WinMain(
     NeonStart();
     NeonFree();
 
-    return 0;
+    return (int) NeonSuccess;
 }

@@ -1,6 +1,7 @@
 #include "args.h"
 #include "program.h"
 #include "../presentation/colour/theme.h"
+
 #include <windows.h>
 
 void NeonProcessArguments(void)

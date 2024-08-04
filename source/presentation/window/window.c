@@ -33,6 +33,10 @@ static long long __stdcall _NeonWindowEventHandler(
         case WM_SIZE:
             (void) GetClientRect(inWindowHandle, &mWindowArea);
             return 0;
+        case WM_LBUTTONDOWN:
+            NeonHandleLeftMouseButton(inLongParam);
+            (void) InvalidateRect(inWindowHandle, NULL, TRUE);
+            return 0;
         case WM_KEYDOWN:
             NeonHandleKeyDownEvent(inWordParam);
             (void) InvalidateRect(inWindowHandle, NULL, TRUE);
@@ -129,6 +133,8 @@ void NeonFreeWindow(void)
     if (mClass.hCursor) { (void) DestroyCursor(mClass.hCursor); }
     if (mClass.hbrBackground) { (void) DeleteObject(mClass.hbrBackground); }
     if (mWindowHandle) { (void) DestroyWindow(mWindowHandle); }
+
+    NeonFreeCanvas();
 }
 
 RECT NeonGetWindowArea(void)

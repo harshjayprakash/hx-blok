@@ -12,6 +12,7 @@ OBJECT_FILES = $(BUILD_DIR)/main.o \
 	$(BUILD_DIR)/core.program.o \
 	$(BUILD_DIR)/core.args.o \
 	$(BUILD_DIR)/model.objects.square.o \
+	$(BUILD_DIR)/model.objects.vector.o \
 	$(BUILD_DIR)/model.utilities.position.o \
 	$(BUILD_DIR)/model.utilities.size.o \
 	$(BUILD_DIR)/presentation.colour.theme.o \
@@ -38,6 +39,9 @@ $(BUILD_DIR)/core.args.o: $(SOURCE_DIR)/core/args.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/model.objects.square.o: $(SOURCE_DIR)/model/objects/square.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/model.objects.vector.o: $(SOURCE_DIR)/model/objects/vector.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/model.utilities.position.o: $(SOURCE_DIR)/model/utilities/position.c

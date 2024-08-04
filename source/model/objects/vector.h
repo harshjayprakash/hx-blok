@@ -2,29 +2,42 @@
 #define NEON_VECTOR_H
 
 #include "../utilities/position.h"
+#include <stddef.h>
 
 typedef struct _NeonVectorItem
 {
-    NeonPosition pos;
+    int indexed;
+    NeonPosition coordinates;
 } NeonVectorItem;
 
 typedef struct _NeonVector
 {
     NeonVectorItem *array;
-    int max;
     int head;
+    size_t max;
+    size_t size;
 } NeonVector;
 
-NeonVector NeonNewVector(const int size);
+NeonVector NeonNewVector(size_t size);
 
-int NeonGenerateNewSize(const int currentSize);
+size_t NeonGenerateNewSize(size_t size);
 
-void NeonReSizeVector(const NeonVector *vec);
+int NeonReSizeVector(NeonVector *vector, size_t newSize);
 
-int NeonIsEmpty(const NeonVector *vec);
+int NeonIsEmpty(const NeonVector *vector);
 
-int NeonIsFull(const NeonVector *vec);
+int NeonIsFull(const NeonVector *vector);
 
-void NeonFreeVector(NeonVector *vec);
+int NeonPush(NeonVector *vector, const NeonVectorItem node);
+
+NeonVectorItem *NeonGetNode(const NeonVector *vector, int index);
+
+int NeonFindNode(const NeonVector *vector, const NeonVectorItem node);
+
+int NeonNodeExists(const NeonVector *vector, const NeonVectorItem node);
+
+void NeonFreeVector(NeonVector *vector);
+
+void NeonPrintVector(const NeonVector vector);
 
 #endif

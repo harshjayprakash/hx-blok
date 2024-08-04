@@ -6,5 +6,6 @@
 void NeonHandlePaintEvent(HWND window, HDC displayContext);
 void NeonHandleKeyDownEvent(WPARAM wordParam);
 void NeonHandleReSizeEvent(void);
+void NeonHandleLeftMouseButton(LPARAM longParam);
 
 #endif
