@@ -2,13 +2,12 @@
 
 > An exploration of the Windows API and the principles of lower level development.
 
+![Banner](./doc/banner.png)
+
 ## Usage
 
-
-
 ## What's New
+
 - TODO
 
-
 ## Code Standard
-- 
