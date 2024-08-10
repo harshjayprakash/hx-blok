@@ -6,6 +6,7 @@
 
 #include "window.h"
 #include "graphics/theme.h"
+#include "graphics/drawing.h"
 #include "../core/program.h"
 #include "../core/result.h"
 #include "../core/log.h"
@@ -34,7 +35,9 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         break;
     case WM_PAINT:
         displayContext = BeginPaint(mWindow, &paint);
+        NeonInitDrawingTools();
         (void) displayContext;
+        NeonFreeDrawingTools();
         (void) EndPaint(windowHandle, &paint);
         break;
     case WM_SIZE:
