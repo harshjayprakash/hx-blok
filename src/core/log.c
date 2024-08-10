@@ -39,7 +39,7 @@ void NeonLog(const NeonLogLevel level, const NeonResult information)
             logFile, L"Project Neon | %ls | %ls\n", 
             levelsAsString[levelAsIndex], information.message 
         );
-        
+
         return;
     }
 
@@ -57,5 +57,8 @@ NeonResult NeonLogAndReturn(const NeonLogLevel level, const NeonResult informati
 
 void NeonFreeLogger(void)
 {
-
+    if (logFile)
+    {
+        fclose(logFile);
+    }
 }
