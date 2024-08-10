@@ -27,7 +27,7 @@ void NeonLog(const NeonLogLevel level, const NeonResult information)
 
 
     (void) fwprintf(
-        stdout, L"Project Neon | %s | %s", 
+        stdout, L"Project Neon | %ls | %ls\n", 
         levelsAsString[levelAsIndex], information.message 
     );
 }
