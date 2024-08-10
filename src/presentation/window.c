@@ -35,9 +35,7 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         break;
     case WM_PAINT:
         displayContext = BeginPaint(mWindow, &paint);
-        NeonInitDrawingTools();
         NeonHandleWindowPaintEvent(displayContext);
-        NeonFreeDrawingTools();
         (void) EndPaint(windowHandle, &paint);
         break;
     case WM_SIZE:
