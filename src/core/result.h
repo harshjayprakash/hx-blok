@@ -31,6 +31,10 @@ typedef enum __NeonResultCode
      */
     NeonNotInit         = 0x000011,
     /**
+     * @brief Null pointer.
+     */
+    NeonNullPtr         = 0x000012,
+    /**
      * @brief Not Implementated
      */
     NeonNotImpl         = 0x000100,
