@@ -48,10 +48,12 @@ NeonResult NeonProcessArguments(void)
     {
         if (wcsncmp(arguments[index], L"--dark-mode", 12*sizeof(unsigned short)))
         {
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Changing program theme to dark mode."));
             NeonSetTheme(NeonDarkTheme);
         }
         if (wcsncmp(arguments[index], L"--light-mode", 13*sizeof(unsigned short)))
         {
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Changing program theme to light mode."));
             NeonSetTheme(NeonLightTheme);
         }
     }
