@@ -6,8 +6,6 @@
 
 #include "drawing.h"
 #include "theme.h"
-#include "../../core/log.h"
-#include "../../core/result.h"
 
 static HBRUSH mBackgroundBrush = { 0 };
 static HBRUSH mForegroundBrush = { 0 };
@@ -16,7 +14,6 @@ static HPEN mForegroundPen = { 0 };
 
 void NeonInitDrawingTools(void)
 {
-    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Initialising graphics tools."));
     mBackgroundBrush = CreateSolidBrush(NeonGetBackgroundColour());
     mForegroundBrush = CreateSolidBrush(NeonGetForegroundColour());
     mAccentBrush = CreateSolidBrush(NeonGetAccentColour());
@@ -45,7 +42,6 @@ HPEN NeonGetForegroundPen(void)
 
 void NeonFreeDrawingTools(void)
 {
-    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Cleaning up graphics tools."));
     (void) DeleteObject(mBackgroundBrush);
     (void) DeleteObject(mForegroundBrush);
     (void) DeleteObject(mAccentBrush);
