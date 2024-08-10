@@ -58,6 +58,6 @@ typedef struct __NeonResult
  * @param pMessage The message.
  * @return NeonResult The result object.
  */
-NeonResult NeonNewResult(NeonResultCode code, wchar_t *pMessage);
+NeonResult NeonCreateResult(NeonResultCode code, wchar_t *pMessage);
 
 #endif

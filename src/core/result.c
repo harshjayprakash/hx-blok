@@ -7,12 +7,10 @@
 #include "result.h"
 #include <wchar.h>
 
-NeonResult NeonNewResult(NeonResultCode code, wchar_t *pMessage)
+NeonResult NeonCreateResult(NeonResultCode code, wchar_t *pMessage)
 {
     NeonResult result = { 0 };
     result.code = code;
-
-    wprintf(L"%s", pMessage);
 
     if (pMessage) {
         (void) wcsncpy(result.message, pMessage, 260);
