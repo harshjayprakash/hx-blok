@@ -11,6 +11,7 @@
 #include <Windows.h>
 
 #include "../../model/object/square.h"
+#include "../../model/utility/direction.h"
 
 /**
  * @brief Initialises the block object.
@@ -23,6 +24,13 @@ void NeonInitBlockObject(void);
  * @param displayContext The display to render to.
  */
 void NeonRenderBlock(HDC displayContext);
+
+/**
+ * @brief Moves the block based on the input direction.
+ * 
+ * @param direction The direction the block should move.
+ */
+void NeonMoveBlock(NeonDirection direction);
 
 /**
  * @brief Cleans up the resources used by the block object.

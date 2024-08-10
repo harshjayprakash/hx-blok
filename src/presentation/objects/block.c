@@ -19,18 +19,44 @@ void NeonInitBlockObject(void)
         NeonCreatePosition(0, 0),
         NeonCreateSize(15, 15)
     );
-}
 
-void NeonRenderBlock(HDC displayContext)
-{
     mMovableSquareAsRect = (RECT) {
         mMovableSquare.position.x,
         mMovableSquare.position.y,
         (mMovableSquare.position.x + mMovableSquare.size.width),
         (mMovableSquare.position.y + mMovableSquare.size.height)
     };
+}
 
+void NeonRenderBlock(HDC displayContext)
+{
     FillRect(displayContext, &mMovableSquareAsRect, NeonGetAccentBrush());
+}
+
+void NeonMoveBlock(NeonDirection direction)
+{
+    switch (direction)
+    {
+    case NeonNorth:
+        NeonSetYPosition(&(mMovableSquare.position), mMovableSquare.position.y - mMovableSquare.size.height);
+        break;
+    case NeonEast:
+        NeonSetXPosition(&(mMovableSquare.position), mMovableSquare.position.x + mMovableSquare.size.width);
+        break;
+    case NeonSouth:
+        NeonSetYPosition(&(mMovableSquare.position), mMovableSquare.position.y + mMovableSquare.size.height);
+        break;
+    case NeonWest:
+        NeonSetXPosition(&(mMovableSquare.position), mMovableSquare.position.x - mMovableSquare.size.width);
+        break;
+    }
+
+    mMovableSquareAsRect = (RECT) {
+        mMovableSquare.position.x,
+        mMovableSquare.position.y,
+        (mMovableSquare.position.x + mMovableSquare.size.width),
+        (mMovableSquare.position.y + mMovableSquare.size.height)
+    };
 }
 
 void NeonFreeBlockObject()
