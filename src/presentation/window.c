@@ -10,6 +10,8 @@
 #include "../core/program.h"
 #include "../core/result.h"
 #include "../core/log.h"
+#include "objects/block.h"
+#include "events/handler.h"
 
 #include <wchar.h>
 
@@ -34,7 +36,7 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
     case WM_PAINT:
         displayContext = BeginPaint(mWindow, &paint);
         NeonInitDrawingTools();
-        (void) displayContext;
+        NeonHandleWindowPaintEvent(displayContext);
         NeonFreeDrawingTools();
         (void) EndPaint(windowHandle, &paint);
         break;
@@ -119,6 +121,8 @@ NeonResult NeonInitWindow(void)
         return NeonLogAndReturn(NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
     }
 
+    NeonInitBlockObject();
+
     (void) ShowWindow(mWindow, NeonGetShowFlag());
     (void) UpdateWindow(mWindow);
     (void) _NeonMessageLoop();
@@ -133,6 +137,8 @@ RECT NeonGetWindowArea(void)
 
 NeonResult NeonFreeWindow(void)
 {
+    NeonFreeBlockObject();
+
     (void) UnregisterClassW(mName, NeonGetHandle());
 
     if (mClass.hIcon)
