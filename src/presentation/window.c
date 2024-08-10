@@ -51,8 +51,8 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         }
     case WM_SIZE:
         (void) GetClientRect(windowHandle, &mWindowArea);
-        mWindowWidth = mWindowArea.right - mWindowArea.left;
-        mWindowHeight = mWindowArea.bottom - mWindowArea.top;
+        mWindowWidth = mWindowArea.right;
+        mWindowHeight = mWindowArea.bottom;
         return 0;
     default:
         return DefWindowProcW(windowHandle, message, wordParam, longParam);
