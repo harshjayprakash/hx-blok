@@ -15,6 +15,7 @@ OBJECT_FILES = $(BUILD_DIR)/main.o \
 	$(BUILD_DIR)/model.object.square.o \
 	$(BUILD_DIR)/model.utility.position.o \
 	$(BUILD_DIR)/model.utility.size.o \
+	$(BUILD_DIR)/presentation.graphics.drawing.o \
 	$(BUILD_DIR)/presentation.graphics.theme.o \
 	$(BUILD_DIR)/presentation.window.o
 
@@ -44,6 +45,9 @@ $(BUILD_DIR)/model.utility.position.o: $(SOURCE_DIR)/model/utility/position.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/model.utility.size.o: $(SOURCE_DIR)/model/utility/size.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/presentation.graphics.drawing.o: $(SOURCE_DIR)/presentation/graphics/drawing.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.graphics.theme.o: $(SOURCE_DIR)/presentation/graphics/theme.c
