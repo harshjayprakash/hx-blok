@@ -9,6 +9,7 @@
 #include "log.h"
 #include "../presentation/graphics/theme.h"
 #include "../presentation/window.h"
+#include "../presentation/graphics/drawing.h"
 #include <wchar.h>
 
 static HINSTANCE mInstanceHandle = { 0 };
@@ -67,8 +68,10 @@ NeonResult NeonProcessArguments(void)
 
 NeonResult NeonStart(void)
 {
+    NeonInitDrawingTools();
     NeonInitWindow();
     NeonFreeWindow();
+    NeonFreeDrawingTools();
     return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Quit message recieved."));
 }
 
