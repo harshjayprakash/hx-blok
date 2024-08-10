@@ -11,8 +11,6 @@
 #include "../core/result.h"
 #include "../core/log.h"
 
-#define STRICT 1
-#include <Windows.h>
 #include <wchar.h>
 
 
