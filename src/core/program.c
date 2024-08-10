@@ -11,8 +11,6 @@
 #include "../presentation/window.h"
 #include "../presentation/graphics/drawing.h"
 #include <wchar.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 static HINSTANCE mInstanceHandle = { 0 };
 static int mShowflag = 0;
