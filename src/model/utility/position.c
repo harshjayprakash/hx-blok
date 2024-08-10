@@ -5,6 +5,8 @@
  */
 
 #include "position.h"
+#include "../../core/log.h"
+#include "../../core/result.h"
 
 NeonPosition NeonCreatePosition(const int x, const int y)
 {
@@ -14,4 +16,38 @@ NeonPosition NeonCreatePosition(const int x, const int y)
 NeonPosition NeonCreatePositionFromSelf(const NeonPosition position)
 {
     return NeonCreatePosition(position.x, position.y);
+}
+
+void NeonSetPosition(NeonPosition *position, const int x, const int y)
+{
+    if (!position)
+    {
+        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot update position: is null"));
+        return;
+    }
+
+    NeonSetXPosition(position, x);
+    NeonSetYPosition(position, y);
+}
+
+void NeonSetXPosition(NeonPosition *position, const int x)
+{
+    if (!position)
+    {
+        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot update x position: is null"));
+        return;
+    }
+
+    position->x = x;
+}
+
+void NeonSetYPosition(NeonPosition *position, const int y)
+{
+    if (!position)
+    {
+        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot update y position: is null"));
+        return;
+    }
+
+    position->y = y;
 }

@@ -39,4 +39,29 @@ NeonPosition NeonCreatePosition(const int x, const int y);
  */
 NeonPosition NeonCreatePositionFromSelf(const NeonPosition position);
 
+/**
+ * @brief Set position.
+ * 
+ * @param position The position instance to be updated.
+ * @param x The new x position.
+ * @param y The new y position.
+ */
+void NeonSetPosition(NeonPosition *position, const int x, const int y);
+
+/**
+ * @brief Set the x position.
+ * 
+ * @param position The position instance to be updated.
+ * @param x The new x position.
+ */
+void NeonSetXPosition(NeonPosition *position, const int x);
+
+/**
+ * @brief Set the y position
+ * 
+ * @param position The position instance to be updated.
+ * @param y The new y position.
+ */
+void NeonSetYPosition(NeonPosition *position, const int y);
+
 #endif
