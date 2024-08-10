@@ -9,6 +9,7 @@
 #include "log.h"
 #include "../presentation/graphics/theme.h"
 #include "../presentation/window.h"
+#include "../presentation/graphics/drawing.h"
 #include <wchar.h>
 
 static HINSTANCE mInstanceHandle = { 0 };
@@ -46,12 +47,15 @@ NeonResult NeonProcessArguments(void)
 
     for (int index = 0; index < argumentCount; index++)
     {
-        if (wcsncmp(arguments[index], L"--dark-mode", 12*sizeof(unsigned short)))
+
+        if (wcsncmp(arguments[index], L"--dark-mode", 12*sizeof(unsigned short)) == 0)
         {
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Changing program theme to dark mode."));
             NeonSetTheme(NeonDarkTheme);
         }
-        if (wcsncmp(arguments[index], L"--light-mode", 13*sizeof(unsigned short)))
+        if (wcsncmp(arguments[index], L"--light-mode", 13*sizeof(unsigned short)) == 0)
         {
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Changing program theme to light mode."));
             NeonSetTheme(NeonLightTheme);
         }
     }
@@ -65,8 +69,10 @@ NeonResult NeonProcessArguments(void)
 
 NeonResult NeonStart(void)
 {
+    NeonInitDrawingTools();
     NeonInitWindow();
     NeonFreeWindow();
+    NeonFreeDrawingTools();
     return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Quit message recieved."));
 }
 

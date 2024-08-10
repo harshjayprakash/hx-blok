@@ -22,6 +22,8 @@ static WNDCLASSEXW mClass = { 0 };
 static wchar_t mName[] = L"__NeonBlockWindowClass";
 static wchar_t mCaption[] = L"Neon v24.10 - Branch Sandbox/Experimental";
 static RECT mWindowArea = { 0 };
+static int mWindowHeight = 0;
+static int mWindowWidth = 0;
 
 static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordParam, LPARAM longParam)
 {
@@ -32,20 +34,29 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
     {
     case WM_DESTROY:
         PostQuitMessage(0);
-        break;
+        return 0;
     case WM_PAINT:
-        displayContext = BeginPaint(mWindow, &paint);
-        NeonInitDrawingTools();
-        NeonHandleWindowPaintEvent(displayContext);
-        NeonFreeDrawingTools();
-        (void) EndPaint(windowHandle, &paint);
-        break;
+        {
+            displayContext = BeginPaint(mWindow, &paint);
+            HDC bufferedContext = CreateCompatibleDC(displayContext);
+            HBITMAP bitmapMemory = CreateCompatibleBitmap(displayContext, mWindowWidth, mWindowHeight);
+            (void) SelectObject(bufferedContext, bitmapMemory);
+            FillRect(bufferedContext, &mWindowArea, NeonGetBackgroundBrush());
+            NeonHandleWindowPaintEvent(bufferedContext);
+            (void) BitBlt(displayContext, 0, 0, mWindowWidth, mWindowHeight, bufferedContext, 0, 0, SRCCOPY);
+            (void) DeleteObject(bitmapMemory);
+            (void) DeleteObject(bufferedContext);
+            (void) EndPaint(windowHandle, &paint);
+            return 0;
+        }
     case WM_SIZE:
         (void) GetClientRect(windowHandle, &mWindowArea);
-        break;
+        mWindowWidth = mWindowArea.right - mWindowArea.left;
+        mWindowHeight = mWindowArea.bottom - mWindowArea.top;
+        return 0;
+    default:
+        return DefWindowProcW(windowHandle, message, wordParam, longParam);
     }
-    
-    return DefWindowProcW(windowHandle, message, wordParam, longParam);
 }
 
 static int _NeonMessageLoop(void)
