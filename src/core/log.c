@@ -8,10 +8,16 @@
 #include <stdio.h>
 
 static NeonLogTechnique mLogTechnique = NeonConsole;
+static FILE *logFile = NULL;
 
 void NeonInitLogger(const NeonLogTechnique technique)
 {
     mLogTechnique = technique;
+
+    if (mLogTechnique == NeonFile)
+    {
+        logFile = fopen("log.txt", "w");
+    }
 }
 
 void NeonLog(const NeonLogLevel level, const NeonResult information)
@@ -25,6 +31,17 @@ void NeonLog(const NeonLogLevel level, const NeonResult information)
 
     int levelAsIndex = (int) level;
 
+    if (mLogTechnique == NeonFile)
+    {
+        if (!logFile) { return; }
+
+        (void) fwprintf(
+            logFile, L"Project Neon | %ls | %ls\n", 
+            levelsAsString[levelAsIndex], information.message 
+        );
+        
+        return;
+    }
 
     (void) fwprintf(
         stdout, L"Project Neon | %ls | %ls\n", 
