@@ -27,6 +27,13 @@ NeonResult NeonInitWindow(void);
 RECT NeonGetWindowArea(void);
 
 /**
+ * @brief Get window handle.
+ * 
+ * @return HWND Window handle.
+ */
+HWND NeonGetWindowHandle(void);
+
+/**
  * @brief Frees any resources of the window.
  * 
  * @return NeonResult If the window destruction was successful.

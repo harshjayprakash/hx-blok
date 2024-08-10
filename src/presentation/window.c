@@ -146,6 +146,11 @@ RECT NeonGetWindowArea(void)
     return mWindowArea;
 }
 
+HWND NeonGetWindowHandle(void)
+{
+    return mWindow;
+}
+
 NeonResult NeonFreeWindow(void)
 {
     NeonFreeBlockObject();
