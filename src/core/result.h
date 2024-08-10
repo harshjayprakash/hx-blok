@@ -34,6 +34,10 @@ typedef enum __NeonResultCode
      * @brief Not Implementated
      */
     NeonNotImpl         = 0x000100,
+    /**
+     * @brief No error to report.
+     */
+    NeonNone            = 0x000200
 } NeonResultCode;
 
 /**
