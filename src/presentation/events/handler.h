@@ -17,4 +17,11 @@
  */
 void NeonHandleWindowPaintEvent(HDC displayContext);
 
+/**
+ * @brief Handles the key down event.
+ * 
+ * @param wordParam The key pressed.
+ */
+void NeonHandleWindowKeyDownEvent(WPARAM wordParam);
+
 #endif
