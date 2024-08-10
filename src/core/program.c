@@ -56,6 +56,8 @@ NeonResult NeonProcessArguments(void)
         }
     }
 
+    NeonUpdateColours();
+
     (void) LocalFree(arguments);
 
     return NeonCreateResult(NeonSuccess, L"Processed arguments successfully.");
