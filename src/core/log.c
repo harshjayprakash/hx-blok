@@ -6,13 +6,17 @@
 
 #include "log.h"
 #include <stdio.h>
+#include <time.h>
 
 static NeonLogTechnique mLogTechnique = NeonConsole;
 static FILE *logFile = NULL;
+static time_t mTime;
+static struct tm mTm;
 
 void NeonInitLogger(const NeonLogTechnique technique)
 {
     mLogTechnique = technique;
+
 
     if (mLogTechnique == NeonFile)
     {
@@ -31,12 +35,16 @@ void NeonLog(const NeonLogLevel level, const NeonResult information)
 
     int levelAsIndex = (int) level;
 
+    mTime = time(NULL);
+    mTm = *localtime(&mTime);
+
     if (mLogTechnique == NeonFile)
     {
         if (!logFile) { return; }
 
         (void) fwprintf(
-            logFile, L"Project Neon | %ls | %ls\n", 
+            logFile, L"Neon | %d/%d/%d %d:%d:%d | %ls | %ls\n", 
+            mTm.tm_year+1900, mTm.tm_mon, mTm.tm_mday, mTm.tm_hour, mTm.tm_min, mTm.tm_sec,
             levelsAsString[levelAsIndex], information.message 
         );
 
@@ -44,7 +52,8 @@ void NeonLog(const NeonLogLevel level, const NeonResult information)
     }
 
     (void) fwprintf(
-        stdout, L"Project Neon | %ls | %ls\n", 
+        stderr, L"Neon | %d/%d/%d %d:%d:%d | %ls | %ls\n", 
+        mTm.tm_year+1900, mTm.tm_mon, mTm.tm_mday, mTm.tm_hour, mTm.tm_min, mTm.tm_sec,
         levelsAsString[levelAsIndex], information.message 
     );
 }
