@@ -128,6 +128,11 @@ NeonResult NeonInitWindow(void)
     return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Successfully initialised window."));
 }
 
+RECT NeonGetWindowArea(void)
+{
+    return mWindowArea;
+}
+
 NeonResult NeonFreeWindow(void)
 {
     (void) UnregisterClassW(mName, NeonGetHandle());
