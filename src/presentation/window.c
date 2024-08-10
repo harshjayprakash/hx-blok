@@ -13,7 +13,9 @@
 #include "objects/block.h"
 #include "events/handler.h"
 
+#include <Windows.h>
 #include <wchar.h>
+#include <wingdi.h>
 
 
 static HWND mWindow = { 0 };
@@ -53,6 +55,9 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         (void) GetClientRect(windowHandle, &mWindowArea);
         mWindowWidth = mWindowArea.right;
         mWindowHeight = mWindowArea.bottom;
+        return 0;
+    case WM_KEYDOWN:
+        NeonHandleWindowKeyDownEvent(wordParam);
         return 0;
     default:
         return DefWindowProcW(windowHandle, message, wordParam, longParam);
