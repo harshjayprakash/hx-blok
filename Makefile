@@ -9,9 +9,14 @@ BUILD_DIR = build
 OUTPUT_DIR = bin
 
 OBJECT_FILES = $(BUILD_DIR)/main.o \
+	$(BUILD_DIR)/core.log.o \
 	$(BUILD_DIR)/core.program.o \
 	$(BUILD_DIR)/core.result.o \
-	$(BUILD_DIR)/core.log.o
+	$(BUILD_DIR)/model.object.square.o \
+	$(BUILD_DIR)/model.utility.position.o \
+	$(BUILD_DIR)/model.utility.size.o \
+	$(BUILD_DIR)/presentation.graphics.theme.o \
+	$(BUILD_DIR)/presentation.window.o
 
 EXECUTABLE = neon-blok.exe
 
@@ -30,6 +35,21 @@ $(BUILD_DIR)/core.program.o: $(SOURCE_DIR)/core/program.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/core.result.o: $(SOURCE_DIR)/core/result.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/model.object.square.o: $(SOURCE_DIR)/model/object/square.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/model.utility.position.o: $(SOURCE_DIR)/model/utility/position.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/model.utility.size.o: $(SOURCE_DIR)/model/utility/size.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/presentation.graphics.theme.o: $(SOURCE_DIR)/presentation/graphics/theme.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/presentation.window.o: $(SOURCE_DIR)/presentation/window.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 .PHONY: init

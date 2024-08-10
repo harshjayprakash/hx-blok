@@ -7,6 +7,9 @@
 #include "program.h"
 #include "result.h"
 #include "log.h"
+#include "../presentation/graphics/theme.h"
+#include "../presentation/window.h"
+#include <wchar.h>
 
 static HINSTANCE mInstanceHandle = { 0 };
 static int mShowflag = 0;
@@ -41,6 +44,18 @@ NeonResult NeonProcessArguments(void)
         return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNotInit, L"Failed to get arguments."));
     }
 
+    for (int index = 0; index < argumentCount; index++)
+    {
+        if (wcsncmp(arguments[index], L"--dark-mode", 12*sizeof(unsigned short)))
+        {
+            NeonSetTheme(NeonDarkTheme);
+        }
+        if (wcsncmp(arguments[index], L"--light-mode", 13*sizeof(unsigned short)))
+        {
+            NeonSetTheme(NeonLightTheme);
+        }
+    }
+
     (void) LocalFree(arguments);
 
     return NeonCreateResult(NeonSuccess, L"Processed arguments successfully.");
@@ -48,7 +63,19 @@ NeonResult NeonProcessArguments(void)
 
 NeonResult NeonStart(void)
 {
-    return NeonLogAndReturn(NeonUnknown, NeonCreateResult(NeonNotImpl, L"Start: Not Implementated."));
+    NeonInitWindow();
+    NeonFreeWindow();
+    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Quit message recieved."));
+}
+
+HINSTANCE NeonGetHandle(void)
+{
+    return mInstanceHandle;
+}
+
+int NeonGetShowFlag(void)
+{
+    return mShowflag;
 }
 
 NeonResult NeonFree(void)

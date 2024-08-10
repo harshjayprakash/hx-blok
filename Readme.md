@@ -8,6 +8,7 @@
 
 ## What's New
 
-- TODO
+- Logging
+- Re-implementated Result System
 
 ## Code Standard

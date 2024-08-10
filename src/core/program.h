@@ -33,6 +33,20 @@ NeonResult NeonProcessArguments(void);
 NeonResult NeonStart(void);
 
 /**
+ * @brief Gets the program's instance handle.
+ * 
+ * @return HINSTANCE The program's instance handle.
+ */
+HINSTANCE NeonGetHandle(void);
+
+/**
+ * @brief Gets the program show flag.
+ * 
+ * @return int The program show flag.
+ */
+int NeonGetShowFlag(void);
+
+/**
  * @brief Frees any resources used by the program module.
  * 
  * @return NeonResult - If operation succeeded.
