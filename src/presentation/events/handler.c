@@ -45,5 +45,6 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
     }
 
     NeonMoveBlock(direction);
+    NeonUpdateCoordinatesText();
     InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
 }
