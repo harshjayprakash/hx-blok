@@ -5,12 +5,17 @@ static NeonVector mObstructableSquares = { 0 };
 
 void NeonInitObstructables(void)
 {
-    mObstructableSquares = NeonCreateVector(100);
+    mObstructableSquares = NeonCreateVector(10);
 
     for (int index = 0; index < mObstructableSquares.max; index++)
     {
+        NeonNode *nodePtr = NeonGetNodeAsPointer(&mObstructableSquares, index);
+
+        if (!nodePtr) { continue; }
+
+        nodePtr->indexed = 0;
         NeonCopyPosition(
-            &(NeonGetNodeAsPointer(&mObstructableSquares, index)->position), 
+            &(nodePtr->position), 
             NeonCreatePosition(-1, -1)
         );
     }
