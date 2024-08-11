@@ -10,6 +10,7 @@
 #include "../../core/result.h"
 
 static NeonSquare mMovableSquare = { 0 };
+static NeonSize mMovableSquareBoundary = { 0 };
 static RECT mMovableSquareAsRect = { 0 };
 
 void NeonInitBlockObject(void)
@@ -57,6 +58,10 @@ void NeonMoveBlock(NeonDirection direction)
         (mMovableSquare.position.x + mMovableSquare.size.width),
         (mMovableSquare.position.y + mMovableSquare.size.height)
     };
+
+void NeonSetBlockBoundary(const NeonSize size)
+{
+    NeonCopySize(&mMovableSquareBoundary, size);
 }
 
 void NeonFreeBlockObject()
