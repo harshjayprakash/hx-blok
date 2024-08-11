@@ -39,4 +39,37 @@ NeonSize NeonCreateSize(const int width, const int height);
  */
 NeonSize NeonCreateSizeFromSelf(const NeonSize size);
 
+/**
+ * @brief Sets the size.
+ * 
+ * @param size The size instance to be updated.
+ * @param width The new width.
+ * @param height The new height.
+ */
+void NeonSetSize(NeonSize *size, const int width, const int height);
+
+/**
+ * @brief Sets the width of the size object.
+ * 
+ * @param size The size instance to be updated.
+ * @param width The new width.
+ */
+void NeonSetWidth(NeonSize *size, const int width);
+
+/**
+ * @brief Sets the height of the size object.
+ * 
+ * @param size The size instance to be updated.
+ * @param height The new height.
+ */
+void NeonSetHeight(NeonSize *size, const int height);
+
+/**
+ * @brief Copies the attributes from source to destination.
+ * 
+ * @param dest The size object to copy to.
+ * @param src The size object to copy from.
+ */
+void NeonCopySize(NeonSize *dest, const NeonSize src);
+
 #endif
