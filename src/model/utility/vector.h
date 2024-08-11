@@ -20,6 +20,10 @@ typedef struct __NeonVector {
 
 NeonVector NeonCreateVector(size_t size);
 
+int NeonIsVectorFull(const NeonVector *vector);
+
+int NeonIsVectorEmpty(const NeonVector *vector);
+
 void NeonDestroyVector(NeonVector *vector);
 
 #endif
