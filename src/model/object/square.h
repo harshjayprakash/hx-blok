@@ -28,4 +28,12 @@ typedef struct __NeonSquare
  */
 NeonSquare NeonCreateSquare(const NeonPosition position, const NeonSize size);
 
+/**
+ * @brief Copies the square to the destination.
+ * 
+ * @param dest The square to be copied to.
+ * @param src The square to be copied from.
+ */
+void NeonCopySquare(NeonSquare *dest, const NeonSquare src);
+
 #endif
