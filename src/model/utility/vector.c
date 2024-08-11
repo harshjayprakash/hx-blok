@@ -99,6 +99,38 @@ NeonNode *NeonGetNodeAsPointer(const NeonVector *vector, const int index)
     return (vector->array + index);
 }
 
+void NeonPrintVector(const NeonVector *vector)
+{
+    if (!vector)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to print vector: is null"));
+        return;
+    }
+
+    if (!vector->array)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to print vector: vector array is null"));   
+        return; 
+    }
+
+    (void) wprintf(
+        L"Vector: { Max: %llu, Size: %llu, Head: %d\n",
+        vector->max, vector->size, vector->head
+    );
+
+    for (int index = 0; index < vector->max; index++)
+    {
+        NeonNode *nodePtr = NeonGetNodeAsPointer(vector, index);
+
+        if (!nodePtr) { continue; }
+
+        wprintf(
+            L"{ { X: %d, Y: %d }, Indexed: %d }",
+            nodePtr->position.x, nodePtr->position.y, nodePtr->indexed
+        );
+    }
+}
+
 void NeonDestroyVector(NeonVector *vector)
 {
     if (!vector)
