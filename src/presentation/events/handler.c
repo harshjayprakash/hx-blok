@@ -60,8 +60,8 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         return;
     }
 
-    int positionX = (LOWORD(longParam));
-    int positionY = (HIWORD(longParam));
+    int positionX = (LOWORD(longParam) / square->size.width) * square->size.width;
+    int positionY = (HIWORD(longParam) / square->size.height) * square->size.height;
 
     wchar_t logMessage[60];
 
