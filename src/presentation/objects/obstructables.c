@@ -1,5 +1,8 @@
 #include "obstructables.h"
 #include "../../model/utility/vector.h"
+#include "../graphics/drawing.h"
+#include "block.h"
+#include "../window.h"
 
 static NeonVector mObstructableSquares = { 0 };
 
@@ -23,6 +26,30 @@ void NeonInitObstructables(void)
 
 void NeonRenderObstructables(HDC displayContext)
 {
+    NeonSquare *square = NeonGetBlockAsPointer();
+
+    if (!square) 
+    { 
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to paint obstructable squares: square reference is null"));
+        return; 
+    }
+
+    for (int index = 0; index < mObstructableSquares.max; index++)
+    {
+        NeonNode *nodePtr = NeonGetNodeAsPointer(&mObstructableSquares, index);
+
+        if (!nodePtr) { continue; }
+
+        if (nodePtr->position.x == -1 || nodePtr->position.y == -1 || nodePtr->indexed == 0)
+        {
+            continue;
+        }
+
+        RECT nodeAsRect = { nodePtr->position.x, nodePtr->position.y, nodePtr->position.x +  square->size.width, nodePtr->position.y + square->size.height};
+
+        (void) FillRect(displayContext, &nodeAsRect, NeonGetForegroundBrush());
+    }
+
 
 }
 
@@ -35,6 +62,7 @@ void NeonAddObstrutable(const NeonPosition position)
     NeonPushNode(&mObstructableSquares, node);
 
     NeonPrintVector(&mObstructableSquares);
+    InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
 }
 
 void NeonFreeObstructables(void)
