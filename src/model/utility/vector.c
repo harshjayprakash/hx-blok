@@ -9,7 +9,7 @@ NeonVector NeonCreateVector(size_t size)
         NULL, size, 0, (-1)
     };
 
-    vector.array = calloc(vector.size, sizeof(NeonNode));
+    vector.array = calloc(vector.max, sizeof(NeonNode));
 
     if (!vector.array)
     {
