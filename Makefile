@@ -15,6 +15,7 @@ OBJECT_FILES = $(BUILD_DIR)/main.o \
 	$(BUILD_DIR)/model.object.square.o \
 	$(BUILD_DIR)/model.utility.position.o \
 	$(BUILD_DIR)/model.utility.size.o \
+	$(BUILD_DIR)/model.utility.vector.o \
 	$(BUILD_DIR)/presentation.components.canvas.o \
 	$(BUILD_DIR)/presentation.components.panel.o \
 	$(BUILD_DIR)/presentation.events.handler.o \
@@ -50,6 +51,9 @@ $(BUILD_DIR)/model.utility.position.o: $(SOURCE_DIR)/model/utility/position.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/model.utility.size.o: $(SOURCE_DIR)/model/utility/size.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/model.utility.vector.o: $(SOURCE_DIR)/model/utility/vector.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.components.canvas.o: $(SOURCE_DIR)/presentation/components/canvas.c
