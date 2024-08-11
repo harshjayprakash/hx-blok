@@ -19,6 +19,43 @@ NeonVector NeonCreateVector(size_t size)
     return vector;
 }
 
+size_t NeonGenerateNewVectorSize(size_t size)
+{
+    return size + (size * 2);
+}
+
+NeonResult NeonReSizeVector(NeonVector *vector, size_t newSize)
+{
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Attempting to resize vector."));
+
+    if (!vector)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to resize vector: is null"));
+    }
+
+    if (!vector->array)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to resize vector: array is null"));
+    }
+
+    if (newSize + 1 < vector->max)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonOutOfRange, L"Failed to resize vector: invalid size"));
+    }
+
+    NeonNode *newMemory = realloc(vector->array, newSize * sizeof(NeonNode));
+
+    if (!newMemory)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonOutOfRange, L"Failed to resize vector: memory reallocation failed"));
+    }
+
+    vector->array = newMemory;
+    vector->max = newSize;
+
+    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonNone, L"Resized vector"));
+}
+
 int NeonIsVectorFull(const NeonVector *vector)
 {
     if (!vector)
@@ -27,7 +64,7 @@ int NeonIsVectorFull(const NeonVector *vector)
         return -1;
     }
 
-    if (vector->head == vector->max && vector->size == vector->max)
+    if (vector->head == vector->max - 1)
     {
         return 1;
     }
@@ -43,7 +80,7 @@ int NeonIsVectorEmpty(const NeonVector *vector)
         return -1;
     }
 
-    if (vector->size == 0 && vector->head == -1)
+    if (vector->head == -1)
     {
         return 1;
     }
@@ -63,9 +100,9 @@ NeonResult NeonPushNode(NeonVector *vector, const NeonNode node)
         return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to push node: vector array is null"));    
     }
 
-    if (NeonIsVectorFull(vector))
+    if (NeonIsVectorFull(vector) == 1)
     {
-        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to push node: vector is full"));
+        NeonReSizeVector(vector, NeonGenerateNewVectorSize(vector->max));
     }
 
     vector->head++;
@@ -125,7 +162,7 @@ void NeonPrintVector(const NeonVector *vector)
         if (!nodePtr) { continue; }
 
         wprintf(
-            L"{ { X: %d, Y: %d }, Indexed: %d }",
+            L"{ { X: %d, Y: %d }, Indexed: %d }\n",
             nodePtr->position.x, nodePtr->position.y, nodePtr->indexed
         );
     }
