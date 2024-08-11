@@ -39,6 +39,9 @@ void NeonMoveBlock(NeonDirection direction);
  */
 void NeonSetBlockBoundary(const NeonSize size);
 
+
+NeonSquare *NeonGetBlockAsPointer(void);
+
 /**
  * @brief Cleans up the resources used by the block object.
  */

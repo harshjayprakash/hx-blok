@@ -86,6 +86,11 @@ void NeonSetBlockBoundary(const NeonSize size)
     NeonCopySize(&mMovableSquareBoundary, size);
 }
 
+NeonSquare *NeonGetBlockAsPointer(void)
+{
+    return &mMovableSquare;
+}
+
 void NeonFreeBlockObject()
 {
     NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Destroying movable square object."));
