@@ -21,6 +21,7 @@ OBJECT_FILES = $(BUILD_DIR)/main.o \
 	$(BUILD_DIR)/presentation.graphics.drawing.o \
 	$(BUILD_DIR)/presentation.graphics.theme.o \
 	$(BUILD_DIR)/presentation.objects.block.o \
+	$(BUILD_DIR)/presentation.objects.obstructables.o \
 	$(BUILD_DIR)/presentation.window.o
 
 EXECUTABLE = neon-blok.exe
@@ -67,6 +68,9 @@ $(BUILD_DIR)/presentation.graphics.theme.o: $(SOURCE_DIR)/presentation/graphics/
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.objects.block.o: $(SOURCE_DIR)/presentation/objects/block.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/presentation.objects.obstructables.o: $(SOURCE_DIR)/presentation/objects/obstructables.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/presentation.window.o: $(SOURCE_DIR)/presentation/window.c
