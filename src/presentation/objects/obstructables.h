@@ -11,6 +11,8 @@ void NeonRenderObstructables(HDC displayContext);
 
 void NeonAddObstrutable(const NeonPosition position);
 
+float NeonGetVectorMemoryPercentage(void);
+
 void NeonFreeObstructables(void);
 
 #endif

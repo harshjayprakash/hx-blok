@@ -65,6 +65,11 @@ void NeonAddObstrutable(const NeonPosition position)
     InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
 }
 
+float NeonGetVectorMemoryPercentage()
+{
+    return ((mObstructableSquares.size * 1.0) / (mObstructableSquares.max * 1.0));
+}
+
 void NeonFreeObstructables(void)
 {
     NeonDestroyVector(&mObstructableSquares);

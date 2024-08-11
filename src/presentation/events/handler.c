@@ -69,4 +69,5 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
     NeonLog(NeonInformation, NeonCreateResult(NeonNone, logMessage));
 
     NeonAddObstrutable(NeonCreatePosition(positionX, positionY));
+    NeonUpdateVectorMemoryBar();
 }

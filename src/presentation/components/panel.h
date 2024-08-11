@@ -18,6 +18,8 @@ void NeonUpdateCoordinatesText(void);
 
 void NeonUpdatePanelSize(void);
 
+void NeonUpdateVectorMemoryBar(void);
+
 void NeonFreePanelComponent(void);
 
 #endif
