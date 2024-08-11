@@ -3,6 +3,8 @@
 
 NeonVector NeonCreateVector(size_t size)
 {
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Initialising vector."));  
+
     NeonVector vector = (NeonVector) {
         NULL, size, 0, (-1)
     };
