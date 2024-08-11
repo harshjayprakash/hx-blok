@@ -28,7 +28,13 @@ void NeonRenderObstructables(HDC displayContext)
 
 void NeonAddObstrutable(const NeonPosition position)
 {
-    
+    NeonNode node = {
+        position, 1
+    };
+
+    NeonPushNode(&mObstructableSquares, node);
+
+    NeonPrintVector(&mObstructableSquares);
 }
 
 void NeonFreeObstructables(void)
