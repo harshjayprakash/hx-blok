@@ -62,7 +62,6 @@ void NeonAddObstrutable(const NeonPosition position)
     NeonPushNode(&mObstructableSquares, node);
 
     InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
-    NeonPrintVector(&mObstructableSquares);
 }
 
 int NeonGetObstrutableCount(void)
