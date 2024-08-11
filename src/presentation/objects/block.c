@@ -14,6 +14,7 @@ static NeonSquare mMovableSquare = { 0 };
 static NeonSquare mProjectedSquare = { 0 };
 static NeonSize mMovableSquareBoundary = { 0 };
 static RECT mMovableSquareAsRect = { 0 };
+static RECT mMovableSquareInnerAsRect = { 0 };
 
 void NeonInitBlockObject(void)
 {
@@ -29,11 +30,19 @@ void NeonInitBlockObject(void)
         (mMovableSquare.position.x + mMovableSquare.size.width),
         (mMovableSquare.position.y + mMovableSquare.size.height)
     };
+
+    mMovableSquareInnerAsRect = (RECT) {
+        mMovableSquare.position.x + 5,
+        mMovableSquare.position.y + 5,
+        (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
+        (mMovableSquare.position.y + (mMovableSquare.size.height- 5))
+    };
 }
 
 void NeonRenderBlock(HDC displayContext)
 {
     FillRect(displayContext, &mMovableSquareAsRect, NeonGetAccentBrush());
+    FillRect(displayContext, &mMovableSquareInnerAsRect, NeonGetBackgroundBrush());
 }
 
 void NeonMoveBlock(NeonDirection direction)
@@ -62,6 +71,15 @@ void NeonMoveBlock(NeonDirection direction)
         (mMovableSquare.position.x + mMovableSquare.size.width),
         (mMovableSquare.position.y + mMovableSquare.size.height)
     };
+
+    mMovableSquareInnerAsRect = (RECT) {
+        mMovableSquare.position.x + 5,
+        mMovableSquare.position.y + 5,
+        (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
+        (mMovableSquare.position.y + (mMovableSquare.size.height - 5))
+    };
+
+}
 
 void NeonSetBlockBoundary(const NeonSize size)
 {
