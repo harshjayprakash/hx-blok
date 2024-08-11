@@ -33,6 +33,13 @@ void NeonRenderBlock(HDC displayContext);
 void NeonMoveBlock(NeonDirection direction);
 
 /**
+ * @brief Sets the boundary the block must stay between.
+ * 
+ * @param size The size object to denote the area to stay within.
+ */
+void NeonSetBlockBoundary(const NeonSize size);
+
+/**
  * @brief Cleans up the resources used by the block object.
  */
 void NeonFreeBlockObject(void);
