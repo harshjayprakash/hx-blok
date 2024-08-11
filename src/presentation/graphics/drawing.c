@@ -17,7 +17,7 @@ void NeonInitDrawingTools(void)
     mBackgroundBrush = CreateSolidBrush(NeonGetBackgroundColour());
     mForegroundBrush = CreateSolidBrush(NeonGetForegroundColour());
     mAccentBrush = CreateSolidBrush(NeonGetAccentColour());
-    mForegroundPen = CreatePen(PS_SOLID, 1, NeonGetForegroundColour());
+    mForegroundPen = CreatePen(PS_SOLID, 2, NeonGetForegroundColour());
 }
 
 HBRUSH NeonGetBackgroundBrush(void)
