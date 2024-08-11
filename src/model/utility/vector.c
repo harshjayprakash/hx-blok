@@ -56,6 +56,11 @@ NeonResult NeonPushNode(NeonVector *vector, const NeonNode node)
         return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to push node: vector is null"));
     }
 
+    if (!vector->array)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to push node: vector array is null"));    
+    }
+
     if (NeonIsVectorFull(vector))
     {
         return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to push node: vector is full"));
@@ -67,6 +72,29 @@ NeonResult NeonPushNode(NeonVector *vector, const NeonNode node)
     NeonCopyPosition(&((vector->array + vector->head)->position), node.position);
 
     return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonNone, L"Vector: node pushed."));
+}
+
+NeonNode *NeonGetNodeAsPointer(const NeonVector *vector, const int index)
+{
+    if (!vector)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to get node via index: vector is null"));   
+        return NULL; 
+    }
+
+    if (!vector->array)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to get node via index: vector array is null"));   
+        return NULL; 
+    }
+
+    if (index > vector->max - 1 || index < 0)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonOutOfRange, L"Failed to get node via index: index out of range"));
+        return NULL;
+    }
+
+    return (vector->array + index);
 }
 
 void NeonDestroyVector(NeonVector *vector)
