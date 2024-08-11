@@ -60,6 +60,9 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         NeonSetBlockBoundary(NeonCreateSize(mWindowWidth, mWindowHeight));
         NeonUpdatePanelSize();
         return 0;
+    case WM_LBUTTONDOWN:
+        NeonHandleWindowLeftMouseDown(longParam);
+        return 0;
     case WM_KEYDOWN:
         NeonHandleWindowKeyDownEvent(wordParam);
         return 0;

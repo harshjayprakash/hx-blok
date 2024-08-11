@@ -48,3 +48,22 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
     NeonUpdateCoordinatesText();
     InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
 }
+
+void NeonHandleWindowLeftMouseDown(LPARAM longParam)
+{
+    NeonSquare *square = NeonGetBlockAsPointer();
+
+    if (!square)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to retrieve square."));
+        return;
+    }
+
+    int positionX = (LOWORD(longParam));
+    int positionY = (HIWORD(longParam));
+
+    wchar_t logMessage[60];
+
+    (void) swprintf(logMessage, 60, L"Click detected at (%d, %d)", positionX, positionY);
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, logMessage));
+}

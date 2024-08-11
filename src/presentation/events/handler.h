@@ -24,4 +24,7 @@ void NeonHandleWindowPaintEvent(HDC displayContext);
  */
 void NeonHandleWindowKeyDownEvent(WPARAM wordParam);
 
+
+void NeonHandleWindowLeftMouseDown(LPARAM longParam);
+
 #endif
