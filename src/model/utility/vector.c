@@ -1,5 +1,4 @@
 #include "vector.h"
-
 #include <memory.h>
 
 NeonVector NeonCreateVector(size_t size)
@@ -48,6 +47,26 @@ int NeonIsVectorEmpty(const NeonVector *vector)
     }
 
     return 0;
+}
+
+NeonResult NeonPushNode(NeonVector *vector, const NeonNode node)
+{
+    if (!vector)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to push node: vector is null"));
+    }
+
+    if (NeonIsVectorFull(vector))
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to push node: vector is full"));
+    }
+
+    vector->head++;
+    vector->size++;
+    (vector->array + vector->head)->indexed = 1;
+    NeonCopyPosition(&((vector->array + vector->head)->position), node.position);
+
+    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonNone, L"Vector: node pushed."));
 }
 
 void NeonDestroyVector(NeonVector *vector)
