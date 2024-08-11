@@ -5,6 +5,8 @@
  */
 
 #include "window.h"
+#include "components/canvas.h"
+#include "components/panel.h"
 #include "graphics/theme.h"
 #include "graphics/drawing.h"
 #include "../core/program.h"
@@ -138,7 +140,8 @@ NeonResult NeonInitWindow(void)
         return NeonLogAndReturn(NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
     }
 
-    NeonInitBlockObject();
+    NeonInitPanelComponent();
+    NeonInitCanvasComponent();
 
     (void) ShowWindow(mWindow, NeonGetShowFlag());
     (void) UpdateWindow(mWindow);
@@ -159,7 +162,8 @@ HWND NeonGetWindowHandle(void)
 
 NeonResult NeonFreeWindow(void)
 {
-    NeonFreeBlockObject();
+    NeonFreePanelComponent();
+    NeonFreeCanvasComponent();
 
     (void) UnregisterClassW(mName, NeonGetHandle());
 
