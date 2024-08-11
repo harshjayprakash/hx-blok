@@ -55,6 +55,7 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         (void) GetClientRect(windowHandle, &mWindowArea);
         mWindowWidth = mWindowArea.right;
         mWindowHeight = mWindowArea.bottom;
+        NeonSetBlockBoundary(NeonCreateSize(mWindowWidth, mWindowHeight));
         return 0;
     case WM_KEYDOWN:
         NeonHandleWindowKeyDownEvent(wordParam);
