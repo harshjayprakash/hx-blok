@@ -16,8 +16,8 @@ void NeonInitCanvasComponent(void)
 
 void NeonRenderCanvasComponent(HDC displayContext)
 {
-    NeonRenderBlock(displayContext);
     NeonRenderObstructables(displayContext);
+    NeonRenderBlock(displayContext);
 }
 
 void NeonFreeCanvasComponent(void)
