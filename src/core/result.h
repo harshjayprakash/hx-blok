@@ -41,7 +41,9 @@ typedef enum __NeonResultCode
     /**
      * @brief No error to report.
      */
-    NeonNone            = 0x000200
+    NeonNone            = 0x000200,
+
+    NeonOutOfRange      = 0x000400,
 } NeonResultCode;
 
 /**
