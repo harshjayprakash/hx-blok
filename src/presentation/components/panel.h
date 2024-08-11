@@ -14,6 +14,10 @@ void NeonInitPanelComponent(void);
 
 void NeonRenderPanelComponent(HDC displayContext);
 
+void NeonUpdateCoordinatesText(void);
+
+void NeonUpdatePanelSize(void);
+
 void NeonFreePanelComponent(void);
 
 #endif
