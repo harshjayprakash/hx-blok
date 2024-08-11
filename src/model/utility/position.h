@@ -64,4 +64,13 @@ void NeonSetXPosition(NeonPosition *position, const int x);
  */
 void NeonSetYPosition(NeonPosition *position, const int y);
 
+
+/**
+ * @brief Copies position object attributes to the destination instance.
+ * 
+ * @param dest The instance to copy to.
+ * @param src The instance to copy from.
+ */
+void NeonCopyPosition(NeonPosition *dest, const NeonPosition src);
+
 #endif

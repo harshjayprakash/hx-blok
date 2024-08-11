@@ -51,3 +51,14 @@ void NeonSetYPosition(NeonPosition *position, const int y)
 
     position->y = y;
 }
+
+void NeonCopyPosition(NeonPosition *dest, const NeonPosition src)
+{
+    if (!dest)
+    {
+        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot copy position: destination is null"));
+        return;
+    }
+
+    NeonSetPosition(dest, src.x, src.y);
+}
