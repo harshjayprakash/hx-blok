@@ -26,6 +26,11 @@ void NeonRenderObstructables(HDC displayContext)
 
 }
 
+void NeonAddObstrutable(const NeonPosition position)
+{
+    
+}
+
 void NeonFreeObstructables(void)
 {
     NeonDestroyVector(&mObstructableSquares);

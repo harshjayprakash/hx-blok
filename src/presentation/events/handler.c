@@ -10,6 +10,7 @@
 #include "../../core/log.h"
 #include "../components/panel.h"
 #include "../components/canvas.h"
+#include "../objects/obstructables.h"
 
 
 void NeonHandleWindowPaintEvent(HDC displayContext)
@@ -66,4 +67,6 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     (void) swprintf(logMessage, 60, L"Click detected at (%d, %d)", positionX, positionY);
     NeonLog(NeonInformation, NeonCreateResult(NeonNone, logMessage));
+
+    NeonAddObstrutable(NeonCreatePosition(positionX, positionY));
 }
