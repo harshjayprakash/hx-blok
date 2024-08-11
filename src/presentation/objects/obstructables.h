@@ -13,6 +13,8 @@ void NeonAddObstrutable(const NeonPosition position);
 
 float NeonGetVectorMemoryPercentage(void);
 
+int NeonGetObstrutableCount(void);
+
 void NeonFreeObstructables(void);
 
 #endif

@@ -8,7 +8,7 @@ static NeonVector mObstructableSquares = { 0 };
 
 void NeonInitObstructables(void)
 {
-    mObstructableSquares = NeonCreateVector(10);
+    mObstructableSquares = NeonCreateVector(2);
 
     for (int index = 0; index < mObstructableSquares.max; index++)
     {
@@ -61,11 +61,16 @@ void NeonAddObstrutable(const NeonPosition position)
 
     NeonPushNode(&mObstructableSquares, node);
 
-    NeonPrintVector(&mObstructableSquares);
     InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+    NeonPrintVector(&mObstructableSquares);
 }
 
-float NeonGetVectorMemoryPercentage()
+int NeonGetObstrutableCount(void)
+{
+    return mObstructableSquares.size;
+}
+
+float NeonGetVectorMemoryPercentage(void)
 {
     return ((mObstructableSquares.size * 1.0) / (mObstructableSquares.max * 1.0));
 }
