@@ -8,8 +8,10 @@
 #include "../graphics/drawing.h"
 #include "../../core/log.h"
 #include "../../core/result.h"
+#include "../../model/object/square.h"
 
 static NeonSquare mMovableSquare = { 0 };
+static NeonSquare mProjectedSquare = { 0 };
 static NeonSize mMovableSquareBoundary = { 0 };
 static RECT mMovableSquareAsRect = { 0 };
 
@@ -36,6 +38,8 @@ void NeonRenderBlock(HDC displayContext)
 
 void NeonMoveBlock(NeonDirection direction)
 {
+    NeonCopySquare(&mProjectedSquare, mMovableSquare);
+
     switch (direction)
     {
     case NeonNorth:
