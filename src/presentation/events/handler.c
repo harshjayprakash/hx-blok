@@ -8,10 +8,14 @@
 #include "../window.h"
 #include "../objects/block.h"
 #include "../../core/log.h"
+#include "../components/panel.h"
+#include "../components/canvas.h"
+
 
 void NeonHandleWindowPaintEvent(HDC displayContext)
 {
-    NeonRenderBlock(displayContext);
+    NeonRenderCanvasComponent(displayContext);
+    NeonRenderPanelComponent(displayContext);
 }
 
 void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
