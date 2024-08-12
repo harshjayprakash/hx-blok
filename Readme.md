@@ -43,8 +43,10 @@ mingw32-make build
 
 ## What's New (Version 24.10)
 
-- Logging
+- Re-defined Internal Architecture
+- Console Logging
 - Re-implementated Result System
+- Re-implementated Clear All Button
 - Vector Size Indicator
 - Changed Style of Movable Block
 - Switched Colour Scheme
@@ -58,11 +60,13 @@ prefixed with this. These are in PascalCase, while variables are in camelCase.
 
 - GDI32 Graphics flicker
 - Additional obstructables may show on the canvas after vector re-sizing.
+- Changing the size to a smaller version than at startup may cause elements to overlap.
 
 ## Future Features
 
 - Custom Theming.
 - Opening an Existing Layout.
+- Changing the size of the Block and Obstructables.
 
 ## Find an issue
 
