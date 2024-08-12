@@ -57,6 +57,12 @@ prefixed with this. These are in PascalCase, while variables are in camelCase.
 ## Known Issues and Limitations
 
 - GDI32 Graphics flicker
+- Additional obstructables may show on the canvas after vector re-sizing.
+
+## Future Features
+
+- Custom Theming.
+- Opening an Existing Layout.
 
 ## Find an issue
 
