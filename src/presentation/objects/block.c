@@ -45,6 +45,16 @@ void NeonRenderBlock(HDC displayContext)
     FillRect(displayContext, &mMovableSquareInnerAsRect, NeonGetBackgroundBrush());
 }
 
+static int _NeonCanMoveBlock()
+{
+    return (
+        mProjectedSquare.position.x >= 0 &&
+        mProjectedSquare.position.x < mMovableSquareBoundary.width &&
+        mProjectedSquare.position.y >= 0 &&
+        mProjectedSquare.position.y < mMovableSquareBoundary.height
+    );
+}
+
 void NeonMoveBlock(NeonDirection direction)
 {
     NeonCopySquare(&mProjectedSquare, mMovableSquare);
@@ -52,17 +62,22 @@ void NeonMoveBlock(NeonDirection direction)
     switch (direction)
     {
     case NeonNorth:
-        NeonSetYPosition(&(mMovableSquare.position), mMovableSquare.position.y - mMovableSquare.size.height);
+        NeonSetYPosition(&(mProjectedSquare.position), mProjectedSquare.position.y - mProjectedSquare.size.height);
         break;
     case NeonEast:
-        NeonSetXPosition(&(mMovableSquare.position), mMovableSquare.position.x + mMovableSquare.size.width);
+        NeonSetXPosition(&(mProjectedSquare.position), mProjectedSquare.position.x + mProjectedSquare.size.width);
         break;
     case NeonSouth:
-        NeonSetYPosition(&(mMovableSquare.position), mMovableSquare.position.y + mMovableSquare.size.height);
+        NeonSetYPosition(&(mProjectedSquare.position), mProjectedSquare.position.y + mProjectedSquare.size.height);
         break;
     case NeonWest:
-        NeonSetXPosition(&(mMovableSquare.position), mMovableSquare.position.x - mMovableSquare.size.width);
+        NeonSetXPosition(&(mProjectedSquare.position), mProjectedSquare.position.x - mProjectedSquare.size.width);
         break;
+    }
+
+    if (_NeonCanMoveBlock())
+    {
+        NeonCopySquare(&mMovableSquare, mProjectedSquare);
     }
 
     mMovableSquareAsRect = (RECT) {

@@ -36,6 +36,9 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
 
     switch (message)
     {
+    case WM_CREATE:
+        (void) GetClientRect(windowHandle, &mWindowArea);
+        return 0;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
