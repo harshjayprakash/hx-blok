@@ -8,6 +8,8 @@
 
 ## Usage
 
+![Program Light and Dark Mode](./doc/program-screenshot-light-dark.png)
+
 ## Compilation and Execution
 
 This program uses the make build system. Note, this uses the clang compiler, you can
