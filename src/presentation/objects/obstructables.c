@@ -3,6 +3,7 @@
 #include "../graphics/drawing.h"
 #include "block.h"
 #include "../window.h"
+#include <wingdi.h>
 
 static NeonVector mObstructableSquares = { 0 };
 
@@ -62,6 +63,11 @@ void NeonAddObstrutable(const NeonPosition position)
     NeonPushNode(&mObstructableSquares, node);
 
     InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+}
+
+void NeonClearObstrutables(void)
+{
+    NeonClearVector(&mObstructableSquares);
 }
 
 int NeonGetObstrutableCount(void)

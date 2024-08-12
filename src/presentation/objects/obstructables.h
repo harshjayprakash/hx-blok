@@ -15,6 +15,8 @@ float NeonGetVectorMemoryPercentage(void);
 
 int NeonGetObstrutableCount(void);
 
+void NeonClearObstrutables(void);
+
 NeonPosition NeonGetObstructableAtIndex(int index);
 
 void NeonFreeObstructables(void);

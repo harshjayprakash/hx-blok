@@ -1,4 +1,5 @@
 #include "vector.h"
+#include "position.h"
 #include <memory.h>
 
 NeonVector NeonCreateVector(size_t size)
@@ -134,6 +135,34 @@ NeonNode *NeonGetNodeAsPointer(const NeonVector *vector, const int index)
     }
 
     return (vector->array + index);
+}
+
+NeonResult NeonClearVector(NeonVector *vector)
+{
+    if (!vector)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to clear vector: is null"));
+    }
+
+    if (!vector->array)
+    {
+        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to clear vector: array is null"));
+    }
+
+    for (int index = 0; index < vector->max; index++)
+    {
+        NeonNode *nodePtr = NeonGetNodeAsPointer(vector, index);
+
+        if (!nodePtr) { continue; }
+
+        nodePtr->indexed = 0;
+        NeonSetPosition(&(nodePtr->position), -1, -1);
+    }
+
+    vector->size = 0;
+    vector->head = -1;
+
+    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonNone, L"Vector cleared successfully."));
 }
 
 void NeonPrintVector(const NeonVector *vector)

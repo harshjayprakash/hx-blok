@@ -13,6 +13,7 @@
 #include "../objects/block.h"
 #include "../objects/obstructables.h"
 #include <wchar.h>
+#include <wingdi.h>
 
 static RECT mPanelArea = { 0 };
 static wchar_t mCoordinates[60];
@@ -20,6 +21,8 @@ static RECT mVectorMemoryOutline = { 0 };
 static RECT mVectorMemoryBar = { 0 };
 static wchar_t mObstructableSquaresCount[60];
 
+static wchar_t mClearAll[60] = L"Clear All";
+static RECT mClearAllButtonArea = { 0 };
 
 void NeonInitPanelComponent(void)
 {
@@ -39,6 +42,8 @@ void NeonRenderPanelComponent(HDC displayContext)
     (void) SetTextColor(displayContext, NeonGetForegroundColour());
     (void) TextOutW(displayContext, 15, mPanelArea.top + 10, mCoordinates, (int) wcslen(mCoordinates));
     (void) TextOutW(displayContext, mVectorMemoryOutline.left - 30, mPanelArea.top + 10, mObstructableSquaresCount, (int) wcslen(mObstructableSquaresCount));
+    (void) Rectangle(displayContext, mClearAllButtonArea.left, mClearAllButtonArea.top, mClearAllButtonArea.right, mClearAllButtonArea.bottom);
+    (void) TextOutW(displayContext, 200, mPanelArea.top + 10, mClearAll, (int) wcslen(mClearAll));
 }
 
 void NeonUpdateCoordinatesText(void)
@@ -78,6 +83,12 @@ void NeonUpdatePanelSize(void)
         mPanelArea.right - 10,
         mPanelArea.bottom - 10
     };
+
+    mClearAllButtonArea.left = 197;
+    mClearAllButtonArea.top = mPanelArea.top + 8;
+    mClearAllButtonArea.right = mClearAllButtonArea.left + 62;
+    mClearAllButtonArea.bottom = mClearAllButtonArea.top + 20;
+
     NeonUpdateVectorMemoryBar();
 
 }
@@ -92,6 +103,16 @@ void NeonUpdateVectorMemoryBar(void)
     };
     mVectorMemoryBar.right = (mVectorMemoryOutline.left) + (NeonGetVectorMemoryPercentage() * 100);
     NeonUpdateSquareCountText();
+}
+
+int NeonIsInClearButtonArea(const int x, const int y)
+{
+    return (
+        x > mClearAllButtonArea.left - 1 &&
+        x < mClearAllButtonArea.right + 1 &&
+        y > mClearAllButtonArea.top - 1 &&
+        y < mClearAllButtonArea.bottom + 1
+    );
 }
 
 void NeonFreePanelComponent(void)

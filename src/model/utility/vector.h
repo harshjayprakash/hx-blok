@@ -32,6 +32,8 @@ NeonResult NeonPushNode(NeonVector *vector, const NeonNode node);
 
 NeonNode *NeonGetNodeAsPointer(const NeonVector *vector, const int index);
 
+NeonResult NeonClearVector(NeonVector *vector);
+
 void NeonPrintVector(const NeonVector *vector);
 
 void NeonDestroyVector(NeonVector *vector);

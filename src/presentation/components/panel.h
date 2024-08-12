@@ -20,6 +20,8 @@ void NeonUpdatePanelSize(void);
 
 void NeonUpdateVectorMemoryBar(void);
 
+int NeonIsInClearButtonArea(const int x, const int y);
+
 void NeonFreePanelComponent(void);
 
 #endif

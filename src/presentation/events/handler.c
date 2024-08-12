@@ -52,6 +52,16 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
 
 void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 {
+    int positionX = (LOWORD(longParam));
+    int positionY = (HIWORD(longParam));
+
+    if (NeonIsInClearButtonArea(positionX, positionY))
+    {
+        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Clearing all obstructables."));
+        NeonClearObstrutables();
+        return;
+    }
+
     NeonSquare *square = NeonGetBlockAsPointer();
 
     if (!square)
@@ -60,14 +70,14 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         return;
     }
 
-    int positionX = (LOWORD(longParam) / square->size.width) * square->size.width;
-    int positionY = (HIWORD(longParam) / square->size.height) * square->size.height;
+    int MultiX = (positionX / square->size.width) * square->size.width;
+    int MultiY = (positionY / square->size.height) * square->size.height;
 
     wchar_t logMessage[60];
 
-    (void) swprintf(logMessage, 60, L"Click detected at (%d, %d)", positionX, positionY);
+    (void) swprintf(logMessage, 60, L"Click detected at (%d, %d)", MultiX, MultiY);
     NeonLog(NeonInformation, NeonCreateResult(NeonNone, logMessage));
 
-    NeonAddObstrutable(NeonCreatePosition(positionX, positionY));
+    NeonAddObstrutable(NeonCreatePosition(MultiX, MultiY));
     NeonUpdateVectorMemoryBar();
 }
