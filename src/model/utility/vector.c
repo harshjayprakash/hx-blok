@@ -165,6 +165,34 @@ NeonResult NeonClearVector(NeonVector *vector)
     return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonNone, L"Vector cleared successfully."));
 }
 
+int NeonNodeExists(const NeonVector *vector, const NeonNode node)
+{
+    if (!vector)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to print vector: is null"));
+        return 0;
+    }
+
+    if (!vector->array)
+    {
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to print vector: vector array is null"));   
+        return 0; 
+    }
+
+    for (int index = 0; index < vector->size; index++)
+    {
+        NeonNode *nodePtr = NeonGetNodeAsPointer(vector, index);
+
+        if (node.position.x == nodePtr->position.x &&
+            node.position.y == nodePtr->position.y)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 void NeonPrintVector(const NeonVector *vector)
 {
     if (!vector)
