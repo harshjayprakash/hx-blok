@@ -74,6 +74,20 @@ float NeonGetVectorMemoryPercentage(void)
     return ((mObstructableSquares.size * 1.0) / (mObstructableSquares.max * 1.0));
 }
 
+NeonPosition NeonGetObstructableAtIndex(int index)
+{
+    NeonPosition result = { -1, -1 };
+    NeonNode *nodePtr = NeonGetNodeAsPointer(&mObstructableSquares, index);
+
+    if (!nodePtr) 
+    {
+        return result;
+    }
+
+    NeonCopyPosition(&result, nodePtr->position);
+    return result;
+}
+
 void NeonFreeObstructables(void)
 {
     NeonDestroyVector(&mObstructableSquares);

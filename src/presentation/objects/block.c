@@ -9,6 +9,7 @@
 #include "../../core/log.h"
 #include "../../core/result.h"
 #include "../../model/object/square.h"
+#include "obstructables.h"
 
 static NeonSquare mMovableSquare = { 0 };
 static NeonSquare mProjectedSquare = { 0 };
@@ -47,12 +48,26 @@ void NeonRenderBlock(HDC displayContext)
 
 static int _NeonCanMoveBlock()
 {
-    return (
+    int insideBoundary = (
         mProjectedSquare.position.x >= 0 &&
         mProjectedSquare.position.x < mMovableSquareBoundary.width &&
         mProjectedSquare.position.y >= 0 &&
         mProjectedSquare.position.y < mMovableSquareBoundary.height
     );
+
+    int hitWall = 0;
+
+    for (int index = 0; index < NeonGetObstrutableCount(); index++)
+    {
+        NeonPosition pos = NeonGetObstructableAtIndex(index);
+
+        if (pos.x == mProjectedSquare.position.x && pos.y == mProjectedSquare.position.y)
+        {
+            hitWall = 1;
+        }
+    }
+
+    return (insideBoundary == 1 && hitWall == 0);
 }
 
 void NeonMoveBlock(NeonDirection direction)
