@@ -11,6 +11,8 @@
 #include "../components/panel.h"
 #include "../components/canvas.h"
 #include "../objects/obstructables.h"
+#include <Windows.h>
+#include <time.h>
 
 
 void NeonHandleWindowPaintEvent(HDC displayContext)
@@ -59,6 +61,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
     {
         NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Clearing all obstructables."));
         NeonClearObstrutables();
+        InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
         return;
     }
 
@@ -77,6 +80,12 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     (void) swprintf(logMessage, 60, L"Click detected at (%d, %d)", MultiX, MultiY);
     NeonLog(NeonInformation, NeonCreateResult(NeonNone, logMessage));
+
+    if (NeonObstrutableExistsAtPosition(MultiX, MultiY))
+    {
+        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Obstructable exists at position. Skipping."));
+        return;
+    }
 
     NeonAddObstrutable(NeonCreatePosition(MultiX, MultiY));
     NeonUpdateVectorMemoryBar();

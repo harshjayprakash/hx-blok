@@ -80,6 +80,11 @@ float NeonGetVectorMemoryPercentage(void)
     return ((mObstructableSquares.size * 1.0) / (mObstructableSquares.max * 1.0));
 }
 
+int NeonObstrutableExistsAtPosition(const int x, const int y)
+{
+    return NeonNodeExists(&mObstructableSquares, (NeonNode) { { x, y }, 1 });
+}
+
 NeonPosition NeonGetObstructableAtIndex(int index)
 {
     NeonPosition result = { -1, -1 };

@@ -17,6 +17,8 @@ int NeonGetObstrutableCount(void);
 
 void NeonClearObstrutables(void);
 
+int NeonObstrutableExistsAtPosition(const int x, const int y);
+
 NeonPosition NeonGetObstructableAtIndex(int index);
 
 void NeonFreeObstructables(void);
