@@ -2,7 +2,7 @@
  * \file theme.c
  * \date 13-08-2024
  * \brief Implementation of the functions related to theme managing.
- * 
+ *
  * This file contains implementation of functions required for theming.
  */
 
@@ -57,4 +57,3 @@ unsigned long NeonGetAccentColour(void)
 {
     return mAccentColour;
 }
-

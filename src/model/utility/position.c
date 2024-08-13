@@ -2,7 +2,7 @@
  * \file position.c
  * \date 13-08-2024
  * \brief Implementation of position function definitions.
- * 
+ *
  * This file contains the implementation of the function definitions provided in the
  * position header file.
  */
@@ -13,7 +13,7 @@
 
 NeonPosition NeonCreatePosition(const int x, const int y)
 {
-    return (NeonPosition) { x, y };
+    return (NeonPosition){x, y};
 }
 
 NeonPosition NeonCreatePositionFromSelf(const NeonPosition position)
@@ -25,7 +25,8 @@ void NeonSetPosition(NeonPosition *position, const int x, const int y)
 {
     if (!position)
     {
-        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot update position: is null"));
+        NeonLog(NeonWarning,
+                NeonCreateResult(NeonNullPtr, L"Cannot update position: is null"));
         return;
     }
 
@@ -37,7 +38,8 @@ void NeonSetXPosition(NeonPosition *position, const int x)
 {
     if (!position)
     {
-        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot update x position: is null"));
+        NeonLog(NeonWarning,
+                NeonCreateResult(NeonNullPtr, L"Cannot update x position: is null"));
         return;
     }
 
@@ -48,7 +50,8 @@ void NeonSetYPosition(NeonPosition *position, const int y)
 {
     if (!position)
     {
-        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot update y position: is null"));
+        NeonLog(NeonWarning,
+                NeonCreateResult(NeonNullPtr, L"Cannot update y position: is null"));
         return;
     }
 
@@ -59,7 +62,9 @@ void NeonCopyPosition(NeonPosition *dest, const NeonPosition src)
 {
     if (!dest)
     {
-        NeonLog(NeonWarning, NeonCreateResult(NeonNullPtr, L"Cannot copy position: destination is null"));
+        NeonLog(
+            NeonWarning,
+            NeonCreateResult(NeonNullPtr, L"Cannot copy position: destination is null"));
         return;
     }
 

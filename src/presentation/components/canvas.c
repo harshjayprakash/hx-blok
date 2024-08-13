@@ -2,8 +2,8 @@
  * \file canvas.c
  * \date 13-08-2024
  * \brief Implementation for the canvas component.
- * 
- * This contains the implementation of the canvas component (initialisation, rendering and 
+ *
+ * This contains the implementation of the canvas component (initialisation, rendering and
  * releasing resources).
  */
 

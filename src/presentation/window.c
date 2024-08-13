@@ -2,36 +2,37 @@
  * \file window.c
  * \date 13-08-2024
  * \brief Function implementation for the Window.
- * 
+ *
  * This file contains the implementation for the graphical window.
  */
 
 #include "window.h"
-#include "components/canvas.h"
-#include "components/panel.h"
-#include "graphics/theme.h"
-#include "graphics/drawing.h"
+#include "../core/log.h"
 #include "../core/program.h"
 #include "../core/result.h"
-#include "../core/log.h"
-#include "objects/block.h"
+#include "components/canvas.h"
+#include "components/panel.h"
 #include "events/handler.h"
+#include "graphics/drawing.h"
+#include "graphics/theme.h"
+#include "objects/block.h"
+
 
 #include <Windows.h>
 #include <wchar.h>
 #include <wingdi.h>
 
-
-static HWND mWindow = { 0 };
-static MSG mMessage = { 0 };
-static WNDCLASSEXW mClass = { 0 };
+static HWND mWindow = {0};
+static MSG mMessage = {0};
+static WNDCLASSEXW mClass = {0};
 static wchar_t mName[] = L"__NeonBlockWindowClass";
 static wchar_t mCaption[] = L"Blok v24.10.1 - Technical Preview";
-static RECT mWindowArea = { 0 };
+static RECT mWindowArea = {0};
 static int mWindowHeight = 0;
 static int mWindowWidth = 0;
 
-static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordParam, LPARAM longParam)
+static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordParam,
+                                LPARAM longParam)
 {
     PAINTSTRUCT paint;
     HDC displayContext;
@@ -39,27 +40,28 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
     switch (message)
     {
     case WM_CREATE:
-        (void) GetClientRect(windowHandle, &mWindowArea);
+        (void)GetClientRect(windowHandle, &mWindowArea);
         return 0;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
-    case WM_PAINT:
-        {
-            displayContext = BeginPaint(mWindow, &paint);
-            HDC bufferedContext = CreateCompatibleDC(displayContext);
-            HBITMAP bitmapMemory = CreateCompatibleBitmap(displayContext, mWindowWidth, mWindowHeight);
-            (void) SelectObject(bufferedContext, bitmapMemory);
-            FillRect(bufferedContext, &mWindowArea, NeonGetBackgroundBrush());
-            NeonHandleWindowPaintEvent(bufferedContext);
-            (void) BitBlt(displayContext, 0, 0, mWindowWidth, mWindowHeight, bufferedContext, 0, 0, SRCCOPY);
-            (void) DeleteObject(bitmapMemory);
-            (void) DeleteObject(bufferedContext);
-            (void) EndPaint(windowHandle, &paint);
-            return 0;
-        }
+    case WM_PAINT: {
+        displayContext = BeginPaint(mWindow, &paint);
+        HDC bufferedContext = CreateCompatibleDC(displayContext);
+        HBITMAP bitmapMemory =
+            CreateCompatibleBitmap(displayContext, mWindowWidth, mWindowHeight);
+        (void)SelectObject(bufferedContext, bitmapMemory);
+        FillRect(bufferedContext, &mWindowArea, NeonGetBackgroundBrush());
+        NeonHandleWindowPaintEvent(bufferedContext);
+        (void)BitBlt(displayContext, 0, 0, mWindowWidth, mWindowHeight, bufferedContext,
+                     0, 0, SRCCOPY);
+        (void)DeleteObject(bitmapMemory);
+        (void)DeleteObject(bufferedContext);
+        (void)EndPaint(windowHandle, &paint);
+        return 0;
+    }
     case WM_SIZE:
-        (void) GetClientRect(windowHandle, &mWindowArea);
+        (void)GetClientRect(windowHandle, &mWindowArea);
         mWindowWidth = mWindowArea.right;
         mWindowHeight = mWindowArea.bottom;
         NeonSetBlockBoundary(NeonCreateSize(mWindowWidth, mWindowHeight));
@@ -80,32 +82,27 @@ static int _NeonMessageLoop(void)
 {
     while (GetMessageW(&mMessage, NULL, 0, 0))
     {
-        (void) TranslateMessage(&mMessage);
-        (void) DispatchMessageW(&mMessage);
+        (void)TranslateMessage(&mMessage);
+        (void)DispatchMessageW(&mMessage);
     }
 
-    return (int) mMessage.wParam;
+    return (int)mMessage.wParam;
 }
 
 static NeonResult _NeonCreateWindow(void)
 {
-    mWindow = CreateWindowExW(
-        WS_EX_OVERLAPPEDWINDOW,
-        mName,
-        mCaption,
-        WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
-        NULL, NULL,
-        NeonGetHandle(),
-        NULL
-    );
+    mWindow = CreateWindowExW(WS_EX_OVERLAPPEDWINDOW, mName, mCaption,
+                              WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
+                              NULL, NULL, NeonGetHandle(), NULL);
 
     if (!mWindow)
     {
-        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonFail, L"Failed to create window."));
+        return NeonLogAndReturn(NeonError,
+                                NeonCreateResult(NeonFail, L"Failed to create window."));
     }
 
-    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Successfully created window."));
+    return NeonLogAndReturn(
+        NeonInformation, NeonCreateResult(NeonSuccess, L"Successfully created window."));
 }
 
 static NeonResult _NeonRegisterWindow(void)
@@ -127,10 +124,13 @@ static NeonResult _NeonRegisterWindow(void)
 
     if (!success)
     {
-        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonFail, L"Failed to register window class."));
+        return NeonLogAndReturn(
+            NeonError, NeonCreateResult(NeonFail, L"Failed to register window class."));
     }
 
-    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Successfully registered window class."));
+    return NeonLogAndReturn(
+        NeonInformation,
+        NeonCreateResult(NeonSuccess, L"Successfully registered window class."));
 }
 
 NeonResult NeonInitWindow(void)
@@ -139,24 +139,28 @@ NeonResult NeonInitWindow(void)
     if (registerResult.code == NeonFail)
     {
         NeonFreeWindow();
-        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
+        return NeonLogAndReturn(
+            NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
     }
 
     NeonResult createResult = _NeonCreateWindow();
-        if (createResult.code == NeonFail)
+    if (createResult.code == NeonFail)
     {
         NeonFreeWindow();
-        return NeonLogAndReturn(NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
+        return NeonLogAndReturn(
+            NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
     }
 
     NeonInitPanelComponent();
     NeonInitCanvasComponent();
 
-    (void) ShowWindow(mWindow, NeonGetShowFlag());
-    (void) UpdateWindow(mWindow);
-    (void) _NeonMessageLoop();
+    (void)ShowWindow(mWindow, NeonGetShowFlag());
+    (void)UpdateWindow(mWindow);
+    (void)_NeonMessageLoop();
 
-    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Successfully initialised window."));
+    return NeonLogAndReturn(
+        NeonInformation,
+        NeonCreateResult(NeonSuccess, L"Successfully initialised window."));
 }
 
 RECT NeonGetWindowArea(void)
@@ -174,32 +178,33 @@ NeonResult NeonFreeWindow(void)
     NeonFreePanelComponent();
     NeonFreeCanvasComponent();
 
-    (void) UnregisterClassW(mName, NeonGetHandle());
+    (void)UnregisterClassW(mName, NeonGetHandle());
 
     if (mClass.hIcon)
     {
-        (void) DestroyIcon(mClass.hIcon);
+        (void)DestroyIcon(mClass.hIcon);
     }
 
     if (mClass.hIconSm)
     {
-        (void) DestroyIcon(mClass.hIconSm);
+        (void)DestroyIcon(mClass.hIconSm);
     }
 
     if (mClass.hCursor)
     {
-        (void) DestroyCursor(mClass.hCursor);
+        (void)DestroyCursor(mClass.hCursor);
     }
 
     if (mClass.hbrBackground)
     {
-        (void) DeleteObject(mClass.hbrBackground);
+        (void)DeleteObject(mClass.hbrBackground);
     }
 
     if (mWindow)
     {
-        (void) DestroyWindow(mWindow);
+        (void)DestroyWindow(mWindow);
     }
 
-    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonSuccess, L"Cleaning up window resources."));
+    return NeonLogAndReturn(
+        NeonInformation, NeonCreateResult(NeonSuccess, L"Cleaning up window resources."));
 }

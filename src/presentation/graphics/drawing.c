@@ -2,7 +2,7 @@
  * \file drawing.c
  * \date 13-08-2024
  * \brief Implementation of the drawing module.
- * 
+ *
  * This file contains the implementation for the drawing functions for the tools required
  * for drawing to the display.
  */
@@ -10,10 +10,10 @@
 #include "drawing.h"
 #include "theme.h"
 
-static HBRUSH mBackgroundBrush = { 0 };
-static HBRUSH mForegroundBrush = { 0 };
-static HBRUSH mAccentBrush = { 0 };
-static HPEN mForegroundPen = { 0 };
+static HBRUSH mBackgroundBrush = {0};
+static HBRUSH mForegroundBrush = {0};
+static HBRUSH mAccentBrush = {0};
+static HPEN mForegroundPen = {0};
 
 void NeonInitDrawingTools(void)
 {
@@ -45,8 +45,8 @@ HPEN NeonGetForegroundPen(void)
 
 void NeonFreeDrawingTools(void)
 {
-    (void) DeleteObject(mBackgroundBrush);
-    (void) DeleteObject(mForegroundBrush);
-    (void) DeleteObject(mAccentBrush);
-    (void) DeleteObject(mForegroundPen);
+    (void)DeleteObject(mBackgroundBrush);
+    (void)DeleteObject(mForegroundBrush);
+    (void)DeleteObject(mAccentBrush);
+    (void)DeleteObject(mForegroundPen);
 }

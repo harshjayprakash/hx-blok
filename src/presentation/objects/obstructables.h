@@ -3,8 +3,8 @@
  * \date 13-08-2024
  * \brief Function definitions for obstructable objects.
  *
- * This file contains the function definitions for initialising, rendering and freeing 
- * resources in relation to the obstructables. This include any interaction with the 
+ * This file contains the function definitions for initialising, rendering and freeing
+ * resources in relation to the obstructables. This include any interaction with the
  * obstructables.
  */
 
@@ -12,40 +12,41 @@
 #define NEON_WALLS_H
 
 #define STRICT 1
-#include <Windows.h>
 #include "../../model/utility/position.h"
+#include <Windows.h>
+
 
 /**
  * \brief Initialises the obstructables.
- * 
+ *
  * \warning The `NeonFreeObstructables` function must be called during resource clean up.
  */
 void NeonInitObstructables(void);
 
 /**
  * \brief Renders the obstructables.
- * 
+ *
  * \param displayContext The display context handle.
  */
 void NeonRenderObstructables(HDC displayContext);
 
 /**
  * \brief Add an obstructable.
- * 
+ *
  * \param position The position of the obstructable.
  */
 void NeonAddObstrutable(const NeonPosition position);
 
 /**
  * \brief Calculates the percentage of vector memory used.
- * 
+ *
  * \return The percentage of vector memory used.
  */
 float NeonGetVectorMemoryPercentage(void);
 
 /**
  * \brief Gets the number of obstructables created.
- * 
+ *
  * \return The number of obstructables.
  */
 int NeonGetObstrutableCount(void);
@@ -57,7 +58,7 @@ void NeonClearObstrutables(void);
 
 /**
  * \brief Checks if a obstructable exists at a position.
- * 
+ *
  * \param x The x position to be checked.
  * \param y The y position to be checked.
  * \return If obstructable exists.
@@ -69,7 +70,7 @@ int NeonObstrutableExistsAtPosition(const int x, const int y);
 
 /**
  * \brief Gets an obstructable at specific index.
- * 
+ *
  * \param index The index to get the obstructable.
  * \return The position of the obstructable.
  *
@@ -80,7 +81,7 @@ NeonPosition NeonGetObstructableAtIndex(int index);
 
 /**
  * \brief Frees memory used by the obstructables.
- * 
+ *
  * \warning This function must be used in the clean up process.
  */
 void NeonFreeObstructables(void);

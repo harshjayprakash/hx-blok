@@ -1,7 +1,7 @@
 /**
  * \file panel.h
  * \date 13-08-2024
- * \brief 
+ * \brief
  */
 
 #ifndef NEON_PANEL_H
@@ -17,7 +17,7 @@ void NeonInitPanelComponent(void);
 
 /**
  * \brief Render the panel component.
- * 
+ *
  * \param displayContext The display context handle.
  */
 void NeonRenderPanelComponent(HDC displayContext);
@@ -39,7 +39,7 @@ void NeonUpdateVectorMemoryBar(void);
 
 /**
  * \brief Check if position is within Clear Button area.
- * 
+ *
  * \param x The x position clicked.
  * \param y The y position clicked.
  * \return If the position was within the area.

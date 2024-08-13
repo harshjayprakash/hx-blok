@@ -2,18 +2,19 @@
  * \file obstructables.c
  * \date 13-08-2024
  * \brief Function implementation for the obstructable objects.
- * 
+ *
  * This file contains the function implementation for the obstructable objects.
  */
 
 #include "obstructables.h"
 #include "../../model/utility/vector.h"
 #include "../graphics/drawing.h"
-#include "block.h"
 #include "../window.h"
+#include "block.h"
 #include <wingdi.h>
 
-static NeonVector mObstructableSquares = { 0 };
+
+static NeonVector mObstructableSquares = {0};
 
 void NeonInitObstructables(void)
 {
@@ -23,13 +24,13 @@ void NeonInitObstructables(void)
     {
         NeonNode *nodePtr = NeonGetNodeAsPointer(&mObstructableSquares, index);
 
-        if (!nodePtr) { continue; }
+        if (!nodePtr)
+        {
+            continue;
+        }
 
         nodePtr->indexed = 0;
-        NeonCopyPosition(
-            &(nodePtr->position), 
-            NeonCreatePosition(-1, -1)
-        );
+        NeonCopyPosition(&(nodePtr->position), NeonCreatePosition(-1, -1));
     }
 }
 
@@ -37,36 +38,41 @@ void NeonRenderObstructables(HDC displayContext)
 {
     NeonSquare *square = NeonGetBlockAsPointer();
 
-    if (!square) 
-    { 
-        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to paint obstructable squares: square reference is null"));
-        return; 
+    if (!square)
+    {
+        NeonLog(NeonError,
+                NeonCreateResult(
+                    NeonNullPtr,
+                    L"Failed to paint obstructable squares: square reference is null"));
+        return;
     }
 
     for (int index = 0; index < mObstructableSquares.max; index++)
     {
         NeonNode *nodePtr = NeonGetNodeAsPointer(&mObstructableSquares, index);
 
-        if (!nodePtr) { continue; }
-
-        if (nodePtr->position.x == -1 || nodePtr->position.y == -1 || nodePtr->indexed == 0)
+        if (!nodePtr)
         {
             continue;
         }
 
-        RECT nodeAsRect = { nodePtr->position.x, nodePtr->position.y, nodePtr->position.x +  square->size.width, nodePtr->position.y + square->size.height};
+        if (nodePtr->position.x == -1 || nodePtr->position.y == -1 ||
+            nodePtr->indexed == 0)
+        {
+            continue;
+        }
 
-        (void) FillRect(displayContext, &nodeAsRect, NeonGetForegroundBrush());
+        RECT nodeAsRect = {nodePtr->position.x, nodePtr->position.y,
+                           nodePtr->position.x + square->size.width,
+                           nodePtr->position.y + square->size.height};
+
+        (void)FillRect(displayContext, &nodeAsRect, NeonGetForegroundBrush());
     }
-
-
 }
 
 void NeonAddObstrutable(const NeonPosition position)
 {
-    NeonNode node = {
-        position, 1
-    };
+    NeonNode node = {position, 1};
 
     NeonPushNode(&mObstructableSquares, node);
 
@@ -90,15 +96,15 @@ float NeonGetVectorMemoryPercentage(void)
 
 int NeonObstrutableExistsAtPosition(const int x, const int y)
 {
-    return NeonNodeExists(&mObstructableSquares, (NeonNode) { { x, y }, 1 });
+    return NeonNodeExists(&mObstructableSquares, (NeonNode){{x, y}, 1});
 }
 
 NeonPosition NeonGetObstructableAtIndex(int index)
 {
-    NeonPosition result = { -1, -1 };
+    NeonPosition result = {-1, -1};
     NeonNode *nodePtr = NeonGetNodeAsPointer(&mObstructableSquares, index);
 
-    if (!nodePtr) 
+    if (!nodePtr)
     {
         return result;
     }

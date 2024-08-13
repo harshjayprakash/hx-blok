@@ -16,10 +16,10 @@
  */
 typedef enum __NeonLogLevel
 {
-    NeonInformation = 0x0000001,   ///< Informative Log Level
-    NeonWarning     = 0x0000002,   ///< Warning Log Level
-    NeonError       = 0x0000003,   ///< Error Log Level
-    NeonUnknown     = 0x0000000,   ///< Unknown Log Level
+    NeonInformation = 0x0000001, ///< Informative Log Level
+    NeonWarning = 0x0000002,     ///< Warning Log Level
+    NeonError = 0x0000003,       ///< Error Log Level
+    NeonUnknown = 0x0000000,     ///< Unknown Log Level
 } NeonLogLevel;
 
 /**
@@ -27,20 +27,20 @@ typedef enum __NeonLogLevel
  */
 typedef enum __NeonLogTechnique
 {
-    NeonFile        = 0x0000001,   ///< Logging to a file
-    NeonConsole     = 0x0000010,   ///< Logging to the console
+    NeonFile = 0x0000001,    ///< Logging to a file
+    NeonConsole = 0x0000010, ///< Logging to the console
 } NeonLogTechnique;
 
 /**
  * \brief Initialises the logger.
- * 
+ *
  * \param technique The method of logging.
  */
 void NeonInitLogger(const NeonLogTechnique technique);
 
 /**
  * \brief Log a message.
- * 
+ *
  * \param level The log level.
  * \param information The result containing the message.
  */
@@ -48,7 +48,7 @@ void NeonLog(const NeonLogLevel level, const NeonResult information);
 
 /**
  * \brief Log a message then return the result.
- * 
+ *
  * \param level The log level.
  * \param information The result containing the message.
  * \return The result containing the message.

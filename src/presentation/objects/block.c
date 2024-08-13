@@ -2,44 +2,39 @@
  * \file block.c
  * \date 13-08-2024
  * \brief Function implementation for the block object.
- * 
+ *
  * This file contains the implementaion for the block object.
  */
 
 #include "block.h"
-#include "../graphics/drawing.h"
 #include "../../core/log.h"
 #include "../../core/result.h"
 #include "../../model/object/square.h"
+#include "../graphics/drawing.h"
 #include "obstructables.h"
 
-static NeonSquare mMovableSquare = { 0 };
-static NeonSquare mProjectedSquare = { 0 };
-static NeonSize mMovableSquareBoundary = { 0 };
-static RECT mMovableSquareAsRect = { 0 };
-static RECT mMovableSquareInnerAsRect = { 0 };
+
+static NeonSquare mMovableSquare = {0};
+static NeonSquare mProjectedSquare = {0};
+static NeonSize mMovableSquareBoundary = {0};
+static RECT mMovableSquareAsRect = {0};
+static RECT mMovableSquareInnerAsRect = {0};
 
 void NeonInitBlockObject(void)
 {
-    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Initialising movable square object."));
-    mMovableSquare = NeonCreateSquare(
-        NeonCreatePosition(0, 0),
-        NeonCreateSize(15, 15)
-    );
+    NeonLog(NeonInformation,
+            NeonCreateResult(NeonNone, L"Initialising movable square object."));
+    mMovableSquare = NeonCreateSquare(NeonCreatePosition(0, 0), NeonCreateSize(15, 15));
 
-    mMovableSquareAsRect = (RECT) {
-        mMovableSquare.position.x,
-        mMovableSquare.position.y,
-        (mMovableSquare.position.x + mMovableSquare.size.width),
-        (mMovableSquare.position.y + mMovableSquare.size.height)
-    };
+    mMovableSquareAsRect =
+        (RECT){mMovableSquare.position.x, mMovableSquare.position.y,
+               (mMovableSquare.position.x + mMovableSquare.size.width),
+               (mMovableSquare.position.y + mMovableSquare.size.height)};
 
-    mMovableSquareInnerAsRect = (RECT) {
-        mMovableSquare.position.x + 5,
-        mMovableSquare.position.y + 5,
-        (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
-        (mMovableSquare.position.y + (mMovableSquare.size.height- 5))
-    };
+    mMovableSquareInnerAsRect =
+        (RECT){mMovableSquare.position.x + 5, mMovableSquare.position.y + 5,
+               (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
+               (mMovableSquare.position.y + (mMovableSquare.size.height - 5))};
 }
 
 void NeonRenderBlock(HDC displayContext)
@@ -50,12 +45,10 @@ void NeonRenderBlock(HDC displayContext)
 
 static int _NeonCanMoveBlock()
 {
-    int insideBoundary = (
-        mProjectedSquare.position.x >= 0 &&
-        mProjectedSquare.position.x < mMovableSquareBoundary.width &&
-        mProjectedSquare.position.y >= 0 &&
-        mProjectedSquare.position.y < mMovableSquareBoundary.height
-    );
+    int insideBoundary = (mProjectedSquare.position.x >= 0 &&
+                          mProjectedSquare.position.x < mMovableSquareBoundary.width &&
+                          mProjectedSquare.position.y >= 0 &&
+                          mProjectedSquare.position.y < mMovableSquareBoundary.height);
 
     int hitWall = 0;
 
@@ -79,16 +72,20 @@ void NeonMoveBlock(NeonDirection direction)
     switch (direction)
     {
     case NeonNorth:
-        NeonSetYPosition(&(mProjectedSquare.position), mProjectedSquare.position.y - mProjectedSquare.size.height);
+        NeonSetYPosition(&(mProjectedSquare.position),
+                         mProjectedSquare.position.y - mProjectedSquare.size.height);
         break;
     case NeonEast:
-        NeonSetXPosition(&(mProjectedSquare.position), mProjectedSquare.position.x + mProjectedSquare.size.width);
+        NeonSetXPosition(&(mProjectedSquare.position),
+                         mProjectedSquare.position.x + mProjectedSquare.size.width);
         break;
     case NeonSouth:
-        NeonSetYPosition(&(mProjectedSquare.position), mProjectedSquare.position.y + mProjectedSquare.size.height);
+        NeonSetYPosition(&(mProjectedSquare.position),
+                         mProjectedSquare.position.y + mProjectedSquare.size.height);
         break;
     case NeonWest:
-        NeonSetXPosition(&(mProjectedSquare.position), mProjectedSquare.position.x - mProjectedSquare.size.width);
+        NeonSetXPosition(&(mProjectedSquare.position),
+                         mProjectedSquare.position.x - mProjectedSquare.size.width);
         break;
     }
 
@@ -97,20 +94,15 @@ void NeonMoveBlock(NeonDirection direction)
         NeonCopySquare(&mMovableSquare, mProjectedSquare);
     }
 
-    mMovableSquareAsRect = (RECT) {
-        mMovableSquare.position.x,
-        mMovableSquare.position.y,
-        (mMovableSquare.position.x + mMovableSquare.size.width),
-        (mMovableSquare.position.y + mMovableSquare.size.height)
-    };
+    mMovableSquareAsRect =
+        (RECT){mMovableSquare.position.x, mMovableSquare.position.y,
+               (mMovableSquare.position.x + mMovableSquare.size.width),
+               (mMovableSquare.position.y + mMovableSquare.size.height)};
 
-    mMovableSquareInnerAsRect = (RECT) {
-        mMovableSquare.position.x + 5,
-        mMovableSquare.position.y + 5,
-        (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
-        (mMovableSquare.position.y + (mMovableSquare.size.height - 5))
-    };
-
+    mMovableSquareInnerAsRect =
+        (RECT){mMovableSquare.position.x + 5, mMovableSquare.position.y + 5,
+               (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
+               (mMovableSquare.position.y + (mMovableSquare.size.height - 5))};
 }
 
 void NeonSetBlockBoundary(const NeonSize size)
@@ -125,5 +117,6 @@ NeonSquare *NeonGetBlockAsPointer(void)
 
 void NeonFreeBlockObject()
 {
-    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Destroying movable square object."));
+    NeonLog(NeonInformation,
+            NeonCreateResult(NeonNone, L"Destroying movable square object."));
 }

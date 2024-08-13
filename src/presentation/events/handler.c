@@ -3,19 +3,18 @@
  * \date 13-08-2024
  * \brief Implementation of the window handle events.
  *
- * This file contains the implementation of handling window events. 
+ * This file contains the implementation of handling window events.
  */
 
 #include "handler.h"
-#include "../window.h"
-#include "../objects/block.h"
 #include "../../core/log.h"
-#include "../components/panel.h"
 #include "../components/canvas.h"
+#include "../components/panel.h"
+#include "../objects/block.h"
 #include "../objects/obstructables.h"
+#include "../window.h"
 #include <Windows.h>
 #include <time.h>
-
 
 void NeonHandleWindowPaintEvent(HDC displayContext)
 {
@@ -27,22 +26,26 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
 {
     NeonDirection direction;
 
-    switch ((int) wordParam)
+    switch ((int)wordParam)
     {
     case VK_UP:
-        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Key Event Detected: Up Arrow"));
+        NeonLog(NeonInformation,
+                NeonCreateResult(NeonNone, L"Key Event Detected: Up Arrow"));
         direction = NeonNorth;
         break;
     case VK_RIGHT:
-        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Key Event Detected: Right Arrow"));
+        NeonLog(NeonInformation,
+                NeonCreateResult(NeonNone, L"Key Event Detected: Right Arrow"));
         direction = NeonEast;
         break;
     case VK_DOWN:
-        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Key Event Detected: Down Arrow"));
+        NeonLog(NeonInformation,
+                NeonCreateResult(NeonNone, L"Key Event Detected: Down Arrow"));
         direction = NeonSouth;
         break;
     case VK_LEFT:
-        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Key Event Detected: Left Arrow"));
+        NeonLog(NeonInformation,
+                NeonCreateResult(NeonNone, L"Key Event Detected: Left Arrow"));
         direction = NeonWest;
         break;
     default:
@@ -61,7 +64,8 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     if (NeonIsInClearButtonArea(positionX, positionY))
     {
-        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Clearing all obstructables."));
+        NeonLog(NeonInformation,
+                NeonCreateResult(NeonNone, L"Clearing all obstructables."));
         NeonClearObstrutables();
         InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
         return;
@@ -80,12 +84,14 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     wchar_t logMessage[60];
 
-    (void) swprintf(logMessage, 60, L"Click detected at (%d, %d)", MultiX, MultiY);
+    (void)swprintf(logMessage, 60, L"Click detected at (%d, %d)", MultiX, MultiY);
     NeonLog(NeonInformation, NeonCreateResult(NeonNone, logMessage));
 
     if (NeonObstrutableExistsAtPosition(MultiX, MultiY))
     {
-        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Obstructable exists at position. Skipping."));
+        NeonLog(
+            NeonInformation,
+            NeonCreateResult(NeonNone, L"Obstructable exists at position. Skipping."));
         return;
     }
 

@@ -2,7 +2,7 @@
  * \file canvas.h
  * \date 13-08-2024
  * \brief Function definitions for the canvas component.
- * 
+ *
  * This file contains the function definitions for the canvas component's initialisation,
  * rendering and releasing resources.
  */
@@ -20,7 +20,7 @@ void NeonInitCanvasComponent(void);
 
 /**
  * \brief Renders the canvas components.
- * 
+ *
  * \param displayContext The display context handle.
  */
 void NeonRenderCanvasComponent(HDC displayContext);
@@ -30,4 +30,4 @@ void NeonRenderCanvasComponent(HDC displayContext);
  */
 void NeonFreeCanvasComponent(void);
 
-#endif 
+#endif
