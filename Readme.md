@@ -50,6 +50,7 @@ mingw32-make build
 - Vector Size Indicator
 - Changed Style of Movable Block
 - Switched Colour Scheme
+- Improved Doxygen Documentation
 
 ## Code Standard
 
