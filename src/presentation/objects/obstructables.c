@@ -1,3 +1,11 @@
+/**
+ * \file obstructables.c
+ * \date 13-08-2024
+ * \brief Function implementation for the obstructable objects.
+ * 
+ * This file contains the function implementation for the obstructable objects.
+ */
+
 #include "obstructables.h"
 #include "../../model/utility/vector.h"
 #include "../graphics/drawing.h"

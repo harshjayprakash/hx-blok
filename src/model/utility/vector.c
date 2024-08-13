@@ -1,3 +1,11 @@
+/**
+ * \file vector.c
+ * \date 13-08-2024
+ * \brief Implementation of vector related functions.
+ * 
+ * This file contains the vector function operations as defined in the header file.
+ */
+
 #include "vector.h"
 #include "position.h"
 #include <memory.h>

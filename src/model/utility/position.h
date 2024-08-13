@@ -1,75 +1,71 @@
 /**
- * @file position.h
- * @date 2024-08-10
- * @brief
+ * \file position.h
+ * \date 13-08-2024
+ * \brief Function definitions and structure for the position.
+ *
+ * This file contains the structure to model position and function definitions to create
+ * and set positions.
  */
 
 #ifndef NEON_POSITION_H
 #define NEON_POSITION_H
 
 /**
- * @brief A object to represent position.
+ * \brief Models the position of an object.
  */
 typedef struct __NeonPosition
 {
-    /**
-     * @brief X position.
-     */
-    int x;
-    /**
-     * @brief Y position.
-     */
-    int y;
+    int x;   ///< The X Position
+    int y;   ///< The Y Position
 } NeonPosition;
 
 /**
- * @brief Creates a new position object.
+ * \brief Creates a new position object.
  * 
- * @param x The x position.
- * @param y The y position.
- * @return NeonPosition A stack allocated position object.
+ * \param x The x position
+ * \param y The y position
+ * \return A new stack allocated position object.
  */
 NeonPosition NeonCreatePosition(const int x, const int y);
 
 /**
- * @brief Creates a new position object from another instance.
+ * \brief Creates a new position object from an existing position object.
  * 
- * @param position The position to copy.
- * @return NeonPosition A new stack allocated instance of position.
+ * \param position The existing position object.
+ * \return A new stack allocated position object.
  */
 NeonPosition NeonCreatePositionFromSelf(const NeonPosition position);
 
 /**
- * @brief Set position.
+ * \brief Sets the position.
  * 
- * @param position The position instance to be updated.
- * @param x The new x position.
- * @param y The new y position.
+ * \param position The position instance to be updated.
+ * \param x The new x position.
+ * \param y The new y position.
  */
 void NeonSetPosition(NeonPosition *position, const int x, const int y);
 
 /**
- * @brief Set the x position.
+ * \brief Sets the x position.
  * 
- * @param position The position instance to be updated.
- * @param x The new x position.
+ * \param position The position instance to be updated.
+ * \param x The new x position.
  */
 void NeonSetXPosition(NeonPosition *position, const int x);
 
 /**
- * @brief Set the y position
+ * \brief Sets the y position.
  * 
- * @param position The position instance to be updated.
- * @param y The new y position.
+ * \param position The position instance to be updated.
+ * \param y The new y position.
  */
 void NeonSetYPosition(NeonPosition *position, const int y);
 
-
 /**
- * @brief Copies position object attributes to the destination instance.
+ * @brief Copies the positon object.
  * 
- * @param dest The instance to copy to.
- * @param src The instance to copy from.
+ * @param dest The instance to be copied to.
+ * @param src The instance to be copied from.
  */
 void NeonCopyPosition(NeonPosition *dest, const NeonPosition src);
 

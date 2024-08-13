@@ -1,7 +1,10 @@
 /**
- * @file drawing.h
- * @date 2024-08-10
- * @brief
+ * \file drawing.h
+ * \date 13-08-2024
+ * \brief Function definitions for the drawing module.
+ * 
+ * This file contains the function definitions for getting the tools for painting to the
+ * display.
  */
 
 #ifndef NEON_DRAWING_H
@@ -11,40 +14,44 @@
 #include <Windows.h>
 
 /**
- * @brief Initialises the drawing tools.
+ * \brief Initialises the drawing tools.
+ * 
+ * \warning The tools must be freed using the `NeonFreeDrawingTools` function.
  */
 void NeonInitDrawingTools(void);
 
 /**
- * @brief Returns the background solid brush.
+ * \brief Gets the background coloured solid brush.
  * 
- * @return HBRUSH A background coloured solid brush.
+ * \return The background coloured solid brush handle.
  */
 HBRUSH NeonGetBackgroundBrush(void);
 
 /**
- * @brief Returns the foreground solid brush.
+ * \brief Gets the foreground coloured solid brush.
  * 
- * @return HBRUSH A foreground coloured solid brush.
+ * \return The foreground coloured solid brush handle.
  */
 HBRUSH NeonGetForegroundBrush(void);
 
 /**
- * @brief Returns the accent solid brush.
+ * \brief Gets the foreground coloured solid brush.
  * 
- * @return HBRUSH A accent coloured solid brush.
+ * \return The foreground coloured solid brush handle.
  */
 HBRUSH NeonGetAccentBrush(void);
 
 /**
- * @brief Returns the foreground pen.
+ * \brief Gets the foreground coloured pen.
  * 
- * @return HPEN A foreground coloured pen.
+ * \return The foreground coloured pen handle.
  */
 HPEN NeonGetForegroundPen(void);
 
 /**
- * @brief Cleans up drawing tool resources.
+ * \brief Cleans up resources used by the drawing tools.
+ * 
+ * \warning The tools must be freed using this function.
  */
 void NeonFreeDrawingTools(void);
 

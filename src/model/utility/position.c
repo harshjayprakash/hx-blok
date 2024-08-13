@@ -1,7 +1,10 @@
 /**
- * @file position.c
- * @date 2024-08-10
- * @brief
+ * \file position.c
+ * \date 13-08-2024
+ * \brief Implementation of position function definitions.
+ * 
+ * This file contains the implementation of the function definitions provided in the
+ * position header file.
  */
 
 #include "position.h"

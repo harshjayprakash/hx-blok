@@ -1,7 +1,9 @@
 /**
- * @file block.c
- * @date 2024-08-10
- * @brief
+ * \file block.c
+ * \date 13-08-2024
+ * \brief Function implementation for the block object.
+ * 
+ * This file contains the implementaion for the block object.
  */
 
 #include "block.h"

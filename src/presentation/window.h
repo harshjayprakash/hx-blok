@@ -1,7 +1,10 @@
 /**
- * @file window.h
- * @date 2024-08-10
- * @brief
+ * \file window.h
+ * \date 13-08-2024
+ * \brief Function definitions for window.
+ * 
+ * This file contains the function definitions for window creation, destruction and 
+ * management.
  */
 
 #ifndef NEON_WINDOW_H
@@ -13,30 +16,32 @@
 #include "../core/result.h"
 
 /**
- * @brief Initialises the window.
+ * \brief Initialises the window.
  * 
- * @return NeonResult If the window initialisation was successful.
+ * \return A result denoting if the operation was successful. 
  */
 NeonResult NeonInitWindow(void);
 
 /**
- * @brief Get window's area.
+ * \brief Gets the window area.
  * 
- * @return RECT Window area in RECT format.
+ * \return The window area in form RECT.
  */
 RECT NeonGetWindowArea(void);
 
 /**
- * @brief Get window handle.
+ * \brief Gets the window handle.
  * 
- * @return HWND Window handle.
+ * \return The window handle.
  */
 HWND NeonGetWindowHandle(void);
 
 /**
- * @brief Frees any resources of the window.
+ * \brief Frees any resources used by the window.
  * 
- * @return NeonResult If the window destruction was successful.
+ * \return A resut denoting if the operation was successful.
+ *
+ * \warning This function must be called to clean up window, after closing.
  */
 NeonResult NeonFreeWindow(void);
 

@@ -1,7 +1,9 @@
 /**
- * @file log.c
- * @date 2024-08-09
- * @brief
+ * \file log.c
+ * \date 13-08-2024
+ * \brief Implementation of log functions.
+ *
+ * This file contains the implementation of the functions contianed in log.h.
  */
 
 #include "log.h"

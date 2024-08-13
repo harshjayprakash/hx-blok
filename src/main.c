@@ -1,7 +1,9 @@
 /**
- * @file main.c
- * @date 2024-08-09
- * @brief Provides an entrypoint into the program.
+ * \file main.c
+ * \date 13-08-2024
+ * \brief Implementation of the entrypoint.
+ * 
+ * This file contains the WinMain entrypoint functions for Windows programs.
  */
 
 #define STRICT 1
@@ -11,13 +13,13 @@
 #include "core/program.h"
 
 /**
- * @brief Provides an entrypoint for the Windows program.
+ * \brief The entrypoint of the program.
  * 
- * @param hInstance Handle to the current instance of the program.
- * @param hPrevInstance Handle to the previous instance of the program.
- * @param lpCmdLine Command line for the program.
- * @param nShowCmd Controls how the window will be displayed.
- * @return int Returns the exit value.
+ * \param hInstance The instance handle.
+ * \param hPrevInstance Previous version of the instance handle.
+ * \param lpCmdLine The command line.
+ * \param nShowCmd How the program will be displayed.
+ * \return Exit code 0 for success.
  */
 int __stdcall WinMain(
     HINSTANCE hInstance, 

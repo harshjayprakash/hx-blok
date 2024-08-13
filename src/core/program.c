@@ -1,7 +1,10 @@
 /**
- * @file program.c
- * @date 2024-08-09
- * @brief
+ * \file program.c
+ * \date 13-08-2024
+ * \brief Implementation of the program module.
+ * 
+ * This file contains the function implementation of the program "singleton", storing
+ * global values.
  */
 
 #include "program.h"

@@ -1,7 +1,10 @@
 /**
- * @file drawing.c
- * @date 2024-08-10
- * @brief
+ * \file drawing.c
+ * \date 13-08-2024
+ * \brief Implementation of the drawing module.
+ * 
+ * This file contains the implementation for the drawing functions for the tools required
+ * for drawing to the display.
  */
 
 #include "drawing.h"

@@ -1,7 +1,9 @@
 /**
- * @file window.c
- * @date 2024-08-10
- * @brief
+ * \file window.c
+ * \date 13-08-2024
+ * \brief Function implementation for the Window.
+ * 
+ * This file contains the implementation for the graphical window.
  */
 
 #include "window.h"

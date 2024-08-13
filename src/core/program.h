@@ -1,7 +1,9 @@
 /**
- * @file program.h
- * @date 2024-08-09
- * @brief
+ * \file program.h
+ * \date 13-08-2024
+ * \brief Function definitions of the program singleton module.
+ *
+ * This file contains function definitions for the program module for global use.
  */
 
 #ifndef NEON_PROGRAM_H
@@ -12,44 +14,46 @@
 #include "result.h"
 
 /**
- * @brief Initialise program.
+ * \brief Initialises the program.
  * 
- * @param instanceHandle Handle to the instance of the program.
- * @param showFlags How the program will be displayed.
- * @return NeonResult - If operation succeeded.
+ * \param instanceHandle The program's instance handle.
+ * \param showFlags How the program will be displayed.
+ * \return Result containing if the operation was successful.
  */
 NeonResult NeonInit(HINSTANCE instanceHandle, int showFlags);
 
 /**
- * @brief Processes arguments given to the program via cli.
+ * \brief Processes the arguments provided on execution.
  * 
- * @return NeonResult - If operation was successful.
+ * \return Result containing if the operation was successful.
  */
 NeonResult NeonProcessArguments(void);
 
 /**
- * @brief An entrypoint for starting the program operations.
+ * \brief Start method for the program.
+ * 
+ * \return Result containing if the operation was successful.
  */
 NeonResult NeonStart(void);
 
 /**
- * @brief Gets the program's instance handle.
+ * \brief Retrieves the program's instance handle.
  * 
- * @return HINSTANCE The program's instance handle.
+ * \return HINSTANCE The instance handle.
  */
 HINSTANCE NeonGetHandle(void);
 
 /**
- * @brief Gets the program show flag.
+ * \brief Retrieves the show flag.
  * 
- * @return int The program show flag.
+ * \return The show flag.
  */
 int NeonGetShowFlag(void);
 
 /**
- * @brief Frees any resources used by the program module.
+ * \brief Cleans up resources used by the program module.
  * 
- * @return NeonResult - If operation succeeded.
+ * \return Result containing if the operation was successful.
  */
 NeonResult NeonFree(void);
 

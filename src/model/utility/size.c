@@ -1,7 +1,10 @@
 /**
- * @file size.c
- * @date 2024-08-10
- * @brief
+ * \file size.c
+ * \date 13-08-2024
+ * \brief Implementation of functions for size object.
+ * 
+ * This file contains the implementation of functions required for the size object. This
+ * includes creating a new instance and setting sizes.
  */
 
 #include "size.h"

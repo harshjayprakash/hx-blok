@@ -1,7 +1,10 @@
 /**
- * @file square.c
- * @date 2024-08-10
- * @brief
+ * \file square.c
+ * \date 13-08-2024
+ * \brief Implementation of square functions.
+ *
+ * This file contans the implementation of the functions of the square module to create a
+ * new square and copy squares.
  */
 
 #include "square.h"

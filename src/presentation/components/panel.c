@@ -1,7 +1,10 @@
 /**
- * @file panel.c
- * @date 2024-08-11
- * @brief
+ * \file panel.c
+ * \date 13-08-2024
+ * \brief Function implementation for the panel component.
+ * 
+ * This file contains the function implementation for the panel component for intialising,
+ * rendering, releasing resources and state changes.
  */
 
 #include "panel.h"

@@ -1,7 +1,9 @@
 /**
- * @file result.c
- * @date 2024-08-09
- * @brief
+ * \file result.c
+ * \date 13-08-2014
+ * \brief Implementation of the result module.
+ * 
+ * This file contains the implementation of the creating a result.
  */
 
 #include "result.h"

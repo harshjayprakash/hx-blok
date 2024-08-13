@@ -1,7 +1,9 @@
 /**
- * @file theme.c
- * @date 2024-08-10
- * @brief
+ * \file theme.c
+ * \date 13-08-2024
+ * \brief Implementation of the functions related to theme managing.
+ * 
+ * This file contains implementation of functions required for theming.
  */
 
 #include "theme.h"

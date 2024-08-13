@@ -1,7 +1,11 @@
 /**
- * @file block.h
- * @date 2024-08-10
- * @brief
+ * \file block.h
+ * \date 13-08-2024
+ * \brief Function definitions for the block object.
+ * 
+ * This file contains the definitions for the block object including: initialising, 
+ * rendering, releasing resources, getting the block, moving the block or setting 
+ * boundaries.
  */
 
 #ifndef NEON_BLOCK_H
@@ -14,36 +18,42 @@
 #include "../../model/utility/direction.h"
 
 /**
- * @brief Initialises the block object.
+ * \brief Initialises the block object.
  */
 void NeonInitBlockObject(void);
 
 /**
- * @brief Renders the block to the window.
+ * \brief Renders the block object.
  * 
- * @param displayContext The display to render to.
+ * \param displayContext The display context handle.
  */
 void NeonRenderBlock(HDC displayContext);
 
 /**
- * @brief Moves the block based on the input direction.
+ * \brief Moves the block in the specified direction.
  * 
- * @param direction The direction the block should move.
+ * \param direction The direction to be moved.
  */
 void NeonMoveBlock(NeonDirection direction);
 
 /**
- * @brief Sets the boundary the block must stay between.
+ * \brief Sets the boundary the block must stay in.
  * 
- * @param size The size object to denote the area to stay within.
+ * \param size The size of the boundary.
  */
 void NeonSetBlockBoundary(const NeonSize size);
 
-
+/**
+ * \brief Gets the block as a pointer.
+ * 
+ * \return A pointer to the block.
+ *
+ * \warning You must not free this memory returned.
+ */
 NeonSquare *NeonGetBlockAsPointer(void);
 
 /**
- * @brief Cleans up the resources used by the block object.
+ * \brief Cleans up the resources used by the block object.
  */
 void NeonFreeBlockObject(void);
 

@@ -1,7 +1,9 @@
 /**
- * @file log.h
- * @date 2024-08-09
- * @brief
+ * \file log.h
+ * \date 13-08-2024
+ * \brief Function definitions and types for logging.
+ *
+ * This file contains the functions and types for logging functionality.
  */
 
 #ifndef NEON_LOG_H
@@ -10,69 +12,51 @@
 #include "result.h"
 
 /**
- * @brief A type to describe the crticality of log event.
+ * \brief Enumeration to indicate a log level.
  */
 typedef enum __NeonLogLevel
 {
-    /**
-     * @brief Information log level.
-     */
-    NeonInformation = 0x0000001,
-    /**
-     * @brief Warning log level.
-     */
-    NeonWarning     = 0x0000002,
-    /**
-     * @brief Error log level.
-     */
-    NeonError       = 0x0000003,
-    /**
-     * @brief Unkown log level.
-     */
-    NeonUnknown     = 0x0000000,
+    NeonInformation = 0x0000001,   ///< Informative Log Level
+    NeonWarning     = 0x0000002,   ///< Warning Log Level
+    NeonError       = 0x0000003,   ///< Error Log Level
+    NeonUnknown     = 0x0000000,   ///< Unknown Log Level
 } NeonLogLevel;
 
 /**
- * @brief A type to describe how logging will take place.
+ * \brief Enumeration of the method of logging.
  */
 typedef enum __NeonLogTechnique
 {
-    /**
-     * @brief Logs to a file.
-     */
-    NeonFile        = 0x0000001,
-    /**
-     * @brief Logs to the console.
-     */
-    NeonConsole     = 0x0000010,
+    NeonFile        = 0x0000001,   ///< Logging to a file
+    NeonConsole     = 0x0000010,   ///< Logging to the console
 } NeonLogTechnique;
 
 /**
- * @brief Initialises the logger module.
+ * \brief Initialises the logger.
  * 
- * @param technique How log messages will be shown.
+ * \param technique The method of logging.
  */
 void NeonInitLogger(const NeonLogTechnique technique);
 
 /**
- * @brief Outputs a log event to the initialised method.
+ * \brief Log a message.
  * 
- * @param level The log level.
- * @param information The message to be logged.
+ * \param level The log level.
+ * \param information The result containing the message.
  */
 void NeonLog(const NeonLogLevel level, const NeonResult information);
 
 /**
- * @brief Outputs a log event to the initialised method and returns the result.
+ * \brief Log a message then return the result.
  * 
- * @param level The log level.
- * @param information The message to be logged.
- * @return NeonResult Returns the logged message.
+ * \param level The log level.
+ * \param information The result containing the message.
+ * \return The result containing the message.
  */
 NeonResult NeonLogAndReturn(const NeonLogLevel level, const NeonResult information);
 
 /**
- * @brief Cleans up any resources used by the logger module.
+ * \brief Cleans up resources used by the logger.
  */
 void NeonFreeLogger(void);
 
