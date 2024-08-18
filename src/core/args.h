@@ -17,7 +17,11 @@
  */
 NeonResult NeonProcessArguments(void);
 
-
+/**
+ * \brief Gets the block scaling.
+ * 
+ * \return The block size scale.
+ */
 int NeonGetBlockScale(void);
 
 #endif
