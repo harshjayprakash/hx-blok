@@ -19,6 +19,7 @@
 #include "../objects/block.h"
 #include "../objects/obstructables.h"
 #include "../window.h"
+#include "../components/canvas.h"
 #include <wchar.h>
 #include <wingdi.h>
 
@@ -86,11 +87,13 @@ void __NeonUpdateControlPositions(void)
 
     mRandomGeneration.area.left = mVectorMemory.area.right + 20;
     mRandomGeneration.area.top = mPanelArea.top + 10;
-    mRandomGeneration.area.right = mRandomGeneration.area.left + 55;
+    mRandomGeneration.area.right = mRandomGeneration.area.left + 70;
     mRandomGeneration.area.bottom = mRandomGeneration.area.top + 20;
     mRandomGeneration.alignment.X = mRandomGeneration.area.left + 3;
     mRandomGeneration.alignment.Y = mRandomGeneration.area.top + 1;
 }
+
+
 
 void NeonInitPanelComponent(void)
 {
@@ -106,7 +109,7 @@ void NeonInitPanelComponent(void)
     mVectorMemory = (NeonProgressBarControl){
         L"0", 60, {0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, 0, 0, 0};
 
-    mRandomGeneration = (NeonButtonControl){L"Gen 10", 60, {0, 0}, {0, 0, 0, 0}};
+    mRandomGeneration = (NeonButtonControl){L"Generate", 60, {0, 0}, {0, 0, 0, 0}};
 
     __NeonUpdateControlPositions();
 
@@ -205,7 +208,7 @@ void NeonUpdateVectorMemoryBar(void)
     mVectorMemory.bar.left = mVectorMemory.barOutline.left + 2;
     mVectorMemory.bar.top = mVectorMemory.barOutline.top + 2;
     mVectorMemory.bar.bottom = mVectorMemory.barOutline.bottom - 3;
-    mVectorMemory.bar.right = mVectorMemory.barOutline.left +
+    mVectorMemory.bar.right = mVectorMemory.barOutline.left + 2 +
                               (mVectorMemory.barSpan * NeonGetVectorMemoryPercentage());
     NeonUpdateSquareCountText();
 }
@@ -223,15 +226,26 @@ int NeonIsInLockToggleArea(const int x, const int y)
         y > mLockedToggle.buttonArea.top - 1 && y < mLockedToggle.buttonArea.bottom + 1);
 }
 
-void NeonLockToggleButton(void)
+int NeonIsInGenerateButtonArea(const int x, const int y)
 {
-    mLockedToggle.selected = (mLockedToggle.selected) ? 0 : 1;
+    return (
+        x > mRandomGeneration.area.left - 1 && x < mRandomGeneration.area.right + 1 &&
+        y > mRandomGeneration.area.top - 1 && y < mRandomGeneration.area.bottom + 1);
 }
 
-int NeonIsLocked(void)
+int NeonIsInPanelArea(const int x, const int y)
 {
-    return mLockedToggle.selected;
+    return (
+        x > mPanelArea.left - 1 && x < mPanelArea.right + 1 &&
+        y > mPanelArea.top - 1 && y < mPanelArea.bottom + 1);
 }
+
+void NeonHandleLockToggleButtonClick(void)
+{
+    mLockedToggle.selected = (mLockedToggle.selected) ? 0 : 1;
+    NeonToggleCanvasLock();
+}
+
 
 void NeonFreePanelComponent(void)
 {

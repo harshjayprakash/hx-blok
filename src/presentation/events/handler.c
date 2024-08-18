@@ -62,24 +62,60 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
     int positionX = (LOWORD(longParam));
     int positionY = (HIWORD(longParam));
 
-    if (NeonIsInClearButtonArea(positionX, positionY))
+    if (NeonIsInPanelArea(positionX, positionY))
     {
-        NeonLog(NeonInformation,
-                NeonCreateResult(NeonNone, L"Clearing all obstructables."));
-        NeonClearObstrutables();
-        InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+        if (NeonIsInClearButtonArea(positionX, positionY))
+        {
+            NeonLog(NeonInformation,
+                    NeonCreateResult(NeonNone, L"Clearing all obstructables."));
+            NeonClearObstrutables();
+            InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+            NeonUpdateVectorMemoryBar();
+            return;
+        }
+
+        if (NeonIsInLockToggleArea(positionX, positionY))
+        {
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Toggled locked module."));
+            NeonHandleLockToggleButtonClick();
+            InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+            return;
+        }
+
+        if (NeonIsInGenerateButtonArea(positionX, positionY))
+        {
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Generating random obstructables."));
+            RECT windowArea = NeonGetWindowArea();
+
+            NeonSquare *square = NeonGetBlockAsPointer();
+
+            if (!square)
+            {
+                NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to retrieve square."));
+                return;
+            }
+
+            int generateCount = (windowArea.bottom * windowArea.right) / 2000;
+
+            for (int index = 0; index < generateCount; index++)
+            {
+                int newX = ((rand()%windowArea.right) / square->size.width) * square->size.width;
+                int newY = ((rand()%windowArea.bottom) / square->size.height) * square->size.height;
+
+                if (NeonObstrutableExistsAtPosition(newX, newY))
+                {
+                    continue;
+                }
+
+                NeonAddObstrutable(NeonCreatePosition(newX, newY));
+                NeonUpdateVectorMemoryBar();
+            }
+        }
+
         return;
     }
 
-    if (NeonIsInLockToggleArea(positionX, positionY))
-    {
-        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Toggled locked module."));
-        NeonLockToggleButton();
-        InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
-        return;
-    }
-
-    if (NeonIsLocked())
+    if (NeonIsCanvasLocked())
     {
         return;
     }
