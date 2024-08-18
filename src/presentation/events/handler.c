@@ -71,6 +71,19 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         return;
     }
 
+    if (NeonIsInLockToggleArea(positionX, positionY))
+    {
+        NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Toggled locked module."));
+        NeonLockToggleButton();
+        InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+        return;
+    }
+
+    if (NeonIsLocked())
+    {
+        return;
+    }
+
     NeonSquare *square = NeonGetBlockAsPointer();
 
     if (!square)

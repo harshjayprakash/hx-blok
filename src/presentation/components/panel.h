@@ -48,6 +48,12 @@ void NeonUpdateVectorMemoryBar(void);
  */
 int NeonIsInClearButtonArea(const int x, const int y);
 
+int NeonIsInLockToggleArea(const int x, const int y);
+
+void NeonLockToggleButton(void);
+
+int NeonIsLocked(void);
+
 /**
  * \brief Frees any resources used by the panel component.
  */
