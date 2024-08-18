@@ -9,6 +9,7 @@ BUILD_DIR = build
 OUTPUT_DIR = bin
 
 OBJECT_FILES = $(BUILD_DIR)/main.o \
+	$(BUILD_DIR)/core.args.o \
 	$(BUILD_DIR)/core.log.o \
 	$(BUILD_DIR)/core.program.o \
 	$(BUILD_DIR)/core.result.o \
@@ -33,6 +34,9 @@ $(OUTPUT_DIR)/$(EXECUTABLE): $(OBJECT_FILES)
 	$(CC) $(CC_FLAGS) -o $@ $^ $(LIBRARIES) $(CC_LINK_FLAGS)
 
 $(BUILD_DIR)/main.o: $(SOURCE_DIR)/main.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+$(BUILD_DIR)/core.args.o: $(SOURCE_DIR)/core/args.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 $(BUILD_DIR)/core.log.o: $(SOURCE_DIR)/core/log.c
