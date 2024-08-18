@@ -115,7 +115,12 @@ NeonSquare *NeonGetBlockAsPointer(void)
     return &mMovableSquare;
 }
 
-void NeonFreeBlockObject()
+RECT NeonGetBlockAsRect(void)
+{
+    return mMovableSquareAsRect;
+}
+
+void NeonFreeBlockObject(void)
 {
     NeonLog(NeonInformation,
             NeonCreateResult(NeonNone, L"Destroying movable square object."));

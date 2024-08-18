@@ -53,6 +53,13 @@ void NeonSetBlockBoundary(const NeonSize size);
 NeonSquare *NeonGetBlockAsPointer(void);
 
 /**
+ * \brief Gets the block as a winapi rectangle.
+ * 
+ * \return The block as the rect type.
+ */
+RECT NeonGetBlockAsRect(void);
+
+/**
  * \brief Cleans up the resources used by the block object.
  */
 void NeonFreeBlockObject(void);

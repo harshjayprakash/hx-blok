@@ -54,7 +54,25 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
 
     NeonMoveBlock(direction);
     NeonUpdateCoordinatesText();
-    InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+
+    NeonSquare *sq = NeonGetBlockAsPointer();
+
+    if (!sq) 
+    {
+        InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+        return;
+    }
+
+    RECT updateRegion = NeonGetBlockAsRect();
+    updateRegion.top -= sq->size.height;
+    updateRegion.left -= sq->size.width;
+    updateRegion.right += sq->size.height;
+    updateRegion.bottom += sq->size.width;
+
+    RECT coordinateRegion = NeonGetCoordinateArea();
+
+    InvalidateRect(NeonGetWindowHandle(), &updateRegion, TRUE);
+    InvalidateRect(NeonGetWindowHandle(), &coordinateRegion, TRUE);
 }
 
 void NeonHandleWindowLeftMouseDown(LPARAM longParam)

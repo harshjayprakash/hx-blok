@@ -247,6 +247,11 @@ void NeonHandleLockToggleButtonClick(void)
 }
 
 
+RECT NeonGetCoordinateArea(void)
+{
+    return mCoordinateText.area;
+}
+
 void NeonFreePanelComponent(void)
 {
 }

@@ -1,6 +1,6 @@
 /**
  * \file panel.h
- * \date 13-08-2024
+ * \date 18-08-2024
  * \brief
  */
 
@@ -89,6 +89,13 @@ int NeonIsInGenerateButtonArea(const int x, const int y);
  * \brief Handles the locked toggle button click operation.
  */
 void NeonHandleLockToggleButtonClick(void);
+
+/**
+ * \brief Gets the coordinate text area.
+ * 
+ * \return The area where coordinates are displayed.
+ */
+RECT NeonGetCoordinateArea(void);
 
 /**
  * \brief Frees any resources used by the panel component.
