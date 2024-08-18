@@ -22,12 +22,12 @@
 #include <wchar.h>
 #include <wingdi.h>
 
-
 static RECT mPanelArea = {0};
 static NeonTextControl mCoordinateText = {0};
 static NeonButtonControl mClearAllButton = {0};
 static NeonToggleButtonControl mLockedToggle = {0};
 static NeonProgressBarControl mVectorMemory = {0};
+static NeonButtonControl mRandomGeneration = {0};
 
 void __NeonUpdatePanelArea(void)
 {
@@ -83,6 +83,13 @@ void __NeonUpdateControlPositions(void)
 
     mVectorMemory.textPosition.X = mVectorMemory.area.left + 3;
     mVectorMemory.textPosition.Y = mVectorMemory.area.top + 1;
+
+    mRandomGeneration.area.left = mVectorMemory.area.right + 20;
+    mRandomGeneration.area.top = mPanelArea.top + 10;
+    mRandomGeneration.area.right = mRandomGeneration.area.left + 55;
+    mRandomGeneration.area.bottom = mRandomGeneration.area.top + 20;
+    mRandomGeneration.alignment.X = mRandomGeneration.area.left + 3;
+    mRandomGeneration.alignment.Y = mRandomGeneration.area.top + 1;
 }
 
 void NeonInitPanelComponent(void)
@@ -98,6 +105,8 @@ void NeonInitPanelComponent(void)
 
     mVectorMemory = (NeonProgressBarControl){
         L"0", 60, {0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, 0, 0, 0};
+
+    mRandomGeneration = (NeonButtonControl){L"Gen 10", 60, {0, 0}, {0, 0, 0, 0}};
 
     __NeonUpdateControlPositions();
 
@@ -154,6 +163,13 @@ void NeonRenderPanelComponent(HDC displayContext)
     (void)TextOutW(displayContext, mVectorMemory.textPosition.X,
                    mVectorMemory.textPosition.Y, mVectorMemory.text,
                    (int)wcslen(mVectorMemory.text));
+
+    (void)Rectangle(displayContext, mRandomGeneration.area.left,
+                    mRandomGeneration.area.top, mRandomGeneration.area.right,
+                    mRandomGeneration.area.bottom);
+    (void)TextOutW(displayContext, mRandomGeneration.alignment.X,
+                   mRandomGeneration.alignment.Y, mRandomGeneration.text,
+                   (int)wcslen(mRandomGeneration.text));
 }
 
 void NeonUpdateCoordinatesText(void)
@@ -186,7 +202,10 @@ void NeonUpdatePanelSize(void)
 
 void NeonUpdateVectorMemoryBar(void)
 {
-    mVectorMemory.bar.right = mVectorMemory.bar.left +
+    mVectorMemory.bar.left = mVectorMemory.barOutline.left + 2;
+    mVectorMemory.bar.top = mVectorMemory.barOutline.top + 2;
+    mVectorMemory.bar.bottom = mVectorMemory.barOutline.bottom - 3;
+    mVectorMemory.bar.right = mVectorMemory.barOutline.left +
                               (mVectorMemory.barSpan * NeonGetVectorMemoryPercentage());
     NeonUpdateSquareCountText();
 }
