@@ -1,17 +1,16 @@
 /**
  * \file args.c
  * \date 18-08-2024
- * \brief 
- * 
+ * \brief
+ *
  */
 
 #include "args.h"
 #include "../presentation/graphics/theme.h"
-#include <wchar.h>
+#include "log.h"
 #include "program.h"
 #include "result.h"
-#include "log.h"
-
+#include <wchar.h>
 
 static int mBlockScale = 15;
 
