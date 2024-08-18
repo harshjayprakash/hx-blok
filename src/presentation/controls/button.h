@@ -1,12 +1,9 @@
 /**
- * @file button.h
- * @author your name (you@domain.com)
- * @brief 
- * @version 0.1
- * @date 2024-08-18
- * 
- * @copyright Copyright (c) 2024
- * 
+ * \file button.h
+ * \date 18-08-2024
+ * \brief Structure of button control.
+ *
+ * This files contains a structure that represents a button.
  */
 
 #ifndef NEON_BUTTON_H
@@ -16,12 +13,15 @@
 #include <Windows.h>
 #include <stdlib.h>
 
+/**
+ * \brief Models a button.
+ */
 typedef struct __NeonButtonControl
 {
-    wchar_t text[60];
-    size_t max;
-    COORD alignment;
-    RECT area;
+    wchar_t text[60]; ///< Button text
+    size_t max;       ///< Maximum text size
+    COORD alignment;  ///< Text position
+    RECT area;        ///< Control area
 } NeonButtonControl;
 
 #endif

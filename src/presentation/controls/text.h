@@ -1,8 +1,9 @@
 /**
  * \file text.h
  * \date 18-08-2024
- * \brief
- * 
+ * \brief Structure for the text.
+ *
+ * This file contains a structure for information required for rendering text.
  */
 
 #ifndef NEON_TEXT_H
@@ -12,12 +13,15 @@
 #include <Windows.h>
 #include <stdlib.h>
 
+/**
+ * \brief Represents a text control.
+ */
 typedef struct __NeonTextControl
 {
-    wchar_t text[60];
-    size_t max;
-    COORD position;
-    RECT area;
+    wchar_t text[60]; ///< Text
+    size_t max;       ///< Maximum text size
+    COORD position;   ///< Text position
+    RECT area;        ///< Control area
 } NeonTextControl;
 
 #endif
