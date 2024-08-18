@@ -1,6 +1,6 @@
 /**
  * \file canvas.h
- * \date 13-08-2024
+ * \date 18-08-2024
  * \brief Function definitions for the canvas component.
  *
  * This file contains the function definitions for the canvas component's initialisation,
@@ -24,6 +24,18 @@ void NeonInitCanvasComponent(void);
  * \param displayContext The display context handle.
  */
 void NeonRenderCanvasComponent(HDC displayContext);
+
+/**
+ * \brief Returns if the canvas has been locked.
+ * 
+ * \return If the canvas has been locked.
+ */
+int NeonIsCanvasLocked(void);
+
+/**
+ * \brief Toggles the lock for the canvas component.
+ */
+void NeonToggleCanvasLock(void);
 
 /**
  * \brief Frees the canvas component.
