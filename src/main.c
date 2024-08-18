@@ -11,6 +11,7 @@
 #include "core/result.h"
 #include "core/log.h"
 #include "core/program.h"
+#include "core/args.h"
 
 /**
  * \brief The entrypoint of the program.

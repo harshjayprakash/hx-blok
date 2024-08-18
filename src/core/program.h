@@ -24,11 +24,11 @@
 NeonResult NeonInit(HINSTANCE instanceHandle, int showFlags);
 
 /**
- * \brief Processes the arguments provided on execution.
- *
- * \return Result containing if the operation was successful.
+ * \brief Checks if the program has been initialised.
+ * 
+ * @return If the program has been initialised.
  */
-NeonResult NeonProcessArguments(void);
+int NeonIsInit(void);
 
 /**
  * \brief Start method for the program.

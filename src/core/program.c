@@ -9,7 +9,7 @@
 
 #include "program.h"
 #include "../presentation/graphics/drawing.h"
-#include "../presentation/graphics/theme.h"
+
 #include "../presentation/window.h"
 #include "log.h"
 #include "result.h"
@@ -36,46 +36,9 @@ NeonResult NeonInit(HINSTANCE instanceHandle, int showFlags)
     return NeonCreateResult(NeonSuccess, L"Program initialised successfully.");
 }
 
-NeonResult NeonProcessArguments(void)
+int NeonIsInit(void)
 {
-    if (!mInitialised)
-    {
-        return NeonLogAndReturn(
-            NeonError,
-            NeonCreateResult(NeonNotInit, L"Program has not not initialised."));
-    }
-
-    int argumentCount = 0;
-    LPWSTR *arguments = CommandLineToArgvW(GetCommandLineW(), &argumentCount);
-
-    if (!arguments)
-    {
-        return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonNotInit, L"Failed to get arguments."));
-    }
-
-    for (int index = 0; index < argumentCount; index++)
-    {
-
-        if (wcsncmp(arguments[index], L"--dark-mode", 12 * sizeof(unsigned short)) == 0)
-        {
-            NeonLog(NeonInformation,
-                    NeonCreateResult(NeonNone, L"Changing program theme to dark mode."));
-            NeonSetTheme(NeonDarkTheme);
-        }
-        if (wcsncmp(arguments[index], L"--light-mode", 13 * sizeof(unsigned short)) == 0)
-        {
-            NeonLog(NeonInformation,
-                    NeonCreateResult(NeonNone, L"Changing program theme to light mode."));
-            NeonSetTheme(NeonLightTheme);
-        }
-    }
-
-    NeonUpdateColours();
-
-    (void)LocalFree(arguments);
-
-    return NeonCreateResult(NeonSuccess, L"Processed arguments successfully.");
+    return mInitialised;
 }
 
 NeonResult NeonStart(void)
