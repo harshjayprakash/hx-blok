@@ -11,11 +11,8 @@
 #include "program.h"
 #include "result.h"
 #include "log.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-// static int mOverrideDefaults = 0;
+
 static int mBlockScale = 15;
 
 NeonResult NeonProcessArguments(void)
