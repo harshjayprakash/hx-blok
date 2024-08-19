@@ -60,6 +60,7 @@ NeonResult NeonProcessArguments(void)
             if (value == 0)
             {
                 scaleMode = 0;
+                NeonLog(NeonWarning, NeonCreateResult(NeonNone, L"Invalid scale."));
                 continue;
             }
             mBlockScale = value;
