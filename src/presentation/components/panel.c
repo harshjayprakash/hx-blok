@@ -183,7 +183,7 @@ void NeonUpdateCoordinatesText(void)
     {
         NeonLog(NeonWarning,
                 NeonCreateResult(NeonNullPtr,
-                                 L"Failed to update coordinates: square is null"));
+                                 L"Coordinate Update Failed: Null Pointer Error"));
         return;
     }
 

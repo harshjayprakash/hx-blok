@@ -22,7 +22,7 @@ void NeonCopySquare(NeonSquare *dest, const NeonSquare src)
     {
         NeonLog(
             NeonWarning,
-            NeonCreateResult(NeonNullPtr, L"Cannot copy square: destination is null"));
+            NeonCreateResult(NeonNullPtr, L"Copying Square Failed: Null Pointer Error."));
         return;
     }
 

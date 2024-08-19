@@ -32,6 +32,8 @@ void NeonInitObstructables(void)
         nodePtr->indexed = 0;
         NeonCopyPosition(&(nodePtr->position), NeonCreatePosition(-1, -1));
     }
+
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Initialised Obstructables."));
 }
 
 void NeonRenderObstructables(HDC displayContext)
@@ -43,7 +45,7 @@ void NeonRenderObstructables(HDC displayContext)
         NeonLog(NeonError,
                 NeonCreateResult(
                     NeonNullPtr,
-                    L"Failed to paint obstructable squares: square reference is null"));
+                    L"Painting Obstructables Failed: Null Pointer Error."));
         return;
     }
 
@@ -116,4 +118,5 @@ NeonPosition NeonGetObstructableAtIndex(int index)
 void NeonFreeObstructables(void)
 {
     NeonDestroyVector(&mObstructableSquares);
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Cleaned Up Obstructable Resources."));
 }

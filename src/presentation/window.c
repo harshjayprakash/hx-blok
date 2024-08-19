@@ -98,11 +98,11 @@ static NeonResult _NeonCreateWindow(void)
     if (!mWindow)
     {
         return NeonLogAndReturn(NeonError,
-                                NeonCreateResult(NeonFail, L"Failed to create window."));
+                                NeonCreateResult(NeonFail, L"Window Creation Failed."));
     }
 
     return NeonLogAndReturn(
-        NeonInformation, NeonCreateResult(NeonSuccess, L"Successfully created window."));
+        NeonInformation, NeonCreateResult(NeonSuccess, L"Created Window."));
 }
 
 static NeonResult _NeonRegisterWindow(void)
@@ -125,12 +125,12 @@ static NeonResult _NeonRegisterWindow(void)
     if (!success)
     {
         return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonFail, L"Failed to register window class."));
+            NeonError, NeonCreateResult(NeonFail, L"Failed to Register Class."));
     }
 
     return NeonLogAndReturn(
         NeonInformation,
-        NeonCreateResult(NeonSuccess, L"Successfully registered window class."));
+        NeonCreateResult(NeonSuccess, L"Registered Window."));
 }
 
 NeonResult NeonInitWindow(void)
@@ -140,7 +140,7 @@ NeonResult NeonInitWindow(void)
     {
         NeonFreeWindow();
         return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
+            NeonError, NeonCreateResult(NeonFail, L"Window Initialisation Failed."));
     }
 
     NeonResult createResult = _NeonCreateWindow();
@@ -148,7 +148,7 @@ NeonResult NeonInitWindow(void)
     {
         NeonFreeWindow();
         return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonFail, L"Failed to initialise window."));
+            NeonError, NeonCreateResult(NeonFail, L"Window Initialisation Failed."));
     }
 
     NeonInitPanelComponent();
@@ -158,9 +158,7 @@ NeonResult NeonInitWindow(void)
     (void)UpdateWindow(mWindow);
     (void)_NeonMessageLoop();
 
-    return NeonLogAndReturn(
-        NeonInformation,
-        NeonCreateResult(NeonSuccess, L"Successfully initialised window."));
+    return NeonCreateResult(NeonSuccess, L"Window Initialised.");
 }
 
 RECT NeonGetWindowArea(void)
@@ -206,5 +204,5 @@ NeonResult NeonFreeWindow(void)
     }
 
     return NeonLogAndReturn(
-        NeonInformation, NeonCreateResult(NeonSuccess, L"Cleaning up window resources."));
+        NeonInformation, NeonCreateResult(NeonSuccess, L"Cleaned Up Window Resources."));
 }

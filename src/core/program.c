@@ -26,14 +26,14 @@ NeonResult NeonInit(HINSTANCE instanceHandle, int showFlags)
     {
         return NeonLogAndReturn(
             NeonWarning,
-            NeonCreateResult(NeonCannotReInit, L"Cannot re-initalise program."));
+            NeonCreateResult(NeonCannotReInit, L"Cannot Re-Initialise Program: Skipping."));
     }
 
     mInstanceHandle = instanceHandle;
     mShowflag = showFlags;
     mInitialised = 1;
 
-    return NeonCreateResult(NeonSuccess, L"Program initialised successfully.");
+    return NeonCreateResult(NeonSuccess, L"Program Initialised.");
 }
 
 int NeonIsInit(void)
@@ -48,7 +48,7 @@ NeonResult NeonStart(void)
     NeonFreeWindow();
     NeonFreeDrawingTools();
     return NeonLogAndReturn(NeonInformation,
-                            NeonCreateResult(NeonSuccess, L"Quit message recieved."));
+                            NeonCreateResult(NeonSuccess, L"Quit Message Recieved: Closing."));
 }
 
 HINSTANCE NeonGetHandle(void)
@@ -64,5 +64,5 @@ int NeonGetShowFlag(void)
 NeonResult NeonFree(void)
 {
     return NeonLogAndReturn(NeonInformation,
-                            NeonCreateResult(NeonSuccess, L"No resources to free."));
+                            NeonCreateResult(NeonSuccess, L"Cleaned Up Program Resources."));
 }

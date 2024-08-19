@@ -30,22 +30,22 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
     {
     case VK_UP:
         NeonLog(NeonInformation,
-                NeonCreateResult(NeonNone, L"Key Event Detected: Up Arrow"));
+                NeonCreateResult(NeonNone, L"Up Arrow Key Event Detected."));
         direction = NeonNorth;
         break;
     case VK_RIGHT:
         NeonLog(NeonInformation,
-                NeonCreateResult(NeonNone, L"Key Event Detected: Right Arrow"));
+                NeonCreateResult(NeonNone, L"Right Arrow Key Event Detected."));
         direction = NeonEast;
         break;
     case VK_DOWN:
         NeonLog(NeonInformation,
-                NeonCreateResult(NeonNone, L"Key Event Detected: Down Arrow"));
+                NeonCreateResult(NeonNone, L"Down Arrow Key Event Detected."));
         direction = NeonSouth;
         break;
     case VK_LEFT:
         NeonLog(NeonInformation,
-                NeonCreateResult(NeonNone, L"Key Event Detected: Left Arrow"));
+                NeonCreateResult(NeonNone, L"Left Arrow Key Event Detected"));
         direction = NeonWest;
         break;
     default:
@@ -85,7 +85,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         if (NeonIsInClearButtonArea(positionX, positionY))
         {
             NeonLog(NeonInformation,
-                    NeonCreateResult(NeonNone, L"Clearing all obstructables."));
+                    NeonCreateResult(NeonNone, L"Clearing All Obstructables."));
             NeonClearObstrutables();
             InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
             NeonUpdateVectorMemoryBar();
@@ -94,7 +94,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
         if (NeonIsInLockToggleArea(positionX, positionY))
         {
-            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Toggled locked module."));
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Toggling Lock Mode."));
             NeonHandleLockToggleButtonClick();
             InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
             return;
@@ -102,14 +102,14 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
         if (NeonIsInGenerateButtonArea(positionX, positionY))
         {
-            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Generating random obstructables."));
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Generating Random Obstructables."));
             RECT windowArea = NeonGetWindowArea();
 
             NeonSquare *square = NeonGetBlockAsPointer();
 
             if (!square)
             {
-                NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to retrieve square."));
+                NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Square Retrieval Failed: Null Pointer Error."));
                 return;
             }
 
@@ -142,7 +142,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     if (!square)
     {
-        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Failed to retrieve square."));
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Square Retrieval Error: Null Pointer Error."));
         return;
     }
 
@@ -151,14 +151,14 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     wchar_t logMessage[60];
 
-    (void)swprintf(logMessage, 60, L"Click detected at (%d, %d)", MultiX, MultiY);
+    (void)swprintf(logMessage, 60, L"Click At (%d, %d)", MultiX, MultiY);
     NeonLog(NeonInformation, NeonCreateResult(NeonNone, logMessage));
 
     if (NeonObstrutableExistsAtPosition(MultiX, MultiY))
     {
         NeonLog(
             NeonInformation,
-            NeonCreateResult(NeonNone, L"Obstructable exists at position. Skipping."));
+            NeonCreateResult(NeonNone, L"Existing Obstructable At Given Position: Skipping."));
         return;
     }
 

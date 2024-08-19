@@ -20,7 +20,7 @@ NeonResult NeonProcessArguments(void)
     {
         return NeonLogAndReturn(
             NeonError,
-            NeonCreateResult(NeonNotInit, L"Program has not not initialised."));
+            NeonCreateResult(NeonNotInit, L"Argument Processing Failed: Program Not Initialised."));
     }
 
     int argumentCount = 0;
@@ -29,7 +29,7 @@ NeonResult NeonProcessArguments(void)
     if (!arguments)
     {
         return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonNotInit, L"Failed to get arguments."));
+            NeonError, NeonCreateResult(NeonNotInit, L"Arguments Processing Failed: Cannot Get."));
     }
 
     int scaleMode = 0;
@@ -40,19 +40,19 @@ NeonResult NeonProcessArguments(void)
         if (wcsncmp(arguments[index], L"--dark-mode", 12 * sizeof(unsigned short)) == 0)
         {
             NeonLog(NeonInformation,
-                    NeonCreateResult(NeonNone, L"Changing program theme to dark mode."));
+                    NeonCreateResult(NeonNone, L"Theme Changed to Dark Mode."));
             NeonSetTheme(NeonDarkTheme);
         }
         if (wcsncmp(arguments[index], L"--light-mode", 13 * sizeof(unsigned short)) == 0)
         {
             NeonLog(NeonInformation,
-                    NeonCreateResult(NeonNone, L"Changing program theme to light mode."));
+                    NeonCreateResult(NeonNone, L"Theme Changed to Light Mode."));
             NeonSetTheme(NeonLightTheme);
         }
-
         if (wcsncmp(arguments[index], L"--scale", 13 * sizeof(unsigned short)))
         {
             scaleMode = 1;
+            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Updating Block Scale."));
         }
         if (scaleMode)
         {
@@ -60,7 +60,6 @@ NeonResult NeonProcessArguments(void)
             if (value == 0)
             {
                 scaleMode = 0;
-                NeonLog(NeonWarning, NeonCreateResult(NeonNone, L"Invalid scale."));
                 continue;
             }
             mBlockScale = value;
@@ -72,7 +71,7 @@ NeonResult NeonProcessArguments(void)
 
     (void)LocalFree(arguments);
 
-    return NeonCreateResult(NeonSuccess, L"Processed arguments successfully.");
+    return NeonCreateResult(NeonSuccess, L"Arguments Processed.");
 }
 
 int NeonGetBlockScale(void)

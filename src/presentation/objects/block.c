@@ -22,8 +22,6 @@ static RECT mMovableSquareInnerAsRect = {0};
 
 void NeonInitBlockObject(void)
 {
-    NeonLog(NeonInformation,
-            NeonCreateResult(NeonNone, L"Initialising movable square object."));
     mMovableSquare = NeonCreateSquare(NeonCreatePosition(0, 0), NeonCreateSize(NeonGetBlockScale(), NeonGetBlockScale()));
 
     mMovableSquareAsRect =
@@ -35,6 +33,9 @@ void NeonInitBlockObject(void)
         (RECT){mMovableSquare.position.x + 5, mMovableSquare.position.y + 5,
                (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
                (mMovableSquare.position.y + (mMovableSquare.size.height - 5))};
+    
+    NeonLog(NeonInformation,
+            NeonCreateResult(NeonNone, L"Initialised Movable Block Object."));
 }
 
 void NeonRenderBlock(HDC displayContext)
@@ -123,5 +124,5 @@ RECT NeonGetBlockAsRect(void)
 void NeonFreeBlockObject(void)
 {
     NeonLog(NeonInformation,
-            NeonCreateResult(NeonNone, L"Destroying movable square object."));
+            NeonCreateResult(NeonNone, L"Cleaned Up Movable Block Object."));
 }

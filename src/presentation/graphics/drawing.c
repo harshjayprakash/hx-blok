@@ -9,6 +9,7 @@
 
 #include "drawing.h"
 #include "theme.h"
+#include "../../core/log.h"
 
 static HBRUSH mBackgroundBrush = {0};
 static HBRUSH mForegroundBrush = {0};
@@ -21,6 +22,8 @@ void NeonInitDrawingTools(void)
     mForegroundBrush = CreateSolidBrush(NeonGetForegroundColour());
     mAccentBrush = CreateSolidBrush(NeonGetAccentColour());
     mForegroundPen = CreatePen(PS_SOLID, 2, NeonGetForegroundColour());
+
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Initialied GDI Drawing Tools."));
 }
 
 HBRUSH NeonGetBackgroundBrush(void)
@@ -49,4 +52,6 @@ void NeonFreeDrawingTools(void)
     (void)DeleteObject(mForegroundBrush);
     (void)DeleteObject(mAccentBrush);
     (void)DeleteObject(mForegroundPen);
+    
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Cleaned Up GDI Drawing Tools."));
 }

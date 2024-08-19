@@ -26,7 +26,7 @@ void NeonSetPosition(NeonPosition *position, const int x, const int y)
     if (!position)
     {
         NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Cannot update position: is null"));
+                NeonCreateResult(NeonNullPtr, L"Update Position Failed: Null Pointer Error."));
         return;
     }
 
@@ -39,7 +39,7 @@ void NeonSetXPosition(NeonPosition *position, const int x)
     if (!position)
     {
         NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Cannot update x position: is null"));
+                NeonCreateResult(NeonNullPtr, L"X Position Update Failed: Null Pointer Error."));
         return;
     }
 
@@ -51,7 +51,7 @@ void NeonSetYPosition(NeonPosition *position, const int y)
     if (!position)
     {
         NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Cannot update y position: is null"));
+                NeonCreateResult(NeonNullPtr, L"Y Position Update Failed: Null Pointer Error."));
         return;
     }
 
@@ -64,7 +64,7 @@ void NeonCopyPosition(NeonPosition *dest, const NeonPosition src)
     {
         NeonLog(
             NeonWarning,
-            NeonCreateResult(NeonNullPtr, L"Cannot copy position: destination is null"));
+            NeonCreateResult(NeonNullPtr, L"Position Copy Failed: Null Pointer Error."));
         return;
     }
 
