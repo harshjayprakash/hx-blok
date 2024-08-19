@@ -15,7 +15,6 @@
 #include "../../model/utility/position.h"
 #include <Windows.h>
 
-
 /**
  * \brief Initialises the obstructables.
  *

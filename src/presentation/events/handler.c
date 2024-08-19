@@ -57,7 +57,7 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
 
     NeonSquare *sq = NeonGetBlockAsPointer();
 
-    if (!sq) 
+    if (!sq)
     {
         InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
         return;
@@ -102,14 +102,17 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
         if (NeonIsInGenerateButtonArea(positionX, positionY))
         {
-            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Generating Random Obstructables."));
+            NeonLog(NeonInformation,
+                    NeonCreateResult(NeonNone, L"Generating Random Obstructables."));
             RECT windowArea = NeonGetWindowArea();
 
             NeonSquare *square = NeonGetBlockAsPointer();
 
             if (!square)
             {
-                NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Square Retrieval Failed: Null Pointer Error."));
+                NeonLog(NeonError, NeonCreateResult(
+                                       NeonNullPtr,
+                                       L"Square Retrieval Failed: Null Pointer Error."));
                 return;
             }
 
@@ -117,8 +120,10 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
             for (int index = 0; index < generateCount; index++)
             {
-                int newX = ((rand()%windowArea.right) / square->size.width) * square->size.width;
-                int newY = ((rand()%windowArea.bottom) / square->size.height) * square->size.height;
+                int newX = ((rand() % windowArea.right) / square->size.width) *
+                           square->size.width;
+                int newY = ((rand() % windowArea.bottom) / square->size.height) *
+                           square->size.height;
 
                 if (NeonObstrutableExistsAtPosition(newX, newY))
                 {
@@ -142,7 +147,9 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     if (!square)
     {
-        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Square Retrieval Error: Null Pointer Error."));
+        NeonLog(NeonError,
+                NeonCreateResult(NeonNullPtr,
+                                 L"Square Retrieval Error: Null Pointer Error."));
         return;
     }
 
@@ -156,9 +163,9 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     if (NeonObstrutableExistsAtPosition(MultiX, MultiY))
     {
-        NeonLog(
-            NeonInformation,
-            NeonCreateResult(NeonNone, L"Existing Obstructable At Given Position: Skipping."));
+        NeonLog(NeonInformation,
+                NeonCreateResult(NeonNone,
+                                 L"Existing Obstructable At Given Position: Skipping."));
         return;
     }
 

@@ -13,8 +13,6 @@
 #include "../presentation/window.h"
 #include "log.h"
 #include "result.h"
-#include <wchar.h>
-
 
 static HINSTANCE mInstanceHandle = {0};
 static int mShowflag = 0;
@@ -25,8 +23,8 @@ NeonResult NeonInit(HINSTANCE instanceHandle, int showFlags)
     if (mInitialised)
     {
         return NeonLogAndReturn(
-            NeonWarning,
-            NeonCreateResult(NeonCannotReInit, L"Cannot Re-Initialise Program: Skipping."));
+            NeonWarning, NeonCreateResult(NeonCannotReInit,
+                                          L"Cannot Re-Initialise Program: Skipping."));
     }
 
     mInstanceHandle = instanceHandle;
@@ -47,8 +45,9 @@ NeonResult NeonStart(void)
     NeonInitWindow();
     NeonFreeWindow();
     NeonFreeDrawingTools();
-    return NeonLogAndReturn(NeonInformation,
-                            NeonCreateResult(NeonSuccess, L"Quit Message Recieved: Closing."));
+    return NeonLogAndReturn(
+        NeonInformation,
+        NeonCreateResult(NeonSuccess, L"Quit Message Recieved: Closing."));
 }
 
 HINSTANCE NeonGetHandle(void)
@@ -63,6 +62,6 @@ int NeonGetShowFlag(void)
 
 NeonResult NeonFree(void)
 {
-    return NeonLogAndReturn(NeonInformation,
-                            NeonCreateResult(NeonSuccess, L"Cleaned Up Program Resources."));
+    return NeonLogAndReturn(
+        NeonInformation, NeonCreateResult(NeonSuccess, L"Cleaned Up Program Resources."));
 }

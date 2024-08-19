@@ -1,8 +1,8 @@
 /**
  * \file args.h
  * \date 18-08-2024
- * \brief 
- * 
+ * \brief
+ *
  */
 
 #ifndef NEON_ARGS_H
@@ -19,7 +19,7 @@ NeonResult NeonProcessArguments(void);
 
 /**
  * \brief Gets the block scaling.
- * 
+ *
  * \return The block size scale.
  */
 int NeonGetBlockScale(void);

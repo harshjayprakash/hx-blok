@@ -10,6 +10,7 @@
 #include "panel.h"
 #include "../../core/log.h"
 #include "../../model/object/square.h"
+#include "../components/canvas.h"
 #include "../controls/button.h"
 #include "../controls/progress-bar.h"
 #include "../controls/text.h"
@@ -19,9 +20,9 @@
 #include "../objects/block.h"
 #include "../objects/obstructables.h"
 #include "../window.h"
-#include "../components/canvas.h"
 #include <wchar.h>
 #include <wingdi.h>
+
 
 static RECT mPanelArea = {0};
 static NeonTextControl mCoordinateText = {0};
@@ -92,8 +93,6 @@ void __NeonUpdateControlPositions(void)
     mRandomGeneration.alignment.X = mRandomGeneration.area.left + 3;
     mRandomGeneration.alignment.Y = mRandomGeneration.area.top + 1;
 }
-
-
 
 void NeonInitPanelComponent(void)
 {
@@ -228,16 +227,14 @@ int NeonIsInLockToggleArea(const int x, const int y)
 
 int NeonIsInGenerateButtonArea(const int x, const int y)
 {
-    return (
-        x > mRandomGeneration.area.left - 1 && x < mRandomGeneration.area.right + 1 &&
-        y > mRandomGeneration.area.top - 1 && y < mRandomGeneration.area.bottom + 1);
+    return (x > mRandomGeneration.area.left - 1 && x < mRandomGeneration.area.right + 1 &&
+            y > mRandomGeneration.area.top - 1 && y < mRandomGeneration.area.bottom + 1);
 }
 
 int NeonIsInPanelArea(const int x, const int y)
 {
-    return (
-        x > mPanelArea.left - 1 && x < mPanelArea.right + 1 &&
-        y > mPanelArea.top - 1 && y < mPanelArea.bottom + 1);
+    return (x > mPanelArea.left - 1 && x < mPanelArea.right + 1 &&
+            y > mPanelArea.top - 1 && y < mPanelArea.bottom + 1);
 }
 
 void NeonHandleLockToggleButtonClick(void)
@@ -245,7 +242,6 @@ void NeonHandleLockToggleButtonClick(void)
     mLockedToggle.selected = (mLockedToggle.selected) ? 0 : 1;
     NeonToggleCanvasLock();
 }
-
 
 RECT NeonGetCoordinateArea(void)
 {

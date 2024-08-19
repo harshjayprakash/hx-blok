@@ -27,7 +27,7 @@ void NeonRenderCanvasComponent(HDC displayContext);
 
 /**
  * \brief Returns if the canvas has been locked.
- * 
+ *
  * \return If the canvas has been locked.
  */
 int NeonIsCanvasLocked(void);

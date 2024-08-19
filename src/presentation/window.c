@@ -17,7 +17,6 @@
 #include "graphics/theme.h"
 #include "objects/block.h"
 
-
 #include <Windows.h>
 #include <wchar.h>
 #include <wingdi.h>
@@ -101,8 +100,8 @@ static NeonResult _NeonCreateWindow(void)
                                 NeonCreateResult(NeonFail, L"Window Creation Failed."));
     }
 
-    return NeonLogAndReturn(
-        NeonInformation, NeonCreateResult(NeonSuccess, L"Created Window."));
+    return NeonLogAndReturn(NeonInformation,
+                            NeonCreateResult(NeonSuccess, L"Created Window."));
 }
 
 static NeonResult _NeonRegisterWindow(void)
@@ -124,13 +123,12 @@ static NeonResult _NeonRegisterWindow(void)
 
     if (!success)
     {
-        return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonFail, L"Failed to Register Class."));
+        return NeonLogAndReturn(NeonError,
+                                NeonCreateResult(NeonFail, L"Failed to Register Class."));
     }
 
-    return NeonLogAndReturn(
-        NeonInformation,
-        NeonCreateResult(NeonSuccess, L"Registered Window."));
+    return NeonLogAndReturn(NeonInformation,
+                            NeonCreateResult(NeonSuccess, L"Registered Window."));
 }
 
 NeonResult NeonInitWindow(void)

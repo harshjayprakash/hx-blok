@@ -13,7 +13,6 @@
 #include "block.h"
 #include <wingdi.h>
 
-
 static NeonVector mObstructableSquares = {0};
 
 void NeonInitObstructables(void)
@@ -43,9 +42,8 @@ void NeonRenderObstructables(HDC displayContext)
     if (!square)
     {
         NeonLog(NeonError,
-                NeonCreateResult(
-                    NeonNullPtr,
-                    L"Painting Obstructables Failed: Null Pointer Error."));
+                NeonCreateResult(NeonNullPtr,
+                                 L"Painting Obstructables Failed: Null Pointer Error."));
         return;
     }
 
@@ -118,5 +116,6 @@ NeonPosition NeonGetObstructableAtIndex(int index)
 void NeonFreeObstructables(void)
 {
     NeonDestroyVector(&mObstructableSquares);
-    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Cleaned Up Obstructable Resources."));
+    NeonLog(NeonInformation,
+            NeonCreateResult(NeonNone, L"Cleaned Up Obstructable Resources."));
 }

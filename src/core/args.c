@@ -20,7 +20,8 @@ NeonResult NeonProcessArguments(void)
     {
         return NeonLogAndReturn(
             NeonError,
-            NeonCreateResult(NeonNotInit, L"Argument Processing Failed: Program Not Initialised."));
+            NeonCreateResult(NeonNotInit,
+                             L"Argument Processing Failed: Program Not Initialised."));
     }
 
     int argumentCount = 0;
@@ -29,7 +30,8 @@ NeonResult NeonProcessArguments(void)
     if (!arguments)
     {
         return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonNotInit, L"Arguments Processing Failed: Cannot Get."));
+            NeonError,
+            NeonCreateResult(NeonNotInit, L"Arguments Processing Failed: Cannot Get."));
     }
 
     int scaleMode = 0;
@@ -52,7 +54,8 @@ NeonResult NeonProcessArguments(void)
         if (wcsncmp(arguments[index], L"--scale", 13 * sizeof(unsigned short)))
         {
             scaleMode = 1;
-            NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Updating Block Scale."));
+            NeonLog(NeonInformation,
+                    NeonCreateResult(NeonNone, L"Updating Block Scale."));
         }
         if (scaleMode)
         {

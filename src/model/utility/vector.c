@@ -20,7 +20,8 @@ NeonVector NeonCreateVector(size_t size)
 
     if (!vector.array)
     {
-        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Vector Initialisation Failed"));
+        NeonLog(NeonError,
+                NeonCreateResult(NeonNullPtr, L"Vector Initialisation Failed"));
     }
 
     return vector;
@@ -33,7 +34,8 @@ size_t NeonGenerateNewVectorSize(size_t size)
 
 NeonResult NeonReSizeVector(NeonVector *vector, size_t newSize)
 {
-    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Attempting to Re-sizing Vector."));
+    NeonLog(NeonInformation,
+            NeonCreateResult(NeonNone, L"Attempting to Re-sizing Vector."));
 
     if (!vector)
     {
@@ -45,8 +47,8 @@ NeonResult NeonReSizeVector(NeonVector *vector, size_t newSize)
     if (!vector->array)
     {
         return NeonLogAndReturn(
-            NeonError,
-            NeonCreateResult(NeonNullPtr, L"Vector Re-size Failed: Vector Array is Null."));
+            NeonError, NeonCreateResult(NeonNullPtr,
+                                        L"Vector Re-size Failed: Vector Array is Null."));
     }
 
     if (newSize + 1 < vector->max)
@@ -78,7 +80,8 @@ int NeonIsVectorFull(const NeonVector *vector)
     if (!vector)
     {
         NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr, L"Vector Full Check Failed: Null Pointer Error."));
+                NeonCreateResult(NeonNullPtr,
+                                 L"Vector Full Check Failed: Null Pointer Error."));
         return -1;
     }
 
@@ -95,7 +98,8 @@ int NeonIsVectorEmpty(const NeonVector *vector)
     if (!vector)
     {
         NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr, L"Vector Empty Check Failed: Null Pointer Error."));
+                NeonCreateResult(NeonNullPtr,
+                                 L"Vector Empty Check Failed: Null Pointer Error."));
         return -1;
     }
 
@@ -133,17 +137,16 @@ NeonResult NeonPushNode(NeonVector *vector, const NeonNode node)
     (vector->array + vector->head)->indexed = 1;
     NeonCopyPosition(&((vector->array + vector->head)->position), node.position);
 
-    return NeonLogAndReturn(NeonInformation,
-                            NeonCreateResult(NeonNone, L"Node Pushed."));
+    return NeonLogAndReturn(NeonInformation, NeonCreateResult(NeonNone, L"Node Pushed."));
 }
 
 NeonNode *NeonGetNodeAsPointer(const NeonVector *vector, const int index)
 {
     if (!vector)
     {
-        NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr,
-                                 L"Node via Index Failed: Null Pointer Error."));
+        NeonLog(
+            NeonError,
+            NeonCreateResult(NeonNullPtr, L"Node via Index Failed: Null Pointer Error."));
         return NULL;
     }
 
@@ -157,9 +160,8 @@ NeonNode *NeonGetNodeAsPointer(const NeonVector *vector, const int index)
 
     if (index > vector->max - 1 || index < 0)
     {
-        NeonLog(NeonError,
-                NeonCreateResult(NeonOutOfRange,
-                                 L"Node via Index Failed: Out of Range."));
+        NeonLog(NeonError, NeonCreateResult(NeonOutOfRange,
+                                            L"Node via Index Failed: Out of Range."));
         return NULL;
     }
 
@@ -171,14 +173,16 @@ NeonResult NeonClearVector(NeonVector *vector)
     if (!vector)
     {
         return NeonLogAndReturn(
-            NeonError, NeonCreateResult(NeonNullPtr, L"Clearing Vector Failed: Null Pointer Error."));
+            NeonError, NeonCreateResult(NeonNullPtr,
+                                        L"Clearing Vector Failed: Null Pointer Error."));
     }
 
     if (!vector->array)
     {
         return NeonLogAndReturn(
             NeonError,
-            NeonCreateResult(NeonNullPtr, L"Clearing Vector Failed: Vector Array is Null."));
+            NeonCreateResult(NeonNullPtr,
+                             L"Clearing Vector Failed: Vector Array is Null."));
     }
 
     for (int index = 0; index < vector->max; index++)
@@ -206,7 +210,8 @@ int NeonNodeExists(const NeonVector *vector, const NeonNode node)
     if (!vector)
     {
         NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr, L"Node Exists Check Failed: Null Pointer Error."));
+                NeonCreateResult(NeonNullPtr,
+                                 L"Node Exists Check Failed: Null Pointer Error."));
         return 0;
     }
 
@@ -236,16 +241,16 @@ void NeonPrintVector(const NeonVector *vector)
 {
     if (!vector)
     {
-        NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr, L"Vector Print Failed: Null Pointer Error."));
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr,
+                                            L"Vector Print Failed: Null Pointer Error."));
         return;
     }
 
     if (!vector->array)
     {
-        NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr,
-                                 L"Vector Print Failed: Vector Array is Null."));
+        NeonLog(
+            NeonError,
+            NeonCreateResult(NeonNullPtr, L"Vector Print Failed: Vector Array is Null."));
         return;
     }
 
@@ -270,12 +275,10 @@ void NeonDestroyVector(NeonVector *vector)
 {
     if (!vector)
     {
-        NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr, L"Vector Destruction Failure."));
+        NeonLog(NeonError, NeonCreateResult(NeonNullPtr, L"Vector Destruction Failure."));
         return;
     }
 
     free(vector->array);
-    NeonLog(NeonInformation,
-            NeonCreateResult(NeonNone, L"Cleaned Up Vector Resources."));
+    NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Cleaned Up Vector Resources."));
 }

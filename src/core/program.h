@@ -13,7 +13,6 @@
 #include "result.h"
 #include <Windows.h>
 
-
 /**
  * \brief Initialises the program.
  *
@@ -25,7 +24,7 @@ NeonResult NeonInit(HINSTANCE instanceHandle, int showFlags);
 
 /**
  * \brief Checks if the program has been initialised.
- * 
+ *
  * @return If the program has been initialised.
  */
 int NeonIsInit(void);

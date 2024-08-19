@@ -16,7 +16,6 @@
 #include "position.h"
 #include <stdlib.h>
 
-
 /**
  * \brief Models a node in the vector.
  */

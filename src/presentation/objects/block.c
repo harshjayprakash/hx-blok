@@ -7,12 +7,13 @@
  */
 
 #include "block.h"
+#include "../../core/args.h"
 #include "../../core/log.h"
 #include "../../core/result.h"
 #include "../../model/object/square.h"
 #include "../graphics/drawing.h"
 #include "obstructables.h"
-#include "../../core/args.h"
+
 
 static NeonSquare mMovableSquare = {0};
 static NeonSquare mProjectedSquare = {0};
@@ -22,7 +23,9 @@ static RECT mMovableSquareInnerAsRect = {0};
 
 void NeonInitBlockObject(void)
 {
-    mMovableSquare = NeonCreateSquare(NeonCreatePosition(0, 0), NeonCreateSize(NeonGetBlockScale(), NeonGetBlockScale()));
+    mMovableSquare =
+        NeonCreateSquare(NeonCreatePosition(0, 0),
+                         NeonCreateSize(NeonGetBlockScale(), NeonGetBlockScale()));
 
     mMovableSquareAsRect =
         (RECT){mMovableSquare.position.x, mMovableSquare.position.y,
@@ -33,7 +36,7 @@ void NeonInitBlockObject(void)
         (RECT){mMovableSquare.position.x + 5, mMovableSquare.position.y + 5,
                (mMovableSquare.position.x + (mMovableSquare.size.width - 5)),
                (mMovableSquare.position.y + (mMovableSquare.size.height - 5))};
-    
+
     NeonLog(NeonInformation,
             NeonCreateResult(NeonNone, L"Initialised Movable Block Object."));
 }

@@ -39,11 +39,11 @@ void NeonUpdateVectorMemoryBar(void);
 
 /**
  * \brief Checks if position is within the panel component area.
- * 
+ *
  * \param x The x position.
  * \param y The y position.
  * \return If the position was within the area.
- * 
+ *
  * \retval 0: Outside Area.
  * \retval 1: Inside Area.
  */
@@ -63,25 +63,25 @@ int NeonIsInClearButtonArea(const int x, const int y);
 
 /**
  * \brief Checks if position is within the lock toggle button area.
- * 
+ *
  * \param x The x position.
  * \param y The y position.
  * \return If the position was within the area.
  *
  * \retval 0: Outside Area.
- * \retval 1: Inside Area. 
+ * \retval 1: Inside Area.
  */
 int NeonIsInLockToggleArea(const int x, const int y);
 
 /**
  * \brief Checks if position is within the generate button area.
- * 
+ *
  * \param x The x position.
  * \param y The y position.
  * \return If the position was within the area.
  *
  * \retval 0: Outside Area.
- * \retval 1: Inside Area. 
+ * \retval 1: Inside Area.
  */
 int NeonIsInGenerateButtonArea(const int x, const int y);
 
@@ -92,7 +92,7 @@ void NeonHandleLockToggleButtonClick(void);
 
 /**
  * \brief Gets the coordinate text area.
- * 
+ *
  * \return The area where coordinates are displayed.
  */
 RECT NeonGetCoordinateArea(void);

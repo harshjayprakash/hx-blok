@@ -22,7 +22,7 @@ typedef enum __NeonTheme
 {
     NeonUnsetTheme = 0x000001, ///< Unset Theme
     NeonLightTheme = 0x000002, ///< Light Mode
-    NeonDarkTheme = 0x000003,   ///< Dark Mode
+    NeonDarkTheme = 0x000003,  ///< Dark Mode
     NeonCustomTheme = 0x000004 ///< Custom Theme
 } NeonTheme;
 

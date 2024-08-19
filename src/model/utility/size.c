@@ -24,8 +24,9 @@ void NeonSetSize(NeonSize *size, const int width, const int height)
 {
     if (!size)
     {
-        NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Size Update Failed: Null Pointer Error."));
+        NeonLog(
+            NeonWarning,
+            NeonCreateResult(NeonNullPtr, L"Size Update Failed: Null Pointer Error."));
         return;
     }
 
@@ -37,8 +38,9 @@ void NeonSetWidth(NeonSize *size, const int width)
 {
     if (!size)
     {
-        NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Width Updated Failed: Null Pointer Error."));
+        NeonLog(
+            NeonWarning,
+            NeonCreateResult(NeonNullPtr, L"Width Updated Failed: Null Pointer Error."));
         return;
     }
 
@@ -49,8 +51,9 @@ void NeonSetHeight(NeonSize *size, const int height)
 {
     if (!size)
     {
-        NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Height Updated Failed: Null Pointer Error."));
+        NeonLog(
+            NeonWarning,
+            NeonCreateResult(NeonNullPtr, L"Height Updated Failed: Null Pointer Error."));
         return;
     }
 

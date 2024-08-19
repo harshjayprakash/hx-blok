@@ -26,7 +26,8 @@ void NeonSetPosition(NeonPosition *position, const int x, const int y)
     if (!position)
     {
         NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Update Position Failed: Null Pointer Error."));
+                NeonCreateResult(NeonNullPtr,
+                                 L"Update Position Failed: Null Pointer Error."));
         return;
     }
 
@@ -39,7 +40,8 @@ void NeonSetXPosition(NeonPosition *position, const int x)
     if (!position)
     {
         NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"X Position Update Failed: Null Pointer Error."));
+                NeonCreateResult(NeonNullPtr,
+                                 L"X Position Update Failed: Null Pointer Error."));
         return;
     }
 
@@ -51,7 +53,8 @@ void NeonSetYPosition(NeonPosition *position, const int y)
     if (!position)
     {
         NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr, L"Y Position Update Failed: Null Pointer Error."));
+                NeonCreateResult(NeonNullPtr,
+                                 L"Y Position Update Failed: Null Pointer Error."));
         return;
     }
 
