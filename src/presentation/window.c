@@ -29,6 +29,7 @@ static wchar_t mCaption[] = L"Blok";
 static RECT mWindowArea = {0};
 static int mWindowHeight = 0;
 static int mWindowWidth = 0;
+static int mRunning = 0;
 
 static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordParam,
                                 LPARAM longParam)
@@ -42,6 +43,7 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         (void)GetClientRect(windowHandle, &mWindowArea);
         return 0;
     case WM_DESTROY:
+        mRunning = 0;
         PostQuitMessage(0);
         return 0;
     case WM_PAINT: {
@@ -79,7 +81,7 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
 
 static int _NeonMessageLoop(void)
 {
-    while (GetMessageW(&mMessage, NULL, 0, 0))
+    while (GetMessageW(&mMessage, NULL, 0, 0)) 
     {
         (void)TranslateMessage(&mMessage);
         (void)DispatchMessageW(&mMessage);
@@ -148,6 +150,8 @@ NeonResult NeonInitWindow(void)
         return NeonLogAndReturn(
             NeonError, NeonCreateResult(NeonFail, L"Window Initialisation Failed."));
     }
+
+    mRunning = 1;
 
     NeonInitPanelComponent();
     NeonInitCanvasComponent();
