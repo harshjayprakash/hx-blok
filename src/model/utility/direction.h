@@ -1,3 +1,11 @@
+/**
+ * \file direction.h
+ * \date 01-09-2024
+ * \brief Enumeration for denoting direction.
+ * 
+ * This file contains an enumeration that represents direction via the compass rose.
+ */
+
 #ifndef NEON_DIRECTION_H
 #define NEON_DIRECTION_H
 

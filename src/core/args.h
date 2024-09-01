@@ -1,8 +1,10 @@
 /**
  * \file args.h
  * \date 18-08-2024
- * \brief
+ * \brief Function prototypes for processing arguments.
  *
+ * This file contains function prototypes for argument processing and retrieving stored 
+ * arguments.
  */
 
 #ifndef NEON_ARGS_H

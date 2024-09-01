@@ -1,8 +1,10 @@
 /**
  * \file args.c
  * \date 18-08-2024
- * \brief
+ * \brief Implementation of argument processing functions.
  *
+ * This file contains function implementation for processing arguments provided by the
+ * user through the CLI at runtime.
  */
 
 #include "args.h"

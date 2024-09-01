@@ -1,7 +1,10 @@
 /**
  * \file panel.h
  * \date 18-08-2024
- * \brief
+ * \brief Function prototypes for the panel component.
+ *
+ * This file contains the function prototypes for initialising, rendering, managing the
+ * panel component
  */
 
 #ifndef NEON_PANEL_H
