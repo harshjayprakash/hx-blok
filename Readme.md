@@ -56,23 +56,7 @@ mingw32-make build
 - Switched Colour Scheme
 - Improved Doxygen Documentation
 - New Ability to Specify Scale via CLI
-
-## Code Standard
-
-The codename for this project is "Neon", so structures, enumerations and functions are
-prefixed with this. These are in PascalCase, while variables are in camelCase.
-
-## Known Issues and Limitations
-
-- GDI32 Graphics flicker
-- Additional obstructables may show on the canvas after vector re-sizing.
-- Changing the size to a smaller version than at startup may cause elements to overlap.
-
-## Future Features
-
-- Custom Theming.
-- Opening an Existing Layout.
-- Changing the size of the Block and Obstructables.
+- Double Buffered UI
 
 ## Find an issue
 
