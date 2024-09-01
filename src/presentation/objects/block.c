@@ -43,11 +43,11 @@ void NeonInitBlockObject(void)
 
 void NeonRenderBlock(HDC displayContext)
 {
-    FillRect(displayContext, &mMovableSquareAsRect, NeonGetAccentBrush());
-    FillRect(displayContext, &mMovableSquareInnerAsRect, NeonGetBackgroundBrush());
+    (void)FillRect(displayContext, &mMovableSquareAsRect, NeonGetAccentBrush());
+    (void)FillRect(displayContext, &mMovableSquareInnerAsRect, NeonGetBackgroundBrush());
 }
 
-static int _NeonCanMoveBlock()
+static int __NeonCanMoveBlock()
 {
     int insideBoundary = (mProjectedSquare.position.x >= 0 &&
                           mProjectedSquare.position.x < mMovableSquareBoundary.width &&
@@ -93,7 +93,7 @@ void NeonMoveBlock(NeonDirection direction)
         break;
     }
 
-    if (_NeonCanMoveBlock())
+    if (__NeonCanMoveBlock())
     {
         NeonCopySquare(&mMovableSquare, mProjectedSquare);
     }

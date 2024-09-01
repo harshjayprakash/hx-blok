@@ -9,6 +9,7 @@
 #ifndef NEON_TOGGLE_BUTTON_H
 #define NEON_TOGGLE_BUTTON_H
 
+#define STRICT 1
 #include <Windows.h>
 #include <stdlib.h>
 

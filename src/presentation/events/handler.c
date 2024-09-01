@@ -6,6 +6,7 @@
  * This file contains the implementation of handling window events.
  */
 
+#define STRICT 1
 #include "handler.h"
 #include "../../core/log.h"
 #include "../components/canvas.h"
@@ -59,7 +60,7 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
 
     if (!sq)
     {
-        InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+        (void)InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
         return;
     }
 
@@ -71,8 +72,8 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
 
     RECT coordinateRegion = NeonGetCoordinateArea();
 
-    InvalidateRect(NeonGetWindowHandle(), &updateRegion, TRUE);
-    InvalidateRect(NeonGetWindowHandle(), &coordinateRegion, TRUE);
+    (void)InvalidateRect(NeonGetWindowHandle(), &updateRegion, TRUE);
+    (void)InvalidateRect(NeonGetWindowHandle(), &coordinateRegion, TRUE);
 }
 
 void NeonHandleWindowLeftMouseDown(LPARAM longParam)
@@ -87,7 +88,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
             NeonLog(NeonInformation,
                     NeonCreateResult(NeonNone, L"Clearing All Obstructables."));
             NeonClearObstrutables();
-            InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+            (void)InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
             NeonUpdateVectorMemoryBar();
             return;
         }
@@ -96,7 +97,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         {
             NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Toggling Lock Mode."));
             NeonHandleLockToggleButtonClick();
-            InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+            (void)InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
             return;
         }
 

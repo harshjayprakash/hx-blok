@@ -42,8 +42,8 @@ int NeonIsInit(void)
 NeonResult NeonStart(void)
 {
     NeonInitDrawingTools();
-    NeonInitWindow();
-    NeonFreeWindow();
+    (void)NeonInitWindow();
+    (void)NeonFreeWindow();
     NeonFreeDrawingTools();
     return NeonLogAndReturn(
         NeonInformation,

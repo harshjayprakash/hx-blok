@@ -6,6 +6,7 @@
  * This file contains the implementation for the graphical window.
  */
 
+#define STRICT 1
 #include "window.h"
 #include "../core/log.h"
 #include "../core/program.h"
@@ -31,7 +32,7 @@ static int mWindowHeight = 0;
 static int mWindowWidth = 0;
 static int mRunning = 0;
 
-static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordParam,
+static long long __NeonProcedure(HWND windowHandle, UINT message, WPARAM wordParam,
                                 LPARAM longParam)
 {
     PAINTSTRUCT paint;
@@ -52,7 +53,7 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
         HBITMAP bitmapMemory =
             CreateCompatibleBitmap(displayContext, mWindowWidth, mWindowHeight);
         (void)SelectObject(bufferedContext, bitmapMemory);
-        FillRect(bufferedContext, &mWindowArea, NeonGetBackgroundBrush());
+        (void)FillRect(bufferedContext, &mWindowArea, NeonGetBackgroundBrush());
         NeonHandleWindowPaintEvent(bufferedContext);
         (void)BitBlt(displayContext, 0, 0, mWindowWidth, mWindowHeight, bufferedContext,
                      0, 0, SRCCOPY);
@@ -79,7 +80,7 @@ static long long _NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPara
     }
 }
 
-static int _NeonMessageLoop(void)
+static int __NeonMessageLoop(void)
 {
     while (GetMessageW(&mMessage, NULL, 0, 0)) 
     {
@@ -90,7 +91,7 @@ static int _NeonMessageLoop(void)
     return (int)mMessage.wParam;
 }
 
-static NeonResult _NeonCreateWindow(void)
+static NeonResult __NeonCreateWindow(void)
 {
     mWindow = CreateWindowExW(WS_EX_OVERLAPPEDWINDOW, mName, mCaption,
                               WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
@@ -106,11 +107,11 @@ static NeonResult _NeonCreateWindow(void)
                             NeonCreateResult(NeonSuccess, L"Created Window."));
 }
 
-static NeonResult _NeonRegisterWindow(void)
+static NeonResult __NeonRegisterWindow(void)
 {
     mClass.cbSize = sizeof(WNDCLASSEXW);
     mClass.style = CS_HREDRAW | CS_VREDRAW;
-    mClass.lpfnWndProc = _NeonProcedure;
+    mClass.lpfnWndProc = __NeonProcedure;
     mClass.cbClsExtra = 0;
     mClass.cbWndExtra = 0;
     mClass.hInstance = NeonGetHandle();
@@ -135,18 +136,18 @@ static NeonResult _NeonRegisterWindow(void)
 
 NeonResult NeonInitWindow(void)
 {
-    NeonResult registerResult = _NeonRegisterWindow();
+    NeonResult registerResult = __NeonRegisterWindow();
     if (registerResult.code == NeonFail)
     {
-        NeonFreeWindow();
+        (void)NeonFreeWindow();
         return NeonLogAndReturn(
             NeonError, NeonCreateResult(NeonFail, L"Window Initialisation Failed."));
     }
 
-    NeonResult createResult = _NeonCreateWindow();
+    NeonResult createResult = __NeonCreateWindow();
     if (createResult.code == NeonFail)
     {
-        NeonFreeWindow();
+        (void)NeonFreeWindow();
         return NeonLogAndReturn(
             NeonError, NeonCreateResult(NeonFail, L"Window Initialisation Failed."));
     }
@@ -158,7 +159,7 @@ NeonResult NeonInitWindow(void)
 
     (void)ShowWindow(mWindow, NeonGetShowFlag());
     (void)UpdateWindow(mWindow);
-    (void)_NeonMessageLoop();
+    (void)__NeonMessageLoop();
 
     return NeonCreateResult(NeonSuccess, L"Window Initialised.");
 }
