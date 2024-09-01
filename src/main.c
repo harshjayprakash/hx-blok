@@ -1,26 +1,42 @@
-#include <Windows.h>
+/**
+ * \file main.c
+ * \date 13-08-2024
+ * \brief Implementation of the entrypoint.
+ *
+ * This file contains the WinMain entrypoint functions for Windows programs.
+ */
+
+#define STRICT 1
 #include "core/args.h"
+#include "core/log.h"
 #include "core/program.h"
 #include "core/result.h"
-#include "ui/window.h"
+#include <Windows.h>
 
-int APIENTRY WinMain(
-    HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+
+/**
+ * \brief The entrypoint of the program.
+ *
+ * \param hInstance The instance handle.
+ * \param hPrevInstance Previous version of the instance handle.
+ * \param lpCmdLine The command line.
+ * \param nShowCmd How the program will be displayed.
+ * \return Exit code 0 for success.
+ */
+int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine,
+                      int nShowCmd)
 {
-    struct TArgs args = (struct TArgs) { 
-        .instanceHandle = hInstance,
-        .previousInstanceHandle = hPrevInstance,
-        .commandLine = lpCmdLine,
-        .showFlag = nShowCmd
-    };
+    (void)hPrevInstance;
+    (void)lpCmdLine;
 
-    blokProgramInit(&args);
-    blokProgramProcessArguments(&args);
-    blokStoreInit();
-    struct TWindow wnd = blokWindowNew();
-    blokWindowFree(&wnd);
-    blokStoreFree();
-    blokProgramFree();
+    NeonInitLogger(NeonConsole);
 
-    return (int) BLOK_SUCCESS;
+    (void)NeonInit(hInstance, nShowCmd);
+    (void)NeonProcessArguments();
+    (void)NeonStart();
+    (void)NeonFree();
+
+    NeonFreeLogger();
+
+    return (int)NeonSuccess;
 }

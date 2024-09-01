@@ -1,29 +1,83 @@
+/**
+ * \file args.c
+ * \date 18-08-2024
+ * \brief
+ *
+ */
+
 #include "args.h"
-#include <processenv.h>
+#include "../presentation/graphics/theme.h"
+#include "log.h"
+#include "program.h"
+#include "result.h"
+#include <wchar.h>
 
-enum TResult blokProgramProcessArguments(struct TArgs *args)
+static int mBlockScale = 15;
+
+NeonResult NeonProcessArguments(void)
 {
-    int argc = 0;
-    LPWSTR *argv = CommandLineToArgvW(GetCommandLineW(), &argc);
-
-    if (!argv)
+    if (!NeonIsInit())
     {
-        return BLOK_NULLPTR_ERROR;
+        return NeonLogAndReturn(
+            NeonError,
+            NeonCreateResult(NeonNotInit,
+                             L"Argument Processing Failed: Program Not Initialised."));
     }
 
-    for (int i = 0; i < argc; i++)
+    int argumentCount = 0;
+    LPWSTR *arguments = CommandLineToArgvW(GetCommandLineW(), &argumentCount);
+
+    if (!arguments)
     {
-        if (wcsncmp(argv[i], L"--dark-theme", 4294967308) == 0)
+        return NeonLogAndReturn(
+            NeonError,
+            NeonCreateResult(NeonNotInit, L"Arguments Processing Failed: Cannot Get."));
+    }
+
+    int scaleMode = 0;
+
+    for (int index = 0; index < argumentCount; index++)
+    {
+
+        if (wcsncmp(arguments[index], L"--dark-mode", 12 * sizeof(unsigned short)) == 0)
         {
-            blokThemeSet(BLOK_THEME_DARK);
+            NeonLog(NeonInformation,
+                    NeonCreateResult(NeonNone, L"Theme Changed to Dark Mode."));
+            NeonSetTheme(NeonDarkTheme);
         }
-        if (wcsncmp(argv[i], L"--light-theme", 4294967309) == 0)
+        if (wcsncmp(arguments[index], L"--light-mode", 13 * sizeof(unsigned short)) == 0)
         {
-            blokThemeSet(BLOK_THEME_LIGHT);
+            NeonLog(NeonInformation,
+                    NeonCreateResult(NeonNone, L"Theme Changed to Light Mode."));
+            NeonSetTheme(NeonLightTheme);
+        }
+        if (wcsncmp(arguments[index], L"--scale", 13 * sizeof(unsigned short)))
+        {
+            scaleMode = 1;
+            NeonLog(NeonInformation,
+                    NeonCreateResult(NeonNone, L"Updating Block Scale."));
+        }
+        if (scaleMode)
+        {
+            int value = _wtoi(arguments[index]);
+            if (value == 0)
+            {
+                scaleMode = 0;
+                continue;
+            }
+            mBlockScale = value;
+            scaleMode = 0;
         }
     }
 
-    (void)LocalFree(argv);
+    NeonUpdateColours();
 
-    return BLOK_SUCCESS;
+    (void)LocalFree(arguments);
+
+    return NeonCreateResult(NeonSuccess, L"Arguments Processed.");
+}
+
+int NeonGetBlockScale(void)
+{
+    return mBlockScale;
 }

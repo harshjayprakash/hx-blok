@@ -1,9 +1,0 @@
-[Project]
-Name = "The Block Experiment"
-Codename = "blok"
-Description = "An exploration of the Windows API and the principles of lower level development"
-Language = "C 17"
-Verison = "0.7"
-
-[Dependencies]
-Windows = ["kernel32.dll", "user32.dll", "shell32.dll", "gdi32.dll"]

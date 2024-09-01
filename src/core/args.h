@@ -1,18 +1,27 @@
-#ifndef BLOK_CORE_ARGS_H
-#define BLOK_CORE_ARGS_H
+/**
+ * \file args.h
+ * \date 18-08-2024
+ * \brief
+ *
+ */
 
-#include <Windows.h>
+#ifndef NEON_ARGS_H
+#define NEON_ARGS_H
+
 #include "result.h"
-#include "../logic/theme.h"
 
-struct TArgs
-{
-    HINSTANCE instanceHandle;
-    HINSTANCE previousInstanceHandle;
-    LPSTR commandLine;
-    int showFlag;
-};
+/**
+ * \brief Processes the arguments provided on execution.
+ *
+ * \return Result containing if the operation was successful.
+ */
+NeonResult NeonProcessArguments(void);
 
-enum TResult blokProgramProcessArguments(struct TArgs *args);
+/**
+ * \brief Gets the block scaling.
+ *
+ * \return The block size scale.
+ */
+int NeonGetBlockScale(void);
 
 #endif
