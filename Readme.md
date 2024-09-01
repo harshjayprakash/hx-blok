@@ -38,8 +38,10 @@ mingw32-make init
 mingw32-make build
 
 # Running the program. 
-# Optional arguments "--light-mode" or "--dark-mode".
+# Optional arguments "--light-mode" or "--dark-mode" for the theming.
 # Default is dark mode.
+# Other arguments include "--scale <number>" where the scale is specified.
+# Default scaling is 15.
 ./bin/neon-blok
 ```
 
