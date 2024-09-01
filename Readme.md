@@ -4,9 +4,7 @@
 
 > [!NOTE]
 > As this is an experiment without a clear roadmap, this program will likely always be in
-> the developing stage. There will not be a deployed executable file. For the most stable
-> version please use the main branch. Other branch may contain more issues, failures and
-> defects (including memory leaks).
+> the developing stage. There will not be a deployed executable file.
 
 ## Usage
 
