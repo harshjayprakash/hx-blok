@@ -45,16 +45,17 @@ mingw32-make build
 ./bin/neon-blok
 ```
 
-## What's New (Version 24.10)
+## What's New
 
 - Re-defined Internal Architecture
-- Console Logging
+- New Console Logging
 - Re-implementated Result System
 - Re-implementated Clear All Button
-- Vector Size Indicator
+- Visual Vector Size Indicator
 - Changed Style of Movable Block
 - Switched Colour Scheme
 - Improved Doxygen Documentation
+- New Ability to Specify Scale via CLI
 
 ## Code Standard
 
