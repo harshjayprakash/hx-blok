@@ -1,6 +1,6 @@
 # The Experimental Block Project
 
-![Banner](./doc/banner.png)
+![Banner](./doc/blok-banner.png)
 
 > [!NOTE]
 > As this is an experiment without a clear roadmap, this program will likely always be in
