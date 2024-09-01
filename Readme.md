@@ -8,19 +8,20 @@
 
 ## Usage
 
-![Program Light and Dark Mode](./doc/program-screenshot-light-dark.png)
+![Program Light and Dark Mode](./doc/blok-dual-screenshot.png)
 
 | Ref. | Description |
 |:----------|:------------|
-| 1 | This refers to the canvas component, where most of the interaction will take place. |
+| A | This refers to the Canvas component, where most of the interaction will take place.  |
+| B | The Panel component, which shows information and additional actions. |
+| C | The native window title. |
+| 1 | The "Block" (the main part or component) is a coloured square (blue in light mode, aqua in dark mode) that can be moved by the arrow keys and cannot move past the "Obstructables". |
 | 2 | An "Obstructable", a sort of wall for the "Block". This can be added by clicking on the canvas with the mouse. |
-| 3 | The "Block" (the main part or component) is a coloured square (blue in light mode, aqua in dark mode) that can be moved by the arrow keys and cannot move past the "Obstructables". |
-| 4 | The Panel component, which shows information and additional actions. |
-| 5 | Shows the coordinates of the "Block". |
-| 6 | A button to clear all the "Obstructables". |
-| 7 | Shows the number of "Obstructables" that have been created. |
-| 8 | Shows the internal vector capacity. |
-| 9 | The native window title. |
+| 3 | Shows the coordinates of the "Block". |
+| 4 | A button to clear all the "Obstructables" on the canvas. |
+| 5 | A toggle button to lock the canvas from registering any clicks. This stops the generation of "Obstructables". |
+| 6 | Shows the number of "Obstructables" and a progress bar relative to the vector size. |
+| 7 | A button to randomly generate "Obstructables" on the canvas. The number of "Obstructables" is based on the window size. |
 
 ## Compilation and Execution
 
@@ -55,6 +56,10 @@ mingw32-make build
 - Improved Doxygen Documentation
 - New Ability to Specify Scale via CLI
 - Double Buffered UI
+
+## Limitations and Issues
+
+Known Issues and Limitations can now be found under the issues tab on GitHub.
 
 ## Find an issue
 
