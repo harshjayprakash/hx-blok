@@ -4,7 +4,8 @@
 
 > [!NOTE]
 > As this is an experiment without a clear roadmap, this program will likely always be in
-> the developing stage. There will not be a deployed executable file.
+> the developing stage. There will not be a deployed executable file. This program
+> contains absolutely no warranty.
 
 ## Usage
 
