@@ -11,7 +11,6 @@
 #include "../../core/log.h"
 #include "theme.h"
 
-
 static HBRUSH mBackgroundBrush = {0};
 static HBRUSH mForegroundBrush = {0};
 static HBRUSH mAccentBrush = {0};

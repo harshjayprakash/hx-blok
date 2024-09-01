@@ -267,7 +267,7 @@ void NeonPrintVector(const NeonVector *vector)
         }
 
         (void)wprintf(L"{ { X: %d, Y: %d }, Indexed: %d }\n", nodePtr->position.x,
-                nodePtr->position.y, nodePtr->indexed);
+                      nodePtr->position.y, nodePtr->indexed);
     }
 }
 

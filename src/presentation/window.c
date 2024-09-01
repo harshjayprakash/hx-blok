@@ -33,7 +33,7 @@ static int mWindowWidth = 0;
 static int mRunning = 0;
 
 static long long __NeonProcedure(HWND windowHandle, UINT message, WPARAM wordParam,
-                                LPARAM longParam)
+                                 LPARAM longParam)
 {
     PAINTSTRUCT paint;
     HDC displayContext;
@@ -82,7 +82,7 @@ static long long __NeonProcedure(HWND windowHandle, UINT message, WPARAM wordPar
 
 static int __NeonMessageLoop(void)
 {
-    while (GetMessageW(&mMessage, NULL, 0, 0)) 
+    while (GetMessageW(&mMessage, NULL, 0, 0))
     {
         (void)TranslateMessage(&mMessage);
         (void)DispatchMessageW(&mMessage);

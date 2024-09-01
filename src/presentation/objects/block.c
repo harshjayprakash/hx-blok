@@ -14,7 +14,6 @@
 #include "../graphics/drawing.h"
 #include "obstructables.h"
 
-
 static NeonSquare mMovableSquare = {0};
 static NeonSquare mProjectedSquare = {0};
 static NeonSize mMovableSquareBoundary = {0};

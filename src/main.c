@@ -13,7 +13,6 @@
 #include "core/result.h"
 #include <Windows.h>
 
-
 /**
  * \brief The entrypoint of the program.
  *

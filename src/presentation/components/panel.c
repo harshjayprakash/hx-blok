@@ -23,7 +23,6 @@
 #include <wchar.h>
 #include <wingdi.h>
 
-
 static RECT mPanelArea = {0};
 static NeonTextControl mCoordinateText = {0};
 static NeonButtonControl mClearAllButton = {0};
