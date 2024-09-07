@@ -1,6 +1,6 @@
 /**
  * \file panel.h
- * \date 18-08-2024
+ * \date 07-09-2024
  * \brief Function prototypes for the panel component.
  *
  * This file contains the function prototypes for initialising, rendering, managing the
@@ -87,6 +87,31 @@ int NeonIsInLockToggleArea(const int x, const int y);
  * \retval 1: Inside Area.
  */
 int NeonIsInGenerateButtonArea(const int x, const int y);
+
+/**
+ * \brief Invalidates the coordinate text area.
+ */
+void NeonInvalidateCoordinateTextArea(void);
+
+/**
+ * \brief Invalidates the clear all button area.
+ */
+void NeonInvalidateClearAllButtonArea(void);
+
+/**
+ * \brief Invalidates the locked toggle button area.
+ */
+void NeonInvalidateLockedToggleArea(void);
+
+/**
+ * \brief Invalidates the progress bar area.
+ */
+void NeonInvalidateProgressBarArea(void);
+
+/**
+ * \brief Invalidates the random button area.
+ */
+void NeonInvalidateRandomButtonArea(void);
 
 /**
  * \brief Handles the locked toggle button click operation.

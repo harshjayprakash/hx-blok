@@ -1,6 +1,6 @@
 /**
  * \file panel.c
- * \date 18-08-2024
+ * \date 07-09-2024
  * \brief Function implementation for the panel component.
  *
  * This file contains the function implementation for the panel component for intialising,
@@ -20,6 +20,7 @@
 #include "../objects/block.h"
 #include "../objects/obstructables.h"
 #include "../window.h"
+#include <Windows.h>
 #include <wchar.h>
 #include <wingdi.h>
 
@@ -234,6 +235,31 @@ int NeonIsInPanelArea(const int x, const int y)
 {
     return (x > mPanelArea.left - 1 && x < mPanelArea.right + 1 &&
             y > mPanelArea.top - 1 && y < mPanelArea.bottom + 1);
+}
+
+void NeonInvalidateCoordinateTextArea(void)
+{
+    (void)InvalidateRect(NeonGetWindowHandle(), &mCoordinateText.area, FALSE);
+}
+
+void NeonInvalidateClearAllButtonArea(void)
+{
+    (void)InvalidateRect(NeonGetWindowHandle(), &mClearAllButton.area, FALSE);
+}
+
+void NeonInvalidateLockedToggleArea(void)
+{
+    (void)InvalidateRect(NeonGetWindowHandle(), &mLockedToggle.buttonArea, FALSE);
+}
+
+void NeonInvalidateProgressBarArea(void)
+{
+    (void)InvalidateRect(NeonGetWindowHandle(), &mVectorMemory.area, FALSE);
+}
+
+void NeonInvalidateRandomButtonArea(void)
+{
+    (void)InvalidateRect(NeonGetWindowHandle(), &mRandomGeneration.area, FALSE);
 }
 
 void NeonHandleLockToggleButtonClick(void)
