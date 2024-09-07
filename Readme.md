@@ -66,7 +66,7 @@ mingw32-make build
 
 ## Limitations and Issues
 
-- GDI32 graphics flicking (Window is forced to repaint after clicking).
+- GDI32 graphics flicking.
 - Scaling specified can be too small or too large.
 - Block can go under the panel.
 - Generating obstructables can take time.
