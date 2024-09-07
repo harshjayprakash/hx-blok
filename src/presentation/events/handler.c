@@ -1,6 +1,6 @@
 /**
  * \file handler.c
- * \date 13-08-2024
+ * \date 07-09-2024
  * \brief Implementation of the window handle events.
  *
  * This file contains the implementation of handling window events.
@@ -56,24 +56,16 @@ void NeonHandleWindowKeyDownEvent(WPARAM wordParam)
     NeonMoveBlock(direction);
     NeonUpdateCoordinatesText();
 
-    NeonSquare *sq = NeonGetBlockAsPointer();
-
-    if (!sq)
-    {
-        (void)InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
-        return;
-    }
+    NeonSize sqSize = NeonGetBlockSize();
 
     RECT updateRegion = NeonGetBlockAsRect();
-    updateRegion.top -= sq->size.height;
-    updateRegion.left -= sq->size.width;
-    updateRegion.right += sq->size.height;
-    updateRegion.bottom += sq->size.width;
+    updateRegion.top -= sqSize.height;
+    updateRegion.left -= sqSize.width;
+    updateRegion.right += sqSize.height;
+    updateRegion.bottom += sqSize.width;
 
-    RECT coordinateRegion = NeonGetCoordinateArea();
-
-    (void)InvalidateRect(NeonGetWindowHandle(), &updateRegion, TRUE);
-    (void)InvalidateRect(NeonGetWindowHandle(), &coordinateRegion, TRUE);
+    (void)InvalidateRect(NeonGetWindowHandle(), &updateRegion, FALSE);
+    NeonInvalidateCoordinateTextArea();
 }
 
 void NeonHandleWindowLeftMouseDown(LPARAM longParam)
@@ -88,8 +80,8 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
             NeonLog(NeonInformation,
                     NeonCreateResult(NeonNone, L"Clearing All Obstructables."));
             NeonClearObstrutables();
-            (void)InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
             NeonUpdateVectorMemoryBar();
+            (void)InvalidateRect(NeonGetWindowHandle(), NULL, FALSE);
             return;
         }
 
@@ -97,7 +89,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         {
             NeonLog(NeonInformation, NeonCreateResult(NeonNone, L"Toggling Lock Mode."));
             NeonHandleLockToggleButtonClick();
-            (void)InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+            NeonInvalidateLockedToggleArea();
             return;
         }
 

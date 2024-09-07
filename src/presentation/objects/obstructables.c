@@ -1,6 +1,6 @@
 /**
  * \file obstructables.c
- * \date 13-08-2024
+ * \date 07-09-2024
  * \brief Function implementation for the obstructable objects.
  *
  * This file contains the function implementation for the obstructable objects.
@@ -10,6 +10,7 @@
 #include "../../model/utility/vector.h"
 #include "../graphics/drawing.h"
 #include "../window.h"
+#include "../components/panel.h"
 #include "block.h"
 #include <wingdi.h>
 
@@ -73,10 +74,18 @@ void NeonRenderObstructables(HDC displayContext)
 void NeonAddObstrutable(const NeonPosition position)
 {
     NeonNode node = {position, 1};
+    NeonSize nodeSize = NeonGetBlockSize();
+    RECT nodeAsRect = {
+        position.x,
+        position.y,
+        position.x + nodeSize.width,
+        position.y + nodeSize.height
+    };
 
     (void)NeonPushNode(&mObstructableSquares, node);
 
-    (void)InvalidateRect(NeonGetWindowHandle(), NULL, TRUE);
+    (void)InvalidateRect(NeonGetWindowHandle(), &nodeAsRect, TRUE);
+    NeonInvalidateProgressBarArea();
 }
 
 void NeonClearObstrutables(void)
