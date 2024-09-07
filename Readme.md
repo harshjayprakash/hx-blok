@@ -36,7 +36,7 @@ This program uses the make build system. Note, this uses the clang compiler, you
 switch it to the GCC compiler, if you wish by changing the CC variable in the makefile.
 You can run the following:
 
-```sh
+```pwsh
 # Creating the folders for the compilation process.
 mingw32-make init
 
