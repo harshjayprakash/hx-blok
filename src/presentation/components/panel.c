@@ -8,8 +8,6 @@
  */
 
 #include "panel.h"
-#include "../../core/log.h"
-#include "../../model/object/square.h"
 #include "../components/canvas.h"
 #include "../controls/button.h"
 #include "../controls/progress-bar.h"
