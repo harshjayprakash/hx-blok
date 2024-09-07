@@ -35,7 +35,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
     (void)NeonStart();
     (void)NeonFree();
 
-    NeonFreeLogger();
+    NeonFreeLogger(); 
 
     return (int)NeonSuccess;
 }
