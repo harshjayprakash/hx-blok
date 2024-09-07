@@ -44,15 +44,6 @@ void NeonMoveBlock(NeonDirection direction);
 void NeonSetBlockBoundary(const NeonSize size);
 
 /**
- * \brief Gets the block as a pointer.
- *
- * \return A pointer to the block.
- *
- * \warning You must not free this memory returned.
- */
-NeonSquare *NeonGetBlockAsPointer(void);
-
-/**
  * \brief Gets the position of the block.
  * 
  * \return Stack allocated position of the block.

@@ -113,11 +113,6 @@ void NeonSetBlockBoundary(const NeonSize size)
     NeonCopySize(&mMovableSquareBoundary, size);
 }
 
-NeonSquare *NeonGetBlockAsPointer(void)
-{
-    return &mMovableSquare;
-}
-
 NeonPosition NeonGetBlockPosition(void)
 {
     return mMovableSquare.position;

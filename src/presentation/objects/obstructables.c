@@ -38,15 +38,7 @@ void NeonInitObstructables(void)
 
 void NeonRenderObstructables(HDC displayContext)
 {
-    NeonSquare *square = NeonGetBlockAsPointer();
-
-    if (!square)
-    {
-        NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr,
-                                 L"Painting Obstructables Failed: Null Pointer Error."));
-        return;
-    }
+    NeonSize squareSize = NeonGetBlockSize();
 
     for (int index = 0; index < mObstructableSquares.max; index++)
     {
@@ -64,8 +56,8 @@ void NeonRenderObstructables(HDC displayContext)
         }
 
         RECT nodeAsRect = {nodePtr->position.x, nodePtr->position.y,
-                           nodePtr->position.x + square->size.width,
-                           nodePtr->position.y + square->size.height};
+                           nodePtr->position.x + squareSize.width,
+                           nodePtr->position.y + squareSize.height};
 
         (void)FillRect(displayContext, &nodeAsRect, NeonGetForegroundBrush());
     }

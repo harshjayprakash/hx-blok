@@ -176,18 +176,10 @@ void NeonRenderPanelComponent(HDC displayContext)
 
 void NeonUpdateCoordinatesText(void)
 {
-    NeonSquare *square = NeonGetBlockAsPointer();
+    NeonPosition squarePosition = NeonGetBlockPosition();
 
-    if (!square)
-    {
-        NeonLog(NeonWarning,
-                NeonCreateResult(NeonNullPtr,
-                                 L"Coordinate Update Failed: Null Pointer Error"));
-        return;
-    }
-
-    (void)swprintf(mCoordinateText.text, 60, L"( X: %d, Y: %d )", square->position.x,
-                   square->position.y);
+    (void)swprintf(mCoordinateText.text, 60, L"( X: %d, Y: %d )", squarePosition.x,
+                   squarePosition.y);
 }
 
 void NeonUpdateSquareCountText(void)

@@ -99,24 +99,16 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
                     NeonCreateResult(NeonNone, L"Generating Random Obstructables."));
             RECT windowArea = NeonGetWindowArea();
 
-            NeonSquare *square = NeonGetBlockAsPointer();
-
-            if (!square)
-            {
-                NeonLog(NeonError, NeonCreateResult(
-                                       NeonNullPtr,
-                                       L"Square Retrieval Failed: Null Pointer Error."));
-                return;
-            }
+            NeonSize squareSize = NeonGetBlockSize();
 
             int generateCount = (windowArea.bottom * windowArea.right) / 2000;
 
             for (int index = 0; index < generateCount; index++)
             {
-                int newX = ((rand() % windowArea.right) / square->size.width) *
-                           square->size.width;
-                int newY = ((rand() % windowArea.bottom) / square->size.height) *
-                           square->size.height;
+                int newX = ((rand() % windowArea.right) / squareSize.width) *
+                           squareSize.width;
+                int newY = ((rand() % windowArea.bottom) / squareSize.height) *
+                           squareSize.height;
 
                 if (NeonObstrutableExistsAtPosition(newX, newY))
                 {
@@ -136,7 +128,7 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         return;
     }
 
-    NeonSquare *square = NeonGetBlockAsPointer();
+    NeonSize squareSize = NeonGetBlockSize();
 
     if (!square)
     {
@@ -146,8 +138,8 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
         return;
     }
 
-    int MultiX = (positionX / square->size.width) * square->size.width;
-    int MultiY = (positionY / square->size.height) * square->size.height;
+    int MultiX = (positionX / squareSize.width) * squareSize.width;
+    int MultiY = (positionY / squareSize.height) * squareSize.height;
 
     wchar_t logMessage[60];
 
