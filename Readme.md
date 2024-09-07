@@ -4,8 +4,9 @@
 
 > [!NOTE]
 > As this is an experiment without a clear roadmap, this program will likely always be in
-> the developing stage. There will not be a deployed executable file. This program
-> contains absolutely no warranty.
+> the developing stage. There will not be a deployed executable file. However, there will
+> be tagged versions if there is a significant enough change and is stable enough (no
+> guarantee). This program contains absolutely no warranty.
 
 ## Usage
 
@@ -13,7 +14,7 @@
 
 | Ref. | Description |
 |:----------|:------------|
-| A | This refers to the Canvas component, where most of the interaction will take place.  |
+| A | This refers to the Canvas component, where most of the interaction will take place. |
 | B | The Panel component, which shows information and additional actions. |
 | C | The native window title. |
 | 1 | The "Block" (the main part or component) is a coloured square (blue in light mode, aqua in dark mode) that can be moved by the arrow keys and cannot move past the "Obstructables". |
@@ -23,6 +24,11 @@
 | 5 | A toggle button to lock the canvas from registering any clicks. This stops the generation of "Obstructables". |
 | 6 | Shows the number of "Obstructables" and a progress bar relative to the vector size. |
 | 7 | A button to randomly generate "Obstructables" on the canvas. The number of "Obstructables" is based on the window size. |
+
+![Program Logging](./doc/blok-logging.png)
+
+This program logs messages to the console as seen in the above screenshot. Any internal
+errors are shown in the console.
 
 ## Compilation and Execution
 
