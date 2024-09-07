@@ -1,34 +1,67 @@
+/**
+ * \file program.c
+ * \date 13-08-2024
+ * \brief Implementation of the program module.
+ *
+ * This file contains the function implementation of the program "singleton", storing
+ * global values.
+ */
+
 #include "program.h"
+#include "../presentation/graphics/drawing.h"
 
-static struct TProgram programInst;
+#include "../presentation/window.h"
+#include "log.h"
+#include "result.h"
 
-static int initialised = 0;
+static HINSTANCE mInstanceHandle = {0};
+static int mShowflag = 0;
+static int mInitialised = 0;
 
-enum TResult blokProgramInit(struct TArgs *pArgs)
+NeonResult NeonInit(HINSTANCE instanceHandle, int showFlags)
 {
-    if (initialised)
+    if (mInitialised)
     {
-        return BLOK_UNNESSECARY_INIT;
-    }
-    
-    if (!pArgs)
-    {
-        return BLOK_NULLPTR_ERROR;
+        return NeonLogAndReturn(
+            NeonWarning, NeonCreateResult(NeonCannotReInit,
+                                          L"Cannot Re-Initialise Program: Skipping."));
     }
 
-    programInst.pArgs = pArgs;
+    mInstanceHandle = instanceHandle;
+    mShowflag = showFlags;
+    mInitialised = 1;
 
-    initialised = 1;
-
-    return BLOK_SUCCESS;
+    return NeonCreateResult(NeonSuccess, L"Program Initialised.");
 }
 
-struct TProgram *blokProgramInstanceGet(void)
+int NeonIsInit(void)
 {
-    return &programInst;
+    return mInitialised;
 }
 
-void blokProgramFree(void)
+NeonResult NeonStart(void)
 {
+    NeonInitDrawingTools();
+    (void)NeonInitWindow();
+    (void)NeonFreeWindow();
+    NeonFreeDrawingTools();
+    return NeonLogAndReturn(
+        NeonInformation,
+        NeonCreateResult(NeonSuccess, L"Quit Message Recieved: Closing."));
+}
 
+HINSTANCE NeonGetHandle(void)
+{
+    return mInstanceHandle;
+}
+
+int NeonGetShowFlag(void)
+{
+    return mShowflag;
+}
+
+NeonResult NeonFree(void)
+{
+    return NeonLogAndReturn(
+        NeonInformation, NeonCreateResult(NeonSuccess, L"Cleaned Up Program Resources."));
 }

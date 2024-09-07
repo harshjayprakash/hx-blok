@@ -1,29 +1,49 @@
-#ifndef BLOK_CORE_RESULT_H
-#define BLOK_CORE_RESULT_H
+/**
+ * \file result.h
+ * \date 13-08-2024
+ * \brief Function definitions, enumerations and structures for the result module.
+ *
+ * This file contains an enumeration of the result codes, a result structure that can be
+ * used as return value and logging. This also include the function definition of creating
+ * a result.
+ */
 
-enum TResult 
+#ifndef NEON_RESULT_H
+#define NEON_RESULT_H
+
+#include <wchar.h>
+
+/**
+ * \brief Result codes to dictate specific successes and failures.
+ */
+typedef enum __NeonResultCode
 {
-    BLOK_SUCCESS = 0,
-    BLOK_FAILURE = 1,
+    NeonSuccess = 0x000000,      ///< Operation was successful
+    NeonNone = 0x000001,         ///< Operation does not require a result
+    NeonFail = 0x000001,         ///< Operation failed
+    NeonCannotReInit = 0x000010, ///< Cannot Re-Initialise Error
+    NeonNotInit = 0x000011,      ///< Not Initialised Error
+    NeonNullPtr = 0x000012,      ///< Null Pointer Error
+    NeonNotImpl = 0x000100,      ///< Not Implementated Error
+    NeonOutOfRange = 0x000400,   ///< Out of Range Error
+} NeonResultCode;
 
-    BLOK_NULLPTR_ERROR = (-2),
-    BLOK_UNNESSECARY_INIT = (-3),
-    BLOK_INVALID_BOUNDARY = (-4),
-    BLOK_OUTSIDE_BOUNDARY = (-5),
-    BLOK_VEC_ARR_NULL = (-6),
-    BLOK_VEC_INVALID_SIZE = (-7),
-    BLOK_REALLOC_ERROR = (-8),
-    BLOK_VEC_ARR_FULL = (-9),
-    BLOK_VEC_ARR_NOT_FULL = (-10),
-    BLOK_VEC_ARR_EMPTY = (-11),
-    BLOK_VEC_ARR_NOT_EMPTY = (-12),
-    BLOK_INDEX_NOT_FOUND = (-14),
-    BLOK_OBJ_EXISTS = (-15),
-    BLOK_OBJ_NON_EXISTANT = (-16),
-    BLOK_OUT_OF_RANGE = (-17),
-    BLOK_WND_REGISTRATION_ERROR = (-18),
-    BLOK_WND_CREATION_ERROR = (-19),
+/**
+ * \brief Represents a result or exception with a message.
+ */
+typedef struct __NeonResult
+{
+    NeonResultCode code;  ///< Result Code
+    wchar_t message[260]; ///< Additional Result Message
+} NeonResult;
 
-};
+/**
+ * \brief Creates a result
+ *
+ * \param code The result code.
+ * \param pMessage The additional message.
+ * \return A new stack allocated result.
+ */
+NeonResult NeonCreateResult(NeonResultCode code, wchar_t *pMessage);
 
 #endif
