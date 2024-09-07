@@ -1,6 +1,6 @@
 /**
  * \file block.c
- * \date 13-08-2024
+ * \date 07-09-2024
  * \brief Function implementation for the block object.
  *
  * This file contains the implementaion for the block object.
@@ -116,6 +116,16 @@ void NeonSetBlockBoundary(const NeonSize size)
 NeonSquare *NeonGetBlockAsPointer(void)
 {
     return &mMovableSquare;
+}
+
+NeonPosition NeonGetBlockPosition(void)
+{
+    return mMovableSquare.position;
+}
+
+NeonSize NeonGetBlockSize(void)
+{
+    return mMovableSquare.size;
 }
 
 RECT NeonGetBlockAsRect(void)

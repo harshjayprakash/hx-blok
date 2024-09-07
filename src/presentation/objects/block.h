@@ -1,6 +1,6 @@
 /**
  * \file block.h
- * \date 13-08-2024
+ * \date 07-09-2024
  * \brief Function definitions for the block object.
  *
  * This file contains the definitions for the block object including: initialising,
@@ -51,6 +51,20 @@ void NeonSetBlockBoundary(const NeonSize size);
  * \warning You must not free this memory returned.
  */
 NeonSquare *NeonGetBlockAsPointer(void);
+
+/**
+ * \brief Gets the position of the block.
+ * 
+ * \return Stack allocated position of the block.
+ */
+NeonPosition NeonGetBlockPosition(void);
+
+/**
+ * \brief Gets the size of the block.
+ * 
+ * \return Stack allocated size of the block.
+ */
+NeonSize NeonGetBlockSize(void);
 
 /**
  * \brief Gets the block as a winapi rectangle.
