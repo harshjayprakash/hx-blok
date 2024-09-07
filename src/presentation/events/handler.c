@@ -130,14 +130,6 @@ void NeonHandleWindowLeftMouseDown(LPARAM longParam)
 
     NeonSize squareSize = NeonGetBlockSize();
 
-    if (!square)
-    {
-        NeonLog(NeonError,
-                NeonCreateResult(NeonNullPtr,
-                                 L"Square Retrieval Error: Null Pointer Error."));
-        return;
-    }
-
     int MultiX = (positionX / squareSize.width) * squareSize.width;
     int MultiY = (positionY / squareSize.height) * squareSize.height;
 
