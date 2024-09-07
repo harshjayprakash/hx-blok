@@ -119,13 +119,6 @@ void NeonInvalidateRandomButtonArea(void);
 void NeonHandleLockToggleButtonClick(void);
 
 /**
- * \brief Gets the coordinate text area.
- *
- * \return The area where coordinates are displayed.
- */
-RECT NeonGetCoordinateArea(void);
-
-/**
  * \brief Frees any resources used by the panel component.
  */
 void NeonFreePanelComponent(void);
