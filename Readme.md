@@ -66,7 +66,11 @@ mingw32-make build
 
 ## Limitations and Issues
 
-Known Issues and Limitations can now be found under the issues tab on GitHub.
+- GDI32 graphics flicking (Window is forced to repaint after clicking).
+- Scaling specified can be too small or too large.
+- After vector re-sizing, unintended obstructables can render on the screen at 0, 0.
+- Block can go under the panel.
+- Generating obstructables can take time.
 
 ## Find an issue
 
